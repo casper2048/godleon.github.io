@@ -1,11 +1,11 @@
 ---
 layout: page
-title: About
+title: 關於我
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+目前這個部落格是由 [GitHub Pages](https://pages.github.com/) + [Jekyll](http://jekyllrb.com/) 所搭建而成
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+若有發現什麼不錯的新功能會陸陸續續放上來!
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+若有疑問，請隨時歡迎來信 [godleon@gmail.com](mailto:godleon@gmail.com)
