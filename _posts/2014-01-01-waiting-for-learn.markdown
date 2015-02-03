@@ -4,7 +4,7 @@ title:  "準備中....待學習資料"
 date:   2014-01-01 10:00:00
 comments: true
 categories: [learning]
-tags: [Linux, RHCE, PostgreSQL, Shell Scripting]
+tags: [Linux, RHCE, PostgreSQL, NoSQL, MongoDB, Django, Shell Scripting, SDN, OpenFlow]
 ---
 
 
@@ -15,18 +15,14 @@ RHCE
 
 
 ### 「邁向 RHCE 之路」系列
-
 - [邁向 RHCE 之路 (Day01) - RHEL 與 CentOS - iT邦幫忙::IT知識分享社群](http://ithelp.ithome.com.tw/question/10074991)
-
 - [邁向 RHCE 之路 (Day02) - 檔案系統樹狀結構 - iT邦幫忙::IT知識分享社群](http://ithelp.ithome.com.tw/question/10075147)
 
 ----------------------
 
 PostgreSQL
 ==========
-
 - [PostgreSQL 中文-Mammoth](http://postgresql.wisdomfish.org/)
-
 - [PostgreSQL新手教程_百度经验](http://jingyan.baidu.com/article/3ea51489ec3cb452e71bba52.html)
 
 ----------------------
@@ -51,7 +47,6 @@ NoSQL 隨著 Big Data 越來越夯了!
 ## Web Framework 相關
 
 #### Django
-
 - [Using MongoDB as your primary Django database](http://staltz.com/djangoconfi-mongoengine/#/)
 - [Django MongoDB Engine](https://django-mongodb-engine.readthedocs.org/en/latest/)
 
@@ -65,9 +60,7 @@ Linux 要用好，Shell Scripting 的技能是不能少的!
 以下記錄一些學習 Linux Shell Scripting 的相關資源
 
 - [LinuxCommand.org: Learn the Linux command line. Write shell scripts.](http://linuxcommand.org/)
-
 - [Linux Shell Scripting Tutorial - A Beginner's handbook](http://bash.cyberciti.biz/guide/Main_Page)
-
 - [Advanced Bash-Scripting Guide](http://www.tldp.org/LDP/abs/html/)
 
 ----------------------
