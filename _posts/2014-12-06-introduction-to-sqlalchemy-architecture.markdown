@@ -4,7 +4,7 @@ title:  "[SQLAlchemy] 架構簡介 - Core"
 date:   2014-12-06 20:58:00
 comments: true
 categories: [SQLAlchemy]
-tags: [SQLAlchemy, python]
+tags: [SQLAlchemy, Python]
 ---
 
 SQLAlchemy 是什麼?

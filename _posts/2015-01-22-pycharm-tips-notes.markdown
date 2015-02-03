@@ -4,7 +4,7 @@ title:  "PyCharm 使用技巧筆記"
 date:   2015-01-31 15:23:00
 comments: true
 categories: [python]
-tags: [python]
+tags: [Python]
 ---
 
 [PyCharm](https://www.jetbrains.com/pycharm/) 真的是寫 Python 的神器阿...簡直可以媲美 M$ Visual Studio .NET

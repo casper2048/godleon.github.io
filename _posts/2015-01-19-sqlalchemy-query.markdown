@@ -4,7 +4,7 @@ title:  "[SQLAlchemy] Query"
 date:   2015-01-19 12:27:00
 comments: true
 categories: [SQLAlchemy]
-tags: [SQLAlchemy, python]
+tags: [SQLAlchemy, Python]
 ---
 
 這篇文章主要是介紹一下在 SQLAlchemy 中查詢的撰寫方式，從 Model 定義先開始，接著新增資料，再來才是查詢。

@@ -4,7 +4,7 @@ title:  "[Django] Basic URL dispatch"
 date:   2015-02-02 19:30:00
 comments: true
 categories: [django]
-tags: [django, python]
+tags: [Django, Python]
 ---
 
 

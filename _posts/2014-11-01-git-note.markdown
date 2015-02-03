@@ -1,0 +1,106 @@
+---
+layout: post
+title:  "Git 學習筆記"
+date:   2014-11-01 22:30:00
+comments: true
+categories: [git]
+tags: [Git]
+---
+
+
+1、建立 repository
+=================
+
+``` bash
+#在目前所在的目錄建立 local repository
+$ git init
+
+#建立 shared repository
+$ git init --bare
+
+#複製指定 repository 的資料到目前的目錄
+#Ex: git clone https://github.com/godleon/sandbox.git
+$ git clone [REPOSITORY_URI] 
+```
+
+
+2、常用的 Git 版本控管指令
+========================
+
+``` bash
+#在目前所在的目錄建立 local repository
+$ git init
+
+#將目前所有 untracked file 加入控管(stage)
+$ git add .
+
+#將 app 目錄中的所有 untracked file 加入控管(stage)
+$ git add app/*
+
+#將副檔名為 txt 的所有 untracked file 加入控管(stage)
+$ git add *.txt
+
+#顯示目前 git 工作狀態
+$ git status
+
+#顯示目前 git 工作狀態(簡易版)
+$ git status -s
+
+#將修改紀錄提交至 local repository(會另外被要求輸入 comment)
+$ git commit
+
+#將修改紀錄提交至 local repository
+$ git commit -m "版本紀錄的說明文字"
+
+#顯示 commit log
+$ git log
+
+#顯示最新 10 筆 commit log
+$ git log -10
+
+#將副檔名為 txt 的檔案刪除並標記為 deleted
+$ git rm '*.txt'
+
+#將 app 目錄下副檔名為 txt 的檔案刪除並標記為 deleted
+$ git rm 'app/*.html'
+
+#將檔案 oldname 改名為 newname
+$ git mv 'oldname' 'newname'
+
+#重置目前工作目錄的索引狀態(已變更的檔案無法恢復)
+$ git reset
+
+#回復到最後一次 commit 時的狀態(已變更的檔案也會恢復)
+$ git reset --hard
+
+#回復目前最新 master 分支中的 filename 檔案
+git checkout master 'filename'
+```
+
+
+3、了解儲存庫、工作目錄、物件與索引之間的關係
+================================
+
+在 Git 裡有兩個重要的資料結構，分別是「物件」與「索引」。
+
+「物件」用來保存版本庫中所有檔案與版本紀錄，「索引」則是用來保存當下要進版本庫之前的目錄狀態。
+
+Git 的「索引」是一個介於「物件儲存區」 (object storage) 與「工作目錄」 (working directory) 之間的媒介。
+
+1. 要使用 Git 版本控管，你必須先建立「工作目錄」與「版本庫」。(mkdir, git init)
+2. 你要先在「工作目錄」進行開發，你可能會建立目錄、建立檔案、修改檔案、刪除檔案、... 等操作。
+3. 然後當你想提交一個新版本到 Git 的「儲存庫」裡，一定要先更新「索引」狀態。(git add, git mv, ...)
+4. 然後 Git 會依據「索引」當下的狀態，決定要把那些檔案提交到 Git 的「儲存庫」裡。(git status)
+5. 最後提交變更時 (git commit)，才會把版本資訊寫入到「物件儲存區」當中 (此時將會寫入 commit 物件)。
+
+
+參考資料
+========
+
+- [Git Tutorials and Training | Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials/)
+
+- [The Will Will Web | Git 學習筆記 (2)：30 天精通 Git 版本控管](http://blog.miniasp.com/post/2013/11/04/Learning-Git-Part-2-Master-Git-in-30-days.aspx)
+
+- [Git 版本控制系統 | ihower 的 Git 教室](http://ihower.tw/git/)
+
+- [Git Tutorial 教學](http://www.slideshare.net/ihower/git-tutorial-13695342)

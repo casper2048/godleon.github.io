@@ -4,7 +4,7 @@ title:  "[SQLAlchemy] SQL Expression Language Tutorial"
 date:   2015-01-10 20:00:00
 comments: true
 categories: [SQLAlchemy]
-tags: [SQLAlchemy, python]
+tags: [SQLAlchemy, Python]
 ---
 
 前言

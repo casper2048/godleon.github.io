@@ -4,7 +4,7 @@ title:  "[Ubuntu] 設定 NIC Bonding"
 date:   2014-12-04 11:20:00
 comments: true
 categories: [linux]
-tags: [linux, ubuntu]
+tags: [Linux, Ubuntu]
 ---
 
 最近要測試 storage，但因為 server 上的網卡(四張)的速率只有 1Gb，所以決定透過 bonding 的方式將所有網路卡串起來使用，儘量的消除資料傳輸的瓶頸出現在網路的機會....

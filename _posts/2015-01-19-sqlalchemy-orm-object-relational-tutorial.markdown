@@ -4,7 +4,7 @@ title:  "[SQLAlchemy] ORM Tutorial"
 date:   2015-01-19 12:00:00
 comments: true
 categories: [SQLAlchemy]
-tags: [SQLAlchemy, python]
+tags: [SQLAlchemy, Python]
 ---
 
 在 [Python Central](http://www.pythoncentral.io/) 上找到一系列很不錯的 SQLAlchemy ORM 的教學文章，透過這一系列的文章可以很有條理的學習 SQLAlchemy：

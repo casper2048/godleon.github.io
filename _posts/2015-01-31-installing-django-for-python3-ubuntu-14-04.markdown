@@ -4,7 +4,7 @@ title:  "[Django] 安裝 Django for Python3"
 date:   2015-01-31 15:23:00
 comments: true
 categories: [django]
-tags: [django, python]
+tags: [Django, Python]
 ---
 
 原本是使用 PyCharm 作為練習 Django 之用，但為了瞭解 Django 的細節，我決定還是從安裝、開發、佈署，一步一步直接從 Linux command line 做起好了。
