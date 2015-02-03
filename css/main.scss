@@ -7,7 +7,7 @@
 
 // Our variables
 $base-font-family: Helvetica, Arial, sans-serif;
-$base-font-size:   16px;
+$base-font-size:   14px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
@@ -22,7 +22,8 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    800px;
+//$content-width:    800;
+$content-width:    90%;
 
 $on-palm:          600px;
 $on-laptop:        800px;
@@ -50,3 +51,28 @@ $on-laptop:        800px;
         "layout",
         "syntax-highlighting"
 ;
+
+// for tag cloud and archives
+.tag-cloud {
+  list-style: none;
+  padding: 0;
+  text-align: justify; 
+  font-size: 16px;
+  li {
+    display: inline-block;
+    margin: 0 12px 12px 0; 
+  }
+}
+#archives {
+  padding: 5px;
+}
+.archive-group {
+  margin: 5px;
+  border-top: 1px solid #ddd;
+}
+.archive-item {
+  margin-left: 5px;
+}
+.post-tags {
+  text-align: right;
+}
