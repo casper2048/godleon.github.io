@@ -31,6 +31,7 @@ Core & ORM
 ==========
 
 SQLAlchemy 架構分為 Core & ORM 兩個部分，以下是架構圖：
+
 ![SQLAlchemy layer diagram](http://aosabook.org/images/sqlalchemy/layers.png)
 
 其實 SQLAlchemy 的概念很簡單，大概條列如下：

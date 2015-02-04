@@ -57,6 +57,8 @@ Security
 
 - [Docker Desktop: Your Desktop over ssh running inside of a Docker container | Docker Blog](http://blog.docker.com/2013/07/docker-desktop-your-desktop-over-ssh-running-inside-of-a-docker-container/)
 
+- [利用官方私人 registry image 架設私人 registry (CentOS 6 host)](https://dockers.hackpad.com/-registry-image-registry-CentOS-6-host-xtp4N9JFMuC)
+
 
 彙總資料
 ========
