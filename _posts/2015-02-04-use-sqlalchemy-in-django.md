@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "[Django] 在 Django 中使用 SQLAlchemy"
-date:   2015-02-04 17:30:00
-published: false
+date:   2015-02-05 17:30:00
+published: true
 comments: true
 categories: [django]
 tags: [Django, Python, SQLAlchemy]
@@ -36,34 +36,14 @@ SQLAlchemy 架構簡介
 這邊新產生一個專案，名稱為 **PropertyRental**，並新增一個 app，名稱為 **property_manage**：
 
 ``` bash
-$ django-admin startproject PropertyRental
-$ cd PropertyRental
-$ python3 manage.py startapp property_manage
+$ django-admin startproject Scholarship
+$ cd Scholarship
+$ python3 manage.py startapp SchoolManage
 ```
 
 以下是目前專案結構：
 
 ``` bash
-.
-├── LICENSE
-├── manage.py
-├── property_manage
-│   ├── admin.py
-│   ├── __init__.py
-│   ├── migrations
-│   │   └── __init__.py
-│   ├── models.py
-│   ├── tests.py
-│   └── views.py
-├── PropertyRental
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-34.pyc
-│   │   └── settings.cpython-34.pyc
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-└── README.md
 ```
 
 ------------------------
@@ -101,7 +81,7 @@ Model 定義
 
 Model 的部分要改成 SQLAlchemy 有以下幾個步驟：
 
-## 1、與資料庫連線
+### 1、與資料庫連線
 
 首先在專案根目錄下新增資料庫連線檔 `.\dbConn.py`：
 
@@ -110,25 +90,144 @@ Model 的部分要改成 SQLAlchemy 有以下幾個步驟：
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-dbEngine = create_engine('mysql+pymysql://<YOUR_LOGIN_NAME>:<YOUR_PASSWORD>@<YOUR_DB_SERVER_IP>/<YOUR_DB_NAME>', pool_recycle=3600)
+dbEngine = create_engine('mysql+pymysql://<YOUR_LOGIN_NAME>:<YOUR_PASSWORD>@<YOUR_DB_SERVER_IP>/<YOUR_DB_NAME>?charset=utf8', pool_recycle=3600)
 dbSession = sessionmaker(bind=dbEngine)()
 ```
 
-## 2、設定 Model
+### 2、設定 Model
 
-編輯 `.\PropertyRental\property_manage\models.py` 
+編輯 `.\SchoolManage\models.py` 
 
 ``` python
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
-from sqlalchemy import Column, Integer, Unicode, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, Unicode, ForeignKey, String
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
+
 from dbConn import dbEngine
 
 
-# 建立 declarative base class
 Base = declarative_base()
+
+class SchoolType(Base):
+    __tablename__ = 'school_type'
+    __table_args__ = {
+        'mysql_engine': 'InnoDB',
+        'mysql_charset': 'utf8'
+    }
+
+    id = Column(Integer, primary_key=True)
+    type_name = Column(Unicode(128), nullable=False)
+    remark = Column(Unicode(256))
+    print_sort = Column(Integer, server_default='0', nullable=False)
+
+class School(Base):
+    __tablename__ = 'school'
+    __table_args__ = {
+        'mysql_engine': 'InnoDB',
+        'mysql_charset': 'utf8'
+    }
+
+    id = Column(Integer, primary_key=True)
+    apply_year = Column(Integer, default='func.year(now())', nullable=False)
+    sch_code = Column(String(32), nullable=False)
+    sch_name = Column(Unicode(128), nullable=False)
+    school_type_id = Column(Integer, ForeignKey('school_type.id'))
+    print_sort = Column(Integer, server_default='9999', nullable=False)
+
+    school_type = relationship('SchoolType', backref=backref('schools', uselist=True, passive_updates=False))
+
+class Academy(Base):
+    __tablename__ = 'academy'
+    __table_args__ = {
+        'mysql_engine': 'InnoDB',
+        'mysql_charset': 'utf8'
+    }
+
+    id = Column(Integer, primary_key=True)
+    apply_year = Column(Integer, default='func.year(now())', nullable=False)
+    acad_code = Column(String(32), nullable=False)
+    acad_name = Column(Unicode(256), nullable=False)
+    school_id = Column(Integer, ForeignKey('school.id'))
+
+    school = relationship('School', backref=backref('academies', uselist=True, passive_updates=False))
+
+Base.metadata.create_all(dbEngine)
 ```
+
+------------------------
+
+撰寫 View Function
+==================
+
+設定好 model 之後，再來就是撰寫 view function 了，接著建立 `.\SchoolManage\views.py`
+
+``` python
+from django.shortcuts import render
+from SchoolManage.models import School
+from dbConn import dbSession
+
+def index(request):
+    all_schools = dbSession.query(School).all()
+    context = {'all_schools': all_schools}
+    return render(request, 'SchoolManage/index.html', context)
+```
+
+------------------------
+
+URL Routing 設定
+================
+
+這個部分包含了專案 & App 兩個部份的 url routing 設定，說明如下：
+
+### 1、設定 App url routing rule
+
+接著設定 url roting 的規則，將剛剛撰寫的 view function 設定為 app 首頁，建立檔案 `.\SchoolManage\urls.py`：
+
+``` python
+from django.conf.urls import patterns, url
+from SchoolManage import views
+
+urlpatterns = patterns('', url(r'^$', views.index, name='index'),)
+```
+
+### 2、設定專案 url routing rule
+
+再來調整專案的 routing 規則，把 app 的 routing 規則改由 app 底下的 urls.py 來設定，調整 `.\Scholarship\urls.py` 如下：
+
+``` python
+from django.conf.urls import patterns, include, url
+
+urlpatterns = patterns('',
+    url(r'^SchoolManage/', include('SchoolManage.urls', namespace='SchoolManage')),
+)
+```
+
+------------------------
+
+調整專案設定
+============
+
+最後調整專案設定，修改 `.\Scholarship\settings.py`，在 `INSTALLED_APPS` 設定中加入 `SchoolManage`。
+
+
+------------------------
+
+檢視專案
+========
+
+大功告成，最後執行 `python3 manage.py runserver 0.0.0.0:8000` 瀏覽 [http://YOUR_SERVER_IP:8000/SchoolManage/](http://YOUR_SERVER_IP:8000/SchoolManage/) 即可建立 table 並瀏覽資料!
+
+不過一開始沒有資料的話，可以連線進 MariaDB 建立幾筆資料後，重新整理網頁即可看到相關資料。
+
+------------------------
+
+參考資料
+========
+
+- [Replacing Django's ORM with SQLAlchemy - Irrational Exuberance](http://lethain.com/replacing-django-s-orm-with-sqlalchemy/)
+
+- [Column Insert/Update Defaults — SQLAlchemy 1.0 Documentation](http://docs.sqlalchemy.org/en/latest/core/defaults.html)
+
 
 [1]: https://docs.djangoproject.com/en/1.7/topics/
