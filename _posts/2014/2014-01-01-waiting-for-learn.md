@@ -65,6 +65,41 @@ Linux 要用好，Shell Scripting 的技能是不能少的!
 
 ----------------------
 
+Log Process
+===========
+
+今天觀賞 Taipei.py 的影片時，發現一些把一堆 Error, Log, Metric 等資訊整合並圖形化且可搜尋的工具，先把他們記起來，之後可以試試看!
+
+### Error
+
+[Sentry: Track exceptions with modern error logging for JavaScript, Python, Ruby, Java, and Node.js](https://getsentry.com/welcome/)
+
+### Log
+
+1. [Structured Logging for Python — structlog documentation](https://structlog.readthedocs.org/en/stable/)
+
+2. [logging.handlers — Logging handlers — Python 3.4.2 documentation](https://docs.python.org/3/library/logging.handlers.html)
+
+3. [Syslog](http://zh.wikipedia.org/wiki/Syslog) / [syslog-ng - Open Source log management solution](https://syslog-ng.org/)
+
+4. [logstash - open source log management](http://logstash.net/)
+
+5. [Elasticsearch.org Open Source Distributed Real Time Search & Analytics | Elasticsearch](http://www.elasticsearch.org/)
+
+6. [Elasticsearch.org Kibana | Overview | Elasticsearch](http://www.elasticsearch.org/overview/kibana/)
+
+### Metric
+
+1. [Carbon](http://graphite.wikidot.com/carbon)
+
+2. [Whisper](http://graphite.wikidot.com/whisper)
+
+3. [Graphite - Scalable Realtime Graphing - Graphite](http://graphite.wikidot.com/)
+
+4. [Riemann - A network monitoring system](http://riemann.io/)
+
+----------------------
+
 OpenFlow
 ========
 
