@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[OpenStack] Juno 安裝 & 設定 @ Ubuntu 14.04 (1) - 基本環境設定"
+title:  "[OpenStack] 安裝 Juno @ Ubuntu 14.04 (1) - 基本環境設定"
 date:   2015-02-10 16:00:00
 published: true
 comments: true
