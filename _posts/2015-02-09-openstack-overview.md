@@ -57,7 +57,16 @@ OpenStack 中每個服務的相互關係可以參考下圖：
 |---------|---------|------|
 | Orchestration | **Heat** | 透過 Heat，可使用一份預定定義好的設定檔，快速的將所指定的運算/儲存/網路...等服務部署起來，功能類似 Amazon CloudFormation |
 | Database Service | **Trove** | 提供 Database-as-a-service 的功能，包含 RDBMS & NoSQL 皆有，讓使用者不需要在自行安裝 & 維護資料庫，可以很簡單的在 OpenStack 上就啟動一個資料庫服務，功能類似 Amazon RDS & DynamoDB |
+>
 
+--------------------
+
+邏輯架構
+========
+
+在 OpenStack 中的每個 service 都有提供 API 與其他 service 進行溝通合作，以下用一張圖來表示 service 相互合作的邏輯關係圖：
+
+![OpenStack Logic Architecture](http://docs.openstack.org/openstack-ops/content/figures/2/figures/osog_0001.png)
 
 --------------------
 
