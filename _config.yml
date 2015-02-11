@@ -2,11 +2,11 @@
 title: 小信豬的原始部落
 email: godleon@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  從 <a href='http://godleon.blogspot.com' target='_blank'>Google Blogger</a> 搬過來囉!<p />
+  記錄在 IT 方面學習的點點滴滴<p />
+  一步一腳印朝 open source 的方向努力學習!
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+url: "http://godleon.github.io" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
 github_username:  godleon
 
