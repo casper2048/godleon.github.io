@@ -360,6 +360,31 @@ You are not authorized to perform the requested action: admin_required (HTTP 403
 
 ---------------------------
 
+建立快速切換使用者身分的 script
+===============================
+
+由於我們在前面建立了 admin & demo 兩個 user，每個 user 所使用的環境變數皆不同，所以為了可以快速切換，我們建立以下兩個 script 作為後續使用：
+
+`~/openstack/admin-openrc.sh`
+
+``` bash
+export OS_TENANT_NAME=admin
+export OS_USERNAME=admin
+export OS_PASSWORD=ADMIN_PASS
+export OS_AUTH_URL=http://controller:35357/v2.0
+```
+
+`~/openstack/demo-openrc.sh`
+
+``` bash
+export OS_TENANT_NAME=demo
+export OS_USERNAME=demo
+export OS_PASSWORD=DEMO_PASS
+export OS_AUTH_URL=http://controller:5000/v2.0
+```
+
+---------------------------
+
 參考資料
 ========
 
