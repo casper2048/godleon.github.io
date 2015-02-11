@@ -115,7 +115,7 @@ root@controller:~# keystone service-create --name glance --type image --descript
 |     name    |              glance              |
 |     type    |              image               |
 +-------------+----------------------------------+
-``
+```
 
 4、在 Keystone 註冊 Glance API endpoints
 
