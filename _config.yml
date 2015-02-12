@@ -10,6 +10,8 @@ url: "http://godleon.github.io" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
 github_username:  godleon
 
+permalink: /blog/:year/:month/:day/:title
+
 # Build settings
 #markdown: kramdown
 markdown: redcarpet
