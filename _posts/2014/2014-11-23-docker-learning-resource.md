@@ -52,6 +52,8 @@ Security
 
 - [Developing on Linux with docker and PyCharm · hydroshare/hydroshare2 Wiki](https://github.com/hydroshare/hydroshare2/wiki/Developing-on-Linux-with-docker-and-PyCharm)
 
+- [Docker in Action - fitter, happier, more productive - Real Python](https://realpython.com/blog/python/docker-in-action-fitter-happier-more-productive/)
+
 特別應用
 ========
 
