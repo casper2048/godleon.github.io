@@ -61,6 +61,8 @@ Security
 
 - [利用官方私人 registry image 架設私人 registry (CentOS 6 host)](https://dockers.hackpad.com/-registry-image-registry-CentOS-6-host-xtp4N9JFMuC)
 
+- [Docker + Weave + Flocker](http://www.slideshare.net/lukemarsden/docker-in-production-heavybit-meetup)
+
 
 彙總資料
 ========
