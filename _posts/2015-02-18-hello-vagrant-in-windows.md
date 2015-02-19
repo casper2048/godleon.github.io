@@ -119,6 +119,26 @@ Vagrant.configure(2) do |config|
   end
 end
 ```
+
+-----------------------------------
+
+移除 VM 配置
+============
+
+假設從 Vagrant Cloud 上安裝了 **ubuntu/trusty64**，目錄名稱為 **demo-1** 為例：
+
+``` bash
+$ cd demo-1
+ 
+$ vagrant halt
+$ vagrant destroy --force
+$ del /F /Q  Vagrantfile
+$ rmdir /S /Q  .vagrant
+ 
+$ vagrant box remove ubuntu/trusty64
+$ rmdir /S /Q %USERPROFILE%\.vagrant.d\boxes\ubuntu-VAGRANTSLASH-trusty64
+```
+
 -----------------------------------
 
 參考資料
