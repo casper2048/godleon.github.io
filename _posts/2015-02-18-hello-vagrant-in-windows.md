@@ -95,6 +95,7 @@ SCRIPT
 Vagrant.configure(2) do |config|
   # Vagrant Box 名稱
   config.vm.box = "ubuntu/trusty64"
+  config.vm.provision "shell", inline: $script
 
   # port forwarding 設定
   # 從原本的輸出畫面可看出已經有 22 <---> 2222 的設定內建了
