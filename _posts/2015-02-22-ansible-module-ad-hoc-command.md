@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "[Ansible] 使用 ad-hoc command"
+title:  "[Ansible] 使用 module & ad-hoc command"
 description: "在使用 playbook 之前，在 Ansible 中使用 module 功能，並執行 ad-hoc command，直接從 control node 對 managed node 下達命令"
-date:   2015-02-22 20:30:00
+date:   2015-02-22 23:00:00
 published: true
 comments: true
 categories: [ansible]
@@ -17,6 +17,15 @@ ad-hoc command 是什麼?
 > An ad-hoc command is something that you might type in to do something really quick, but don’t want to save for later.
 
 其實 ad-hoc command 就是直接執行的指令，而非定義在 playbook 內的命令，當要發布的指令很簡單時(例如：重開機)，與其寫一個 playbook 來執行，不如直接下一個直接的指令來的快。
+
+----------------------------
+
+module 是什麼?
+==============
+
+module 在 Ansible 中的功能就是可用來在本地端 or 遠端管理的機器上執行各式各樣的管理工作，包含使用者管理、套件管理、服務管理、檔案管理 .... 等功能。
+
+當然也可以開發屬於自己使用的 module，詳細的資料可以參考[官方網站](http://docs.ansible.com/modules.html)。
 
 ----------------------------
 
@@ -65,10 +74,10 @@ md1 | success | rc=0 >>
 
 ----------------------------
 
-File Transfer
-=============
+File Transfer (使用 copy module)
+================================
 
-#### 使用 copy module，將 control node 的檔案透過 SCP 複製到 managed nodes 上
+#### 將 control node 的檔案透過 SCP 複製到 managed nodes 上
 
 ``` bash
 $ ansible group1 -m copy -a "src=/etc/hosts dest=/tmp/hosts"
@@ -105,8 +114,8 @@ md2 | success >> {
 
 ----------------------------
 
-目錄/檔案管理
-=============
+目錄/檔案管理 (使用 file module)
+================================
 
 #### 1、變更檔案的 permission & Owner & Group
 
@@ -156,8 +165,8 @@ md1 | success >> {
 
 -------------------------------
 
-套件管理
-========
+套件管理 (使用 apt module)
+==========================
 
 #### 1、使用 APT 安裝最新套件
 
@@ -184,8 +193,8 @@ $ ansible md1 -m apt -a "name=openjdk-6-jre state=absent" --sudo
 
 -------------------------------
 
-使用者 & 群組管理
-===============
+使用者 & 群組管理 (使用 user module)
+====================================
 
 #### 1、新增使用者
 
@@ -221,8 +230,8 @@ md1 | success >> {
 
 -------------------------------
 
-Service 管理
-============
+Service 管理 (使用 service module)
+==================================
 
 #### 重新啟動服務
 
@@ -237,6 +246,21 @@ md1 | success >> {
 ```
 
 若要啟動服務，則 `state=started`；停止服務則用 `state=stopped`
+
+-------------------------------
+
+總結
+====
+
+從上面的範例中可以看出 Ansible 的作業方式：
+
+1. 由 Invetory File 中取得可以管理的遠端主機清單(managed nodes)
+
+2. 使用各種 module 功能進行配置(檔案管理 / 使用者管理 / 套件管理 / 服務管理 .... 等等)
+
+3. 後續還可透過 playbook(劇本) 的方式，將所需要自動化完成的工作，透過 module 組合起來，並透過配置檔快速佈署環境。
+
+Ansible 運作的大痣方式就是如以上所述，其他細節的部份就留待後面研究後再來分享囉!
 
 -------------------------------
 
