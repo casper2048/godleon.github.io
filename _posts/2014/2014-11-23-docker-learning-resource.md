@@ -63,6 +63,8 @@ Security
 
 - [Docker + Weave + Flocker](http://www.slideshare.net/lukemarsden/docker-in-production-heavybit-meetup)
 
+- [You Don’t Need $1MM for a Distributed System — Medium](https://medium.com/@dan.ellis/you-dont-need-1mm-for-a-distributed-system-70901d4741e1)
+
 
 彙總資料
 ========
