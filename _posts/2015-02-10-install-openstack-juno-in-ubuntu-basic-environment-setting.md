@@ -32,7 +32,7 @@ tags: [OpenStack, Ubuntu, Linux]
 > 4 CPU + 8GB RAM + 32GB HD + 3 NIC
 
 4. Block Storage Node
-> 1 CPU + 2GB RAM + 64GB HD + 2 NIC
+> 1 CPU + 2GB RAM + 2 x 64GB HD + 2 NIC
 
 5. Object Storage Node
 > 1 CPU + 2GB RAM + 32GB HD + 2 NIC
