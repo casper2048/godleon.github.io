@@ -7,6 +7,16 @@ categories: [learning]
 tags: [Linux, RHCE, PostgreSQL, NoSQL, MongoDB, Django, Shell Scripting, SDN, OpenFlow]
 ---
 
+IT Automation Tools
+===================
+
+### Puppet
+
+- [Learning Puppet — Resources and the RAL — Documentation — Puppet Labs](https://docs.puppetlabs.com/learning/ral.html)
+
+- [Type Reference — Documentation — Puppet Labs](https://docs.puppetlabs.com/references/latest/type.html)
+
+----------------------
 
 RHCE
 ====
