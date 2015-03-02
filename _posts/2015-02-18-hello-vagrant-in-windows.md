@@ -17,7 +17,7 @@ tags: [vagrant, Virtualization]
 
 2. 安裝 [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads) (使用版本：**4.3.22**)
 
-3. 安裝 Vagrant (使用版本)
+3. 安裝 [Vagrant](https://www.vagrantup.com/downloads.html) (使用版本：**1.7.2**)
 
 4. 安裝 [OpenSSH for Windows](http://sourceforge.net/projects/opensshwindows/)，並把 <font color='red'>**C:\Program Files (x86)\OpenSSH for Windows\bin**</font> 加入到環境變數 **path** 中
 
