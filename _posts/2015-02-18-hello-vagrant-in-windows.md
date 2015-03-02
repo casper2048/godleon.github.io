@@ -19,7 +19,7 @@ tags: [vagrant, Virtualization]
 
 3. 安裝 Vagrant (使用版本)
 
-4. 安裝 [OpenSSH for Windows](http://www.codedata.com.tw/social-coding/vagrant-tutorial-2-playing-vm-with-vagrant/)，並把 <font color='red'>**C:\Program Files (x86)\OpenSSH for Windows\bin**</font> 加入到環境變數 **path** 中
+4. 安裝 [OpenSSH for Windows](http://sourceforge.net/projects/opensshwindows/)，並把 <font color='red'>**C:\Program Files (x86)\OpenSSH for Windows\bin**</font> 加入到環境變數 **path** 中
 
 -----------------------------------
 
