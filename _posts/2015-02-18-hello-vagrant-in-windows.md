@@ -6,7 +6,7 @@ date:   2015-02-18 20:40:00
 published: true
 comments: true
 categories: [vagrant]
-tags: [vagrant, Virtualization]
+tags: [Vagrant, Virtualization]
 ---
 
 
