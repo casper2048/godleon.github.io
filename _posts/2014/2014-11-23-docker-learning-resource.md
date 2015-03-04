@@ -67,6 +67,8 @@ Security
 
 - [You Don’t Need $1MM for a Distributed System — Medium](https://medium.com/@dan.ellis/you-dont-need-1mm-for-a-distributed-system-70901d4741e1)
 
+- [Resin.io - Put Linux Containers to Devices](https://resin.io/)
+
 
 彙總資料
 ========
