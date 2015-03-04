@@ -18,6 +18,7 @@ Docker 原理介紹
 
 - [The Docker Ecosystem: An Introduction to Common Components | DigitalOcean](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-introduction-to-common-components)
 
+--------------------
 
 線上教學
 ========
@@ -28,24 +29,28 @@ Docker 原理介紹
 
 - [The New PaaS: Using Docker and Containers to Simplify Your Life and Accelerate Development on AWS](http://reinvent-hripps.rhcloud.com/#/)
 
+--------------------
 
 Load Balance
 ============
 
 - [Load-balancing Docker containers with Nginx and Consul-Template - Belly Card Engineering](https://tech.bellycard.com/blog/load-balancing-docker-containers-with-nginx-and-consul-template/)
 
+--------------------
 
 Security
 ========
 
 - [GDSSecurity/Docker-Secure-Deployment-Guidelines](https://github.com/GDSSecurity/Docker-Secure-Deployment-Guidelines)
 
+--------------------
 
 線上電子書
 =========
 
 - [《Docker —— 從入門到實踐­》正體中文版](http://philipzheng.gitbooks.io/docker_practice/)
 
+--------------------
 
 與 Developer 相關
 =================
@@ -55,6 +60,8 @@ Security
 - [Developing on Linux with docker and PyCharm · hydroshare/hydroshare2 Wiki](https://github.com/hydroshare/hydroshare2/wiki/Developing-on-Linux-with-docker-and-PyCharm)
 
 - [Docker in Action - fitter, happier, more productive - Real Python](https://realpython.com/blog/python/docker-in-action-fitter-happier-more-productive/)
+
+--------------------
 
 特別應用
 ========
@@ -69,6 +76,14 @@ Security
 
 - [Resin.io - Put Linux Containers to Devices](https://resin.io/)
 
+--------------------
+
+問題解決
+========
+
+- [Docker 跨機器間容器互連 - dockers.hackpad.com](https://dockers.hackpad.com/Docker--BgRL0zC5D8h)
+
+--------------------
 
 彙總資料
 ========
