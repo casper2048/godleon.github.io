@@ -343,7 +343,7 @@ virt_type=kvm
 
 ``` bash
 [libvirt]
-virt_type=qumu
+virt_type=qemu
 ```
 
 4、重新啟動 Compute Service
