@@ -22,21 +22,21 @@ shell session 有兩種：
 
 登入 shell session 會讀取一個 or 多啟動檔：
 
-### `login shell session` 的啟動檔
+### login shell session 的啟動檔
 
 | 檔案 | 內容 |
 |------|------|
-| /etc/profile | 套用給所有使用者的全域性組態 script |
-| ~/.bash_profile | 使用者個人的啟動檔。可用來擴充 or 複寫全域設定 |
-| ~/.bash_login | 若找不到 ~/.bash_profile，bash 會試著讀取此檔案 |
-| ~/.profile | 若 ~/.bash_profile & ~/.bash_login 都找不到，bsah 會試著讀取此檔案(這是在 Debian/Ubuntu 分支才有的設定) |
+| **/etc/profile** | 套用給所有使用者的全域性組態 script |
+| **~/.bash_profile** | 使用者個人的啟動檔。可用來擴充 or 複寫全域設定 |
+| **~/.bash_login** | 若找不到 ~/.bash_profile，bash 會試著讀取此檔案 |
+| **~/.profile** | 若 ~/.bash_profile & ~/.bash_login 都找不到，bsah 會試著讀取此檔案(這是在 Debian/Ubuntu 分支才有的設定) |
 
-### `non-login shell session` 的啟動檔
+### non-login shell session 的啟動檔
 
 | 檔案 | 內容 |
 |------|------|
-| /etc/bash.bashrc | 套用給所有使用者的全域性組態 script |
-| ~/.bashrc | 使用者個人啟動檔。可用來擴充 or 複寫全域設定 |
+| **/etc/bash.bashrc** | 套用給所有使用者的全域性組態 script |
+| **~/.bashrc** | 使用者個人啟動檔。可用來擴充 or 複寫全域設定 |
 
 ---------------------------------------
 
@@ -56,11 +56,11 @@ vi 簡介(A Gentle Introduction To vi)
 
 | 項目 | 意義 |
 |------|------|
-| : | 以冒號起始 ex 命令 |
-| % | `%` 為第一行到最後一行的簡寫。也可以寫成 `1,5`(第 1~5 行) or `1,$`(第 1 ~ 最後一行) |
-| s | 操作方式, s 表示搜尋 & 取代 |
-| /Line/line/ | 搜尋模式 & 替代的文字 |
-| g | 全域性。若省略，則只會取代每一行的第一個被搜尋到的字串。若補上 `c` 則會要求使用者確認 |
+| **:** | 以冒號起始 ex 命令 |
+| **%** | `%` 為第一行到最後一行的簡寫。也可以寫成 `1,5`(第 1~5 行) or `1,$`(第 1 ~ 最後一行) |
+| **s** | 操作方式, s 表示搜尋 & 取代 |
+| **/Line/line/** | 搜尋模式 & 替代的文字 |
+| **g** | 全域性。若省略，則只會取代每一行的第一個被搜尋到的字串。若補上 `c` 則會要求使用者確認 |
 
 ### 編輯多檔
 
