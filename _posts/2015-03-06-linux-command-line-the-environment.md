@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "學習 Linux Command Line 筆記(2) - 組態與環境"
-description: "學習 Linux Command Line 筆記 - 組態與環境"
+description: "學習 Linux Command Line 中組態與環境的調整與設定，包含 loing/non-login shell session 的設定、vi 的使用、PS1 的調整"
 date:   2015-03-06 14:55:00
 published: true
 comments: true
