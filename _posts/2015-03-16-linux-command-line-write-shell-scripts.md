@@ -82,7 +82,7 @@ else
 fi
 ```
 
-```
+``` bash
 # 建立 temp 目錄並進入 temp
 # 若 temp 目錄已存在就會發生錯誤，不執行後面的指令
 $ mkdir temp && cd temp
