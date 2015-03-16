@@ -384,6 +384,18 @@ SUSE    11.0    2008-06-19
  +------------------------------+
 ```
 
+### dirname && basename
+
+``` bash
+# 取得完整路徑中不含程式的路徑部分
+$ dirname /var/spool/mail
+/var/spool
+
+# 取得完整路經中的程式名稱
+$ basename /var/spool/mail
+mail
+```
+
 ----------------------------
 
 參考資料
