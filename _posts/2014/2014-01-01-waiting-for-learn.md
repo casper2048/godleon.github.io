@@ -18,6 +18,28 @@ IT Automation Tools
 
 ----------------------
 
+
+SDN (Software-Defined Network)
+==============================
+
+## OpenFlow
+
+隨著雲端、虛擬化的議題越來越普及，主機、儲存都虛擬化後，當然網路也要虛擬化....
+
+虛擬化後的網路可達到的彈性可不是實體網路設備所能比擬的! 
+
+而要了解網路虛擬化，當然要從 SDN(Software-Defined Network) 開始著手了!
+
+以下留下一些 OpenFlow 相關的資料：
+
+- [http://blog.linton.tw/posts/2014/05/16/learned-how-to-develop-sdn-openflow-applications](http://blog.linton.tw/posts/2014/05/16/learned-how-to-develop-sdn-openflow-applications)
+
+## VMware NSX
+
+- [網路虛擬化NSX 技術文章系列](https://www.facebook.com/vmwaretaiwan/notes)
+
+----------------------
+
 RHCE
 ====
 
@@ -107,18 +129,3 @@ Log Process
 3. [Graphite - Scalable Realtime Graphing - Graphite](http://graphite.wikidot.com/)
 
 4. [Riemann - A network monitoring system](http://riemann.io/)
-
-----------------------
-
-OpenFlow
-========
-
-隨著雲端、虛擬化的議題越來越普及，主機、儲存都虛擬化後，當然網路也要虛擬化....
-
-虛擬化後的網路可達到的彈性可不是實體網路設備所能比擬的! 
-
-而要了解網路虛擬化，當然要從 SDN(Software-Defined Network) 開始著手了!
-
-以下留下一些 OpenFlow 相關的資料：
-
-- [http://blog.linton.tw/posts/2014/05/16/learned-how-to-develop-sdn-openflow-applications](http://blog.linton.tw/posts/2014/05/16/learned-how-to-develop-sdn-openflow-applications)
