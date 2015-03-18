@@ -27,6 +27,12 @@ module 在 Ansible 中的功能就是可用來在本地端 or 遠端管理的機
 
 當然也可以開發屬於自己使用的 module，詳細的資料可以參考[官方網站](http://docs.ansible.com/modules.html)。
 
+module 有個重要的特性，稱為 <font color='red'>**Idempotence**</font>，這有甚麼功能呢? 舉例來說，如果在 playbook 中指定用 module 建立一個名為 leon 的使用者，當這位使用者不存在時，Ansible 就會建立使用者；但如果 leon 已經存在了，Ansible 則是甚麼都不做。
+
+這代表一件很重要的事情，<font color='blue'>**Ansible playbook 可以對同一個 remote server 執行多次，且得到一樣的結果**</font>。
+
+比起傳統用 shell script 來做同樣的事情，Idempotence 這個特性真的算是有一個很大的進步。
+
 ----------------------------
 
 調整 Invetory File
