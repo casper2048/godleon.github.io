@@ -26,7 +26,7 @@ tags: [Vagrant, Virtualization]
 啟動第一個虛擬機
 ================
 
-首先可以到 [Vagrant Cloud](https://vagrantcloud.com/) 上搜尋合適的 box(其實就是做好某種程度配置的 VM) 來安裝，以下以 **ubuntu/trusty64** 為例：
+首先可以到 [Vagrant Cloud](https://vagrantcloud.com/)(現在已經變成 [HashiCorp Atlas](https://atlas.hashicorp.com/) 的其中一項功能) 上搜尋合適的 box(其實就是做好某種程度配置的 VM) 來安裝，以下以 **ubuntu/trusty64** 為例：
 
 ``` bash
 $ mkdir demo-1
