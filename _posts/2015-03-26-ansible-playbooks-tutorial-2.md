@@ -42,7 +42,7 @@ Playbook
     - name: copy SSL key
       copy: > 
         src=/home/vagrant/ansible/files/ssl/nginx.key
-        dest={{ key_file }}
+        dest=\{\{ key_file \}\}
         owner=root
         mode=0600
     # 透過 copy module 複製 SSL 憑證檔案到指定位置(使用 vars & template)
@@ -50,7 +50,7 @@ Playbook
     - name: copy SSL certificate
       copy: >
         src=/home/vagrant/ansible/files/ssl/nginx.crt
-        dest={{ cert_file }}
+        dest=\{\{ cert_file \}\}
       notify: restart nginx
     # 使用 template module 直接指定 jinja2 template 並套用上面定義的變數作為來源檔案
     # 並複製到指定的位置
@@ -93,7 +93,9 @@ Playbook
 
 這四個變數，可以用在 playbook 內，也可以用在 template 內，透過類似以下的方式就可以使用：
 
->> {{ var_name }}
+``` bash
+\{\{ var_name \}\}
+```
 
 -------------------------------------------
 
