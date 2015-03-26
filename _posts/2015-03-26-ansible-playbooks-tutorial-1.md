@@ -24,16 +24,18 @@ Inventory 檔案不能有執行的權限(x)，否則 ansible 會回報以下錯�
 
 ssh private key 只能有擁有者可以存取的權限，若是其他人(group/others)也有存取的權限，ansible 會回報以下錯誤：(必須使用 -vvvv 參數才看的到)
 
-> @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-> @         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
-> @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-> Permissions 0777 for '/home/vagrant/ansible/private_key' are too open.
-> It is required that your private key files are NOT accessible by others.
-> This private key will be ignored.
-> bad permissions: ignore key: /home/vagrant/ansible/private_key
-> debug2: we did not send a packet, disable method
-> debug1: No more authentication methods to try.
-> Permission denied (publickey,password).
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0777 for '/home/vagrant/ansible/private_key' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+bad permissions: ignore key: /home/vagrant/ansible/private_key
+debug2: we did not send a packet, disable method
+debug1: No more authentication methods to try.
+Permission denied (publickey,password).
+```
 
 ---------------------------------------------------
 
@@ -58,7 +60,7 @@ Invetory File
 
 2. 要在這些 hosts 上面執行的任務清單
 
-了解以上內容後，建立第一個 playbook，檔名為 ** web-nossl.yml**：
+了解以上內容後，建立第一個 playbook，檔名為 <font color='red'>**web-nossl.yml**</font>：
 
 ``` yaml
 # 檔案開頭
@@ -191,6 +193,14 @@ PLAY RECAP ********************************************************************
 ### changed
 
 表示 task 執行後有改變 remote host 的狀態，例如：安裝一個新套件、複製一個新設定檔。
+
+## 檢視是否執行成功
+
+此時我們可以連到 [http://192.168.30.10](http://192.168.30.10) 檢查 nginx 是否已經安裝設定好並啟動
+
+若是成功，則可以看到下面的畫面：
+
+![nginx index page by Ansible](https://lh3.googleusercontent.com/-0go8aIo6o5s/VROGFZR6WDI/AAAAAAAAKwI/fr_3ZoGTwJk/w497-h197-no/ansible-web-nossl.png)
 
 ---------------------------------------------------
 
