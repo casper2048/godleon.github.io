@@ -9,13 +9,11 @@ categories: [ansible]
 tags: [Ansible, Linux]
 ---
 
-{% 
-assign key_file = '{{ key_file }}' 
-assign cert_file = '{{ cert_file }}' 
-assign conf_file = '{{ conf_file }}' 
-assign server_name = '{{ server_name }}' 
-assign var_name = '{{ var_name }}'
-%}
+{% assign key_file = '{{ key_file }}' %}
+{% assign cert_file = '{{ cert_file }}' %}
+{% assign conf_file = '{{ conf_file }}' %}
+{% assign server_name = '{{ server_name }}' %}
+{% assign var_name = '{{ var_name }}' %}
 
 Playbook
 ========
