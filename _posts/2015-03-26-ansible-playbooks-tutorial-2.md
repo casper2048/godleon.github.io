@@ -9,6 +9,14 @@ categories: [ansible]
 tags: [Ansible, Linux]
 ---
 
+{% 
+assign key_file = '{{ key_file }}' 
+assign cert_file = '{{ cert_file }}' 
+assign conf_file = '{{ conf_file }}' 
+assign server_name = '{{ server_name }}' 
+assign var_name = '{{ var_name }}'
+%}
+
 Playbook
 ========
 
@@ -94,7 +102,7 @@ Playbook
 這四個變數，可以用在 playbook 內，也可以用在 template 內，透過類似以下的方式就可以使用：
 
 ``` bash
-{{{{ var_name }}}}
+{{ var_name }}
 ```
 
 -------------------------------------------
