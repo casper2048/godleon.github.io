@@ -10,7 +10,7 @@ tags: [Ansible, Linux]
 ---
 
 {% assign db_primary_host = '{{ db_primary_host }}' %}
-{% assign db_primary_host_yaml = '{{ db['primary']['host'] }}' %}
+{% assign db_primary_host_yaml = '{{ db[\'primary\'][\'host\'] }}' %}
 
 測試環境說明
 ============
