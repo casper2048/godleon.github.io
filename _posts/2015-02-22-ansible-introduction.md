@@ -20,6 +20,19 @@ Ansible 是一個 python 為基礎的自動化配置與部署 IT 架構的工具
 
 -------------------------------
 
+Why Ansible ?
+=============
+
+IT Automation 的工具很多，除了 Ansible 之外，還有像是 Puppet / Chef / Salt .... 等等，而 Ansible 的優點在哪裡呢?
+
+Ansible 與其他工具的差別在於，Ansible 是屬於 <font color='red'>**push-based**</font>，其他則屬於 <font color='red'>**pull-based**</font>。
+
+Ansible 是透過 SSH 對 remote server 進行控制 & 設定，這也就是為什麼 Ansible 可以不需要在各 remote server 安裝 agent 而其他工具需要的原因。
+
+也因為這樣的設計，讓使用 Ansible 所需要的前置作業少了很多，也相對簡單。
+
+-------------------------------
+
 安裝 Ansible
 ============
 
