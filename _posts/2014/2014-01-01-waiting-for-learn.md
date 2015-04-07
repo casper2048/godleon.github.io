@@ -56,6 +56,13 @@ RHCE
 
 ----------------------
 
+Linux Inside
+============
+
+- [linux-insides - GitBook](https://www.gitbook.com/book/0xax/linux-insides/details)
+
+----------------------
+
 PostgreSQL
 ==========
 - [PostgreSQL 中文-Mammoth](http://postgresql.wisdomfish.org/)
