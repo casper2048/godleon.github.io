@@ -16,6 +16,10 @@ IT Automation Tools
 
 - [Type Reference — Documentation — Puppet Labs](https://docs.puppetlabs.com/references/latest/type.html)
 
+### Apache Mesos
+
+- [Apache Mesos](http://mesos.apache.org/)
+
 ----------------------
 
 
