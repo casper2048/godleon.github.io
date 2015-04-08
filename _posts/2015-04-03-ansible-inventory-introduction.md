@@ -97,9 +97,10 @@ Inventory 撰寫方式
 vagrant1 ansible_ssh_host=192.168.30.11
 vagrant2 ansible_ssh_host=192.168.30.12
 vagrant3 ansible_ssh_host=192.168.30.13
+jumper ansible_ssh_port=5555 ansible_ssh_host=192.168.1.50
 ```
 
-其中 **vagrant1**、**vagrant2**、**vagrant3** 是 alias 的設定，ansible_ssh_host 可以是 ip 也可以是 domain name 設定。
+其中 **vagrant1**、**vagrant2**、**vagrant3**、**jumper** 是 alias 的設定，ansible_ssh_host 可以是 ip 也可以是 domain name 設定。
 
 ### 最簡單設定
 
@@ -128,6 +129,17 @@ vagrant3
 ```
 
 如此一來就可以透過 <font color='red'>**vagrant**</font> 關鍵字，一次對三台主機進行操控。
+
+也可以指定 connection type & user：
+
+``` ini
+[targets]
+
+localhost              ansible_connection=local
+other1.example.com     ansible_connection=ssh        ansible_ssh_user=mpdehaan
+other2.example.com     ansible_connection=ssh        ansible_ssh_user=mdehaan
+```
+
 
 ### 混合設定
 
@@ -201,7 +213,16 @@ web-[a:z].example.com.tw
 
 ### 定義在 inventory 中
 
-在不同環境中，通常都會有不同的變數，例如：在 production/staging/test 環境中，所使用的主機的 ip(hostname)/帳號密碼/db 都會不一樣，因此在設定時所使用的參數都會不相同，這些變動的部份我們都可以定義在 inventory 的變數中(使用 <font color='red'>**[<group_name>:vars]**</font> 的方式宣告)，以下用個範例來說明在佈署不同環境時，變數要如何定義：
+首先是最基本的變數定義：
+
+``` ini
+[atlanta]
+host1 http_port=80 maxRequestsPerChild=808
+host2 http_port=303 maxRequestsPerChild=909
+```
+
+
+然而在不同環境中，通常都會有不同的變數，例如：在 production/staging/test 環境中，所使用的主機的 ip(hostname)/帳號密碼/db 都會不一樣，因此在設定時所使用的參數都會不相同，這些變動的部份我們都可以定義在 inventory 的變數中(使用 <font color='red'>**[<group_name>:vars]**</font> 的方式宣告)，以下用個範例來說明在佈署不同環境時，變數要如何定義：
 
 ``` ini
 [all:vars]
@@ -234,7 +255,38 @@ db_user=widgetuser
 db_password=lastpassword
 redis_host=vagrant3
 redis_port=6379
+``` 
+
+### 群組中的群組 & 群組中的變數
+
+群組中可以包含群組，再進行變數設定：
+
+``` ini
+[atlanta]
+host1
+host2
+
+[raleigh]
+host2
+host3
+
+[southeast:children]
+atlanta
+raleigh
+
+[southeast:vars]
+some_server=foo.southeast.example.com
+halon_system_timeout=30
+self_destruct_countdown=60
+escape_pods=2
+
+[usa:children]
+southeast
+northeast
+southwest
+northwest
 ```
+
 
 ### 定義在外部檔案
 
