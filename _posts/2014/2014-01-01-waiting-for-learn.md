@@ -23,6 +23,13 @@ IT Automation Tools
 ----------------------
 
 
+OpenStack
+=========
+
+- [Building the Cloud Ecosystem OpenStack, Docker, Kubernetes » OpenStack Open Source Cloud Computing Software](https://www.openstack.org/summit/openstack-paris-summit-2014/session-videos/presentation/building-the-cloud-ecosystem-openstack-docker-kubernetes)
+
+----------------------
+
 SDN (Software-Defined Network)
 ==============================
 
