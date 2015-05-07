@@ -29,6 +29,8 @@ Docker 原理介紹
 
 - [The New PaaS: Using Docker and Containers to Simplify Your Life and Accelerate Development on AWS](http://reinvent-hripps.rhcloud.com/#/)
 
+- [5 videos to help you learn about Docker | Opensource.com](https://opensource.com/business/15/5/must-watch-docker-videos)
+
 --------------------
 
 Load Balance
