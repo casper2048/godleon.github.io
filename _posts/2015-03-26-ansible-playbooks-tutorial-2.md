@@ -156,6 +156,11 @@ Handler
 
 在上面的 playbook 中，handler 的工作是使用 service module 重新啟動 nginx。
 
+除此之外還可以有其他用法，假設用以下的 handler script 來說明：
+
+``` yaml
+```
+
 -------------------------------------------
 
 執行結果
