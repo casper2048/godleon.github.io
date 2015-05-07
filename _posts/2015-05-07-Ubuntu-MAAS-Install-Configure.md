@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "MAAS(Metal as a Service) 的安裝 & 設定"
+title:  "[Ubuntu] MAAS(Metal as a Service) 的安裝 & 設定"
 description: "在這邊文章中，介紹如何安裝 Ubuntu MAAS，讓管理實體機的工作變得更為方便與彈性，以及介紹在安裝設定上有可能會遇到的問題，並說明如何排除"
 date:   2015-05-07 14:40:00
 published: true
@@ -221,7 +221,7 @@ node 加入到 MAAS server 成功之後，可以在 MAAS web portal 上看到 no
 
 ![MAAS node detail info](https://lh3.googleusercontent.com/-YpbcaeBXRSY/VUOEfoWsN1I/AAAAAAAAKzE/k-wSWPQXOHs/w1040-h831-no/maas_node_detail.png)
 
-## 這個階段完成了什麼工作? 
+### 這個階段完成了什麼工作? 
 
 1. 在這個階段中，每台透過 PXE boot 的 node，會取得來自 MAAS server 之前所 import 的 boot image，並執行一段開機流程
 
@@ -235,7 +235,7 @@ node 加入到 MAAS server 成功之後，可以在 MAAS web portal 上看到 no
 
 那若是用虛擬環境怎麼辦呢? 後來查了一下，如果 Host OS 是 Linux 的話，應該可以透過 [virsh](http://libvirt.org/virshcmdref.html) 來解決，讓 MAAS server 懂得怎麼呼叫 Virtual Host(例如：VirtualBox、VMware ... 等等)，讓指定的 VM 開機。([官網上有簡單的介紹如何新增 virtual machine node](http://maas.ubuntu.com/docs1.5/nodes.html#virtual-machine-nodes))
 
-但如果 Host 不是在 Linux，就.......<font color='red'>**手動把 VM 開機也行**<font>。
+但如果 Host 不是在 Linux，就.......<font color='red'>**手動把 VM 開機也行**</font>。
 
 
 --------------------------
