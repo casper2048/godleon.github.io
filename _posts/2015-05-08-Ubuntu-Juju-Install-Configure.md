@@ -163,7 +163,7 @@ $ juju bootstrap -e my_amazon
 
 在官網上有一段 Live Demo 影片可以看：
 
-<iframe title="YouTube video player" width="480" height="390" src="https://www.youtube.com/watch?v=0AT6qKyam9I" frameborder="0" allowfullscreen="allowfullscreen"> </iframe>
+<iframe width="480" height="390" src="https://www.youtube.com/embed/0AT6qKyam9I" frameborder="0" allowfullscreen="allowfullscreen"> </iframe>
 
 整個流程的步驟如下：
 
