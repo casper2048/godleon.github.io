@@ -34,7 +34,7 @@ Juju 與目前很紅的 Puppet / Chef / Ansible 一樣，用途是 Auto Deployme
 如果以上還不了解 Juju 是甚麼，可以參考以下影片：
 
 
-<iframe title="YouTube video player" width="480" height="390" src="https://www.youtube.com/watch?v=1yoIdgdqzLk" frameborder="0" allowfullscreen="allowfullscreen"> </iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1yoIdgdqzLk" frameborder="0" allowfullscreen></iframe>
 
 並搭配官方網站的「[Top 12 questions about Juju](https://insights.ubuntu.com/2013/08/29/top-12-questions-about-juju/)」
 
@@ -163,7 +163,7 @@ $ juju bootstrap -e my_amazon
 
 在官網上有一段 Live Demo 影片可以看：
 
-<iframe width="480" height="390" src="https://www.youtube.com/embed/0AT6qKyam9I" frameborder="0" allowfullscreen="allowfullscreen"> </iframe>
+<iframe width="420" height="315" src="https://www.youtube.com/embed/0AT6qKyam9I" frameborder="0" allowfullscreen></iframe>
 
 整個流程的步驟如下：
 
