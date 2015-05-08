@@ -202,5 +202,5 @@ Juju Cheatsheet
 - [Introduction | Documentation | Juju](https://jujucharms.com/docs/stable/getting-started)
 
 
-[1]: https://jujucharms.com/	"Ubuntu Juju Charm"
-[2]: https://jujucharms.com/docs/devel/charms-bundles	"Ubuntu Juju Bundle"
+[1]: https://jujucharms.com/
+[2]: https://jujucharms.com/docs/devel/charms-bundles
