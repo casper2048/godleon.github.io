@@ -112,6 +112,99 @@ importing 的畫面如下：
 
 --------------------------
 
+Import Boot Image by CLI
+========================
+
+若是要將工作自動化，透過 CLI 來完成就是必要的了!
+
+要如何透過 CLI 完成 import boot image 的工作呢? 執行以下指令即可：
+
+``` bash
+maas [YOUR_PROFILE_NAME] boot-resources import
+```
+
+接著系統就會自動幫我們 import 最新版本的(only amd64) boot image，目前執行結果是取得 `trusty amd64` 版本的 boot image。
+
+### 更改 import boot image 的版本
+
+若要 import 的不是最新的版本，或是可能也需要 i386 的版本呢? 可以透過修改 boot source 來完成，有以下幾個步驟要進行：
+
+##### 1、檢視 boot source 狀態
+
+``` bash
+$ maas [YOUR_PROFILE_NAME] boot-sources read
+Success.
+Machine-readable output follows:
+[
+    {
+        "url": "http://maas.ubuntu.com/images/ephemeral-v2/releases/",
+        "keyring_data": "",
+        "resource_uri": "/MAAS/api/1.0/boot-sources/1/",
+        "keyring_filename": "/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg",
+        "id": 1
+    }
+]
+```
+
+看的出來目前系統中僅有一個預設的 boot source，且 ID = 1。
+
+#### 2、讀取 boot source 詳細設定
+
+``` bash
+$ maas [YOUR_PROFILE_NAME] boot-source-selections read 1
+Success.
+Machine-readable output follows:
+[
+    {
+        "labels": [
+            "release"
+        ],
+        "arches": [
+            "amd64"
+        ],
+        "subarches": [
+            "*"
+        ],
+        "release": "trusty",
+        "os": "ubuntu",
+        "id": 1,
+        "resource_uri": "/MAAS/api/1.0/boot-sources/1/selections/1/"
+    }
+]
+```
+
+從上面的內容可以看出，目前只會 import `ubuntu-trusty-amd64-release` 版本的 boot image。
+
+### 3、新增 boot image 版本
+
+``` bash
+# 在 boot source(ID=1) 中新增一個不同版本設定的區段(section)
+$ maas [YOUR_PROFILE_NAME] boot-source-selections create 1 os="ubuntu" release="precise" arches="amd64" subarches="*" labels= "*"
+Success.
+Machine-readable output follows:
+{
+    "labels": [
+        "*"
+    ],
+    "arches": [
+        "amd64"
+    ],
+    "subarches": [
+        "*"
+    ],
+    "release": "precise",
+    "os": "ubuntu",
+    "id": 2,
+    "resource_uri": "/MAAS/api/1.0/boot-sources/1/selections/2/"
+}
+```
+
+上面指令已經完成，此區段的 ID = 2。
+
+如此一來再重新執行一次 import 的指令，就會把 `ubuntu-precise-amd64` 的 boot image 給 import 進來囉!
+
+--------------------------
+
 
 DHCP service 設定
 =================
@@ -268,3 +361,7 @@ Commission Node
 - [MAAS - Metal as a Service](https://maas.ubuntu.com/)
 
 - [MAAS: Metal As A Service — MAAS dev documentation](https://maas.ubuntu.com/docs/index.html)
+
+- [Installing MAAS](http://people.canonical.com/~gavin/maas/building-packages/install.html)
+
+- [Boot images import configuration — MAAS dev documentation](https://maas.ubuntu.com/docs/bootsources.html)
