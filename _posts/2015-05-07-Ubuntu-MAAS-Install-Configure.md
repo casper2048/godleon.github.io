@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Ubuntu] MAAS(Metal as a Service) 的安裝 & 設定"
-description: "在這邊文章中，介紹如何安裝 Ubuntu MAAS，讓管理實體機的工作變得更為方便與彈性，以及介紹在安裝設定上有可能會遇到的問題，並說明如何排除"
+description: "在這篇文章中，介紹如何安裝 Ubuntu MAAS，讓管理實體機的工作變得更為方便與彈性，以及介紹在安裝設定上有可能會遇到的問題，並說明如何排除"
 date:   2015-05-07 14:40:00
 published: true
 comments: true
@@ -148,7 +148,7 @@ Login 有幾個部分可以調整：
 
 ``` bash
 # 讀取 MAAS server NIC 設定
-$ maas qctroot networks read
+$ maas [YOUR_PROFILE_NAME] networks read
 Success.
 Machine-readable output follows:
 [
