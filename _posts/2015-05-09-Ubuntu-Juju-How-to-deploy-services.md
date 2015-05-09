@@ -23,10 +23,8 @@ Deploying Services
 # 透過 charm store 佈署 mysql
 $ juju deploy mysql
 
-
 # 指定版本的佈署方式，格式為 <repository>:<series>/<service>
 $ juju deploy cs:precise/mysql
-
 
 # 不想每次都指定 series，則可以設定 juju charms 的預設版本為 14.04(trusty)
 $ juju set-env "default-series=trusty"
@@ -41,7 +39,6 @@ $ juju set-env "default-series=trusty"
 # series: trusty
 # service: vsftp
 $ juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
-
 
 # 預先指定環境變數 JUJU_REPOSITORY
 export JUJU_REPOSITORY=/usr/share/charms/
@@ -80,15 +77,15 @@ $ juju deploy --config myconfig.yaml mediawiki
 
 以下幾個指令可以加入 --constraints 參數：
 
-- juju deploy
+- **juju deploy**
 
-- juju bootstrap
+- **juju bootstrap**
 
-- juju add-machine
+- **juju add-machine**
 
 以下指令則無法加入 --constraints 參數：
 
-- juju add-unit
+- **juju add-unit**
 
 
 ``` bash
@@ -96,7 +93,7 @@ $ juju deploy --constraints "cpu-cores=8 mem=32G" mysql
 
 $ juju bootstrap --constraints "cpu-power=0 cpu-cores=0 mem=512M"
 
-juju bootstrap --constraints arch=i386
+$ juju bootstrap --constraints arch=i386
 
 $ juju set-constraints --service mysql mem=8G cpu-cores=4
 ```
