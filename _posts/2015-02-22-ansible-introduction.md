@@ -84,6 +84,13 @@ $ ssh-keygen
 $ ssh [USER_NAME]@[HOST_ADDRESS] 'mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
 ```
 
+若要完全不要提示訊息，可以使用 sshpass 套件來完成：
+
+``` bash
+$ sshpass -p 'mypassword' ssh [USER_NAME]@[HOST_ADDRESS] -o StrictHostKeyChecking=no 'mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+```
+
+
 3、透過以下指令免密碼登入遠端主機
 
 ``` bash
