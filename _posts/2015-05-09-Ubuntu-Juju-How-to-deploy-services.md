@@ -115,6 +115,8 @@ $ juju get-constraints mysql
 $ juju deploy mysql --constraints tags=foo,bar
 ```
 
+若要了解如何在 MAAS 環境建立 tag 相關設定，可以參考 [Making use of Tags — MAAS dev documentation](https://maas.ubuntu.com/docs/tags.html)
+
 --------------------------------------------
 
 
