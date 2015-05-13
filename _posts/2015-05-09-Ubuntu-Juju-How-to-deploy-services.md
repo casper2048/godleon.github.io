@@ -197,6 +197,90 @@ $ juju help run
 --------------------------------------------
 
 
+
+管理 Charm 之間的關聯性
+=======================
+
+### 簡單關聯
+
+每個 charm 佈署之後都是一個服務，而服務鮮少有獨立運作的；因此如何建立服務之間的關聯性就很重要了。
+
+假設我們透過 juju 佈署了 **[mysql](https://jujucharms.com/mysql/trusty/25)** & **[wordpress](https://jujucharms.com/wordpress/trusty/2)** 兩個 charm，要建立兩個 charm 的關聯，可透過以下指令：
+
+``` bash
+$ juju add-relation mysql wordpress
+```
+
+### 關聯是如何建立的?
+
+從上述的範例可看出，建立兩個 charm 的關聯只要一行指令即可完成，但到底兩個 charm 是如何知道「**要怎麼關聯**」呢?
+
+答案就是 charm 中已經包含了如何與其他服務相關聯的程式了。
+
+以上面的例子來說，當佈署完 wordpress 之後，wordpress 會知道自己還需要一個後端資料庫用來儲存資料用；而 mysql 被佈署之後，它自己也會知道就是要扮演一個資料庫的角色。
+
+於是當兩者關聯被建立起來時，wordpress 會通知 mysql 執行建立所需要的使用者權限、Database、Table .... 等工作，而當關聯建立完成後，wordpress 就可以存取 mysql 做為後端資料庫之用了!
+
+
+### 複雜關聯
+
+但有時候不是每個服務都是這麼簡單就可以關聯起來，例如 **[mediawiki](https://jujucharms.com/mediawiki/trusty/3)** & **[mysql](https://jujucharms.com/mysql/trusty/25)** 的關聯：
+
+``` bash
+$ juju deploy mediawiki --to lxc:1
+Added charm "cs:trusty/mediawiki-3" to the environment.
+
+maasqct@maas:~$ juju deploy mysql --to lxc:2
+Added charm "cs:trusty/mysql-25" to the environment.
+
+# 發生錯誤
+$ juju add-relation mediawiki mysql
+ERROR ambiguous relation: "mediawiki mysql" could refer to "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
+```
+
+從上面可以看出，其實 mediawiki 是有多個 <font color='blue'>**hook identifier**</font>(也稱為 <font color='red'>**Role**</font>)，而每個 cahrm 有那些 Role 可以使用，可以到 [charm store](https://jujucharms.com/store) 查詢，資訊可以從下圖中的位置找到：
+
+![Charm's Role Information](https://lh3.googleusercontent.com/-Y6llD17rWy8/VVMJ1E_30iI/AAAAAAAAK1g/MeVwM3GpfJ0/w775-h567-no/charm_desc.png)
+
+因此要建立 mediawiki 與 mysql 關係，要將指令改成如下：
+
+``` bash
+$ juju add-relation mediawiki:db mysql
+```
+
+--------------------------------------------
+
+
+Scaling Services
+================
+
+在雲端環境佈署服務，最大的好處就是可以有強大的水平擴展(scale out)的能力。
+
+而在 Juju 中，使用者可以很簡單的對服務進行 scaling，舉例如下：
+
+### 1. 先佈署一個 MediaWiki 應用，並前置 Load Balance 服務
+
+``` bash
+$ juju deploy haproxy
+$ juju deploy mediawiki
+$ juju deploy mysql
+$ juju add-relation mediawiki:db mysql
+$ juju add-relation mediawiki haproxy
+$ juju expose haproxy
+```
+
+### 2. 擴展 MediaWiki
+
+``` bash
+# 以五台機器為例
+$ juju add-unit -n 5 mediawiki
+```
+
+如此一來就完成水平擴展了，整個步驟相當簡單。
+
+--------------------------------------------
+
+
 Juju 的移除功能
 ===============
 
