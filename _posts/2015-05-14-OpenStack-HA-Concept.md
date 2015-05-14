@@ -48,13 +48,13 @@ Active/Passive
 
 在 Active/Passive 的架構下，會有多個 instance 提供相同的服務，但同時僅有一個 instance 會提供服務，**只有在當提供服務的 instance 掛掉時，才會由其他備援的 instance 繼續提供服務**。
 
-## Stateless
+### Stateless
 
 為 Stateless 服務提供 Active/Passive HA 的情況，會使用一個 virtual IP 提供給外部 client 進行 request 之用。
 
 因此當 virtual IP 後端的服務有掛掉時，則到 virtual IP 的 request 會自動被導至其他備援的 instance 繼續提供服務，因此對外部的 client 來說，其實是感覺不到有任何變更的。 
 
-## Stateful
+### Stateful
 
 由於 Stateful 的服務較為複雜，因此需要額外的監控軟體來監控服務是否正常，並在服務掛掉時啟動另外一個備援的 instance 來繼續提供服務。
 
@@ -73,11 +73,11 @@ Active/Active
 
 與上面不一樣的是，Active/Active 的架構下，不論是正在提供服務的 master instance 或是作為備援角色的 backup instance，都是同時在運作狀態的；當 master instance 掛掉時，backup instance 就可以馬上接手。
 
-## Stateless
+### Stateless
 
 建置 Stateless 服務的 HA，通常會使用像是 [HAProxy](http://www.haproxy.org/) 的 Load Balance 服務，在多個 instance(master + backup) 之前提供一個 virtual IP 做為對外服務之用。
 
-## Stateful
+### Stateful
 
 要建置 Statusful 服務的 HA，不僅僅是監控服務的狀態而已，還要額外包含 **identical state**，確保每一個 instance 都在相同狀態，舉例來說：當 master instance db 新增了一筆資料，則其他的 backup instance db 也同樣要新增一筆資料。
 
