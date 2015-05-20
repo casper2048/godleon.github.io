@@ -46,15 +46,15 @@ pacemaker 會根據使用者的設定，維持 cluster 在最好的狀態；當�
 
 pacemaker 扮演資源管理的大腦角色，內部自然就有多個元件緊密的運作著，而主要的元件共有五個：
 
-1. Cluster Information Base (CIB) 
+1. **Cluster Information Base (CIB)**
 
-2. Cluster Resource Management daemon (CRMd)
+2. **Cluster Resource Management daemon (CRMd)**
 
-3. Local Resource Management daemon (LRMd)
+3. **Local Resource Management daemon (LRMd)**
 
-4. Policy Engine (PEngine or PE) 
+4. **Policy Engine (PEngine or PE)**
 
-5. Fencing daemon (STONITHd) 
+5. **Fencing daemon (STONITHd)**
 
 pacemaker 的運作方式大概如下：
 
@@ -79,6 +79,8 @@ pacemaker 的運作方式大概如下：
 準備 Cluster 環境
 =================
 
+### 1. 機器設定
+
 我們所準備的 Cluster Nodes 如下：(OS 為 **Ubuntu 14.04.02**)
 
 - Cluster Node 1：192.168.122.101 (pcmk-1)
@@ -94,13 +96,17 @@ pacemaker 的運作方式大概如下：
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cluster Test</title>
+    <title>Cluster Test</title>
 </head>
 <body>
-<h1>This is Index page from NFS server</h1>
+    <h1>This is Index page from NFS server</h1>
 </body>
 </html>
 ```
+
+### 2. SSH 互連信任設定
+
+node 1 & 2 之間必須設定 SSH 連線信任的機制(其實就是免密碼登入 SSH)，詳細設定方式可參考[此篇文章](http://www.clearcenter.com/support/documentation/clearos_guides/setting_up_ssh_trust_between_two_servers)。
 
 ---------------------------------
 
@@ -113,7 +119,7 @@ pacemaker 的運作方式大概如下：
 為了使用完整功能，下面把相關的套件都安裝起來：(在所有的 node 上)
 
 ``` bash
-$ sudo apt-get -y install corosync pacemake fence-agents resource-agents pssh crmsh
+$ sudo apt-get -y install corosync pacemake fence-agents resource-agents pssh crmsh nginx
 ```
 
 ### 2. 設定 corosync
