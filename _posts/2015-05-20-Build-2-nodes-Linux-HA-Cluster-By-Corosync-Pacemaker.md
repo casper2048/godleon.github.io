@@ -595,6 +595,18 @@ crm 常用指令
 ============
 
 ``` bash
+# 查詢 crm 的使用方式
+$ sudo crm help
+
+# 查詢 crm onfigure 的使用方式
+$ sudo crm configure help
+
+# 查詢 crm configure colocation 的使用方式
+$ sudo crm configure colocation help
+
+# 查詢 crm configure rsc_template 的使用方式
+$ sudo crm configure rsc_template help
+
 # 目前 cluster 狀態(nodes / resources)
 $sudo crm status
 
@@ -631,6 +643,14 @@ $ sudo crm ra info ocf:heartbeat:IPaddr2
 - [Linux Cluster Part 2 - Adding and Deleting Cluster Resources - GeekPeek.Net](http://geekpeek.net/linux-cluster-resources/)
 
 - [high availability - corosync + pacemaker + nginx - Server Fault](http://serverfault.com/questions/485315/corosync-pacemaker-nginx)
+
+- [Resource Agents - Linux-HA](http://www.linux-ha.org/wiki/Resource_Agents)
+
+- [Resource Agents - ocf_heartbeat_nginx](http://linux-ha.org/doc/man-pages/re-ra-nginx.html)
+
+- [Pacemaker: fix timeout warnings « ID's blog](http://zeldor.biz/2011/03/pacemaker-fix-timeout-warnings/)
+
+- [Suse Doc: 高可用性指南 - 設定叢集資源](https://www.suse.com/zh-tw/documentation/sle_ha/book_sleha/data/sec_ha_config_crm_resources.html)
 
 
 ### corosync.conf 相關
