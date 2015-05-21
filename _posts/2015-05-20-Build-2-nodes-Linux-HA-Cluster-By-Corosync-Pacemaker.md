@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "[HA] 建置 Two Nodes HA Cluster by corosync & pacemake"
-description: "此篇文章介紹如何使用 corosync + pacemake 兩種工具，建置 Linux HA cluster，並搭配實際服務進行驗證"
+title:  "[HA] 建置 Two Nodes HA Cluster by corosync & pacemake @ Ubuntu 14.04"
+description: "此篇文章介紹如何在 Ubnutu 14.04 的環境中，使用 corosync + pacemake 兩種工具，建置 Linux HA cluster，並搭配實際服務進行驗證"
 date:   2015-05-20 14:50:00
 published: true
 comments: true
 categories: [ha]
-tags: [HA, Linux]
+tags: [HA, Linux, Ubuntu]
 ---
 
 
