@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Vagrant] 同時客製化多個 VM"
-description: "介紹 Vagrant 如何使用單一個 Vagrantfile 啟動多台 VM(Introduce how to active multiple virtual machine with one Vagrantfile in Vagrant)"
+description: "介紹 Vagrant 如何客製化 VM，包含 VM 數量 / cpu 核心數 / memory 大小 / 硬碟數量&大小 / 網卡數量 ... 等等"
 date:   2015-05-22 19:55:00
 published: true
 comments: true
@@ -17,7 +17,7 @@ tags: [Vagrant, Virtualization]
 
 2. 可以設定不同的 cpu 數量 & memory 大小
 
-3. 硬碟數量可以超過 1 個
+3. 硬碟數量可以超過 1 個，並個別指定其大小
 
 4. 可以設定多張網路卡
 
