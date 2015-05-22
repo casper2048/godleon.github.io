@@ -6,7 +6,7 @@ date:   2015-05-20 14:50:00
 published: true
 comments: true
 categories: [ha]
-tags: [HA, Linux, Ubuntu]
+tags: [HA, Corosync, Pacemaker, Linux, Ubuntu]
 ---
 
 
