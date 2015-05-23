@@ -51,7 +51,7 @@ node01 ansible_ssh_host=192.168.122.101
 node02 ansible_ssh_host=192.168.122.102
 ```
 
-<font color='blue'>**tasks/foo.yml**</font>
+#### <font color='blue'>tasks/foo.yml</font>
 
 ``` yaml
 ---
@@ -63,16 +63,16 @@ node02 ansible_ssh_host=192.168.122.102
   command: /bin/echo "Second Command {{ usr_2 }}"
 ```
 
-<font color='blue'>**handlers/handlers.yml**</font>
+#### <font color='blue'>handlers/handlers.yml</font>
 
 ``` yaml
 - name: restart apache
   service: name=apache2 state=restarted
 ```
 
-<font color='blue'>**task1.yml**</font>
+#### <font color='blue'>task1.yml</font>
 
-``` yaml
+``` yml
 # 使用指令
 # ansible-playbook task1.yml -i Inventory -K -v
 ---
