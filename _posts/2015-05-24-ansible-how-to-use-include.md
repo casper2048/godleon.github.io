@@ -43,7 +43,7 @@ Include 使用範例說明
 
 ### 檔案內容
 
-#### Inventory
+#### <font color='blue'>Inventory</font>
 
 ``` bash
 [cluster]
@@ -51,7 +51,7 @@ node01 ansible_ssh_host=192.168.122.101
 node02 ansible_ssh_host=192.168.122.102
 ```
 
-#### tasks/foo.yml
+#### <font color='blue'>tasks/foo.yml</font>
 
 ``` yaml
 ---
@@ -63,14 +63,14 @@ node02 ansible_ssh_host=192.168.122.102
   command: /bin/echo "Second Command {{ usr_2 }}"
 ```
 
-#### handlers/handlers.yml
+#### <font color='blue'>handlers/handlers.yml</font>
 
 ``` yaml
 - name: restart apache
   service: name=apache2 state=restarted
 ```
 
-#### task1.yml
+#### <font color='blue'>task1.yml</font>
 
 ``` yaml
 # 使用指令
