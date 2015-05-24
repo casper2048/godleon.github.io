@@ -2,7 +2,7 @@
 layout: post
 title:  "[Ansible] Include 使用介紹"
 description: "在這邊文章中，介紹如何透過 Include，將可重複利用的東西拉出，並可用再多個 playbook 中"
-date:   2015-05-24 07:00:00
+date: 2015-05-24 07:00:00
 published: true
 comments: true
 categories: [ansible]
@@ -72,7 +72,7 @@ node02 ansible_ssh_host=192.168.122.102
 
 #### task1.yml
 
-``` yml
+``` yaml
 # 使用指令
 # ansible-playbook task1.yml -i Inventory -K -v
 ---
