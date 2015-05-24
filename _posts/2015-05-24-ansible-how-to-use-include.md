@@ -43,7 +43,7 @@ Include 使用範例說明
 
 ### 檔案內容
 
-<font color='blue'>**Inventory**</font>
+#### <font color='blue'>Inventory</font>
 
 ``` bash
 [cluster]
