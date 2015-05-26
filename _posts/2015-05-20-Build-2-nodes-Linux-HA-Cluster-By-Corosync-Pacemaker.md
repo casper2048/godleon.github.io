@@ -119,7 +119,7 @@ node 1 & 2 之間必須設定 SSH 連線信任的機制(其實就是免密碼登
 為了使用完整功能，下面把相關的套件都安裝起來：(在所有的 node 上)
 
 ``` bash
-$ sudo apt-get -y install corosync pacemake fence-agents resource-agents pssh crmsh nginx
+$ sudo apt-get -y install corosync pacemaker fence-agents resource-agents pssh crmsh nginx
 ```
 
 ### 2. 設定 corosync
