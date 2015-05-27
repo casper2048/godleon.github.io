@@ -119,7 +119,7 @@ node 1 & 2 之間必須設定 SSH 連線信任的機制(其實就是免密碼登
 為了使用完整功能，下面把相關的套件都安裝起來：(在所有的 node 上)
 
 ``` bash
-$ sudo apt-get -y install corosync pacemaker fence-agents resource-agents pssh crmsh nginx
+$ sudo apt-get -y install corosync pacemake fence-agents resource-agents pssh crmsh nginx
 ```
 
 ### 2. 設定 corosync
@@ -176,7 +176,13 @@ logging {
 
 <font color='red'>**【註】**</font>在 Ubuntu 上沒有 pcs 套件(RedHat 才有)，因此 Corosync 設定檔就必須要靠手動來同步到 cluster nodes 上了。
 
-### 3. 產生 Authentication Key
+### 3. 設定 corosync 開機時啟動
+
+``` bash
+$ sudo sh -c "echo 'START=yes' > /etc/default/corosync"
+```
+
+### 4. 產生 Authentication Key
 
 接著要產生 cluster nodes 之間通訊加密時所使用的金鑰：
 
@@ -185,12 +191,12 @@ logging {
 $ sudo corosync-keygen -l
 ```
 
-<font color='red'>**【註1】**</font>若不加 **-l** 則可以產生較為複雜的金鑰，但需要使用者輸入很多亂數字元，所以這邊就偷懶不這樣產生了。
+<font color='red'>**【註1】**</font>若不加 **-l** 則可以產生較為複雜的金鑰，但需要等待蠻久的。
 
 <font color='red'>**【註2】**</font>此檔案也同必須同步到每個 node 的 **/etc/corosync** 目錄中。
 
 
-### 4. 調整 STONITH & quorum 相關設定
+### 5. 調整 STONITH & quorum 相關設定
 
 STONITH(Shoot The Other Node In The Head) 的功能是將設備進行隔離之用，當 cluster 中有 node 出現問題影響到整體運作時，STONITHd 就可以將其隔離(甚至關機)來維持 cluster 的順暢運作。
 
