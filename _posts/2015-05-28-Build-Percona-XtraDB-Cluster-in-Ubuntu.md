@@ -102,6 +102,8 @@ $ sudo apt-get update
 
 #### 2. 設定 APT pin
 
+若擔心 Percona 官方將套件更新而造成服務不穩定，可以使用 APT Pin 的功能。
+
 新增檔案 **/etc/apt/preferences.d/00percona.pref**，內容如下：
 
 ```
@@ -127,13 +129,13 @@ $ sudo apt-get -y install percona-xtradb-cluster-full-56 python-mysqldb
 
 以下請自行替換：
 
-- User Name = <wsrep_sst_user>
+- User Name = \<wsrep_sst_user\>
 
-- User Password = <wsrep_sst_password>
+- User Password = \<wsrep_sst_password\>
 
 ``` bash
 mysql> CREATE USER '<wsrep_sst_user>'@'localhost' IDENTIFIED BY '<wsrep_sst_password>';
-mysql> GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO ’sstuser’@’localhost’;
+mysql> GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO ’<wsrep_sst_user>’@’localhost’;
 mysql> FLUSH PRIVILEGES;
 ```
 
