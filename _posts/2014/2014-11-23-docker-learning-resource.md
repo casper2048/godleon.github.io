@@ -18,6 +18,12 @@ Docker 原理介紹
 
 - [The Docker Ecosystem: An Introduction to Common Components | DigitalOcean](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-introduction-to-common-components)
 
+### Linux Namespace
+
+- [Docker基础技术：Linux Namespace（上） | 酷 壳 - CoolShell.cn](http://coolshell.cn/articles/17010.html)
+
+- [Docker基础技术：Linux Namespace（下） | 酷 壳 - CoolShell.cn](http://coolshell.cn/articles/17029.html)
+
 --------------------
 
 線上教學
