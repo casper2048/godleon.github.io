@@ -33,9 +33,12 @@ tags: [Cluster, AMQP, RabbitMQ, Linux, Ubuntu]
 
 **OS**：Ubuntu 14.04 Trusy64
 
-**Nodes**
+**Nodes**：
+
 - master：192.168.122.101
+
 - slave01：192.168.122.102
+
 - slave02：192.168.122.102
 
 
@@ -237,11 +240,11 @@ Listing policies ...
 
 ### 安裝
 
-- [如何安裝RabbitMQ Cluster - 阿貝好威的實驗室]
+- [如何安裝RabbitMQ Cluster - 阿貝好威的實驗室](http://lab.howie.tw/2012/07/install-rabbitmq-with-cluster.html)
 
-- [Setup Rabbitmq Clusters on Ubuntu | Binary Pointer]
+- [Setup Rabbitmq Clusters on Ubuntu | Binary Pointer](http://blog.hemantthorat.com/setup-rabbitmq-clusters-on-ubuntu/#.VWugDUZNjIV)
 
-- [How To Cluster Rabbit-MQ | Jason Graves]
+- [How To Cluster Rabbit-MQ | Jason Graves](http://collaboradev.com/2010/12/14/how-to-cluster-rabbit-mq/)
 
 ### 設定
 
