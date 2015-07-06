@@ -53,7 +53,13 @@ $ sudo vagrant plugin install vagrant-vbguest
 - [Error: vagrant failed to mount folders in Linux guest. · Issue #5503 · mitchellh/vagrant · GitHub](https://github.com/mitchellh/vagrant/issues/5503)
 
 
+## LXC (Linux Container)
+
+- [14.04 - Share a folder between host and ubuntu lxc container - Ask Ubuntu](http://askubuntu.com/questions/610513/share-a-folder-between-host-and-ubuntu-lxc-container)
+
+
 -----------------------------------
+
 
 通訊軟體
 =======
@@ -74,6 +80,9 @@ $ sudo vagrant plugin install vagrant-vbguest
 ## 更換 Firefox 預設搜尋引擎
 
 - [上鎖者: Linux Mint 13 更換 Firefox 預設搜尋引擎成為 Google](http://way3sec.blogspot.tw/2012/08/linux-mint-13-firefox-google.html)
+
+
+-----------------------------------
 
 
 Sublime Text 3
