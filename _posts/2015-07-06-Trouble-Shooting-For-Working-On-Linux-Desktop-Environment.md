@@ -74,6 +74,17 @@ $ sudo vagrant plugin install vagrant-vbguest
 -----------------------------------
 
 
+文書編輯
+=======
+
+## Adobe Reader
+
+- [Install Adobe Reader in Ubuntu 14.04 and Ubuntu 14.10](http://sourcedigit.com/15444-install-adobe-reader-in-ubuntu-14-04-and-ubuntu-14-10/)
+
+
+-----------------------------------
+
+
 瀏覽器(Browser)
 ==============
 
@@ -86,8 +97,19 @@ $ sudo vagrant plugin install vagrant-vbguest
 
 
 Sublime Text 3
-============
+==============
 
 ## 安裝
 
 - [How to Install Sublime Text 3 in Ubuntu 14.04 Trusty | UbuntuHandbook](http://ubuntuhandbook.org/index.php/2013/12/install-sublime-text-3-ubuntu-14-04-trusty/)
+
+
+-----------------------------------
+
+
+Atom
+====
+
+- [在 Ubuntu 14.04 和 Linux Mint 17 上安装 Atom 文本编辑器-技术 ◆ 学习|Linux.中国-开源中文社区](https://linux.cn/article-3663-1.html)
+
+- [Atom 的中文顯示框框問題 ~ Open Jiang](http://jeffyon.blogspot.tw/2015/05/atom-md.html)
