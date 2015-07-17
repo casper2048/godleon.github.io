@@ -60,6 +60,30 @@ $ sudo vagrant plugin install vagrant-vbguest
 
 -----------------------------------
 
+系統工具
+=======
+
+## 製作安裝 Linux 用 USB
+
+1. 下載 Linux ISO (e.g. <font color='blue'>**ubuntu-14.04.2-server-amd64.iso**</font>)
+
+2. 透過 `sudo fdisk -l` 確認 USB disk 的 device name (e.g. /dev/sbb)
+
+3. 執行以下指令，卸載 usb disk，並將 ISO 解壓縮到 USB disk 中
+
+``` bash
+$ sudo umount $(mount | grep sdb | awk '{print $3}')
+$ sudo sh -c "cat ubuntu-14.04.2-server-amd64.iso > /dev/sdb" && sync && sync && sync
+```
+
+## 掃描網路
+
+- [Nmap 網路診斷工具基本使用技巧與教學 - G. T. Wang](http://blogger.gtwang.org/2014/10/nmap-command-examples-tutorials.html)
+
+
+
+-----------------------------------
+
 
 通訊軟體
 =======
@@ -80,6 +104,10 @@ $ sudo vagrant plugin install vagrant-vbguest
 ## Adobe Reader
 
 - [Install Adobe Reader in Ubuntu 14.04 and Ubuntu 14.10](http://sourcedigit.com/15444-install-adobe-reader-in-ubuntu-14-04-and-ubuntu-14-10/)
+
+## 列印 PDF
+
+- [阿剛老師的異想世界: ubuntu軟體教室--在ubuntu上安裝一台可輸出PDF的虛擬印表機](http://kentxchang.blogspot.com/2010/12/ubuntu-ubuntupdf.html)
 
 
 -----------------------------------
