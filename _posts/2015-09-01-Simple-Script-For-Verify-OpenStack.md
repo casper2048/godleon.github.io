@@ -40,6 +40,7 @@ $ source admin-openrc.sh
 
 ### Cinder
 建立一個 1GB 的 volume
+
 ```bash
 $ cinder create 1 --display-name MyFirstVolume
 $ cinder list
