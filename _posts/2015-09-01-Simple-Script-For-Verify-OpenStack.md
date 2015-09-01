@@ -14,7 +14,7 @@ tags: [OpenStack]
 
 可用以下的 script(**admin-openrc.sh**) 切換成 admin 的身份，但必須提供 admin password
 
-``` bash
+```bash
 export OS_VOLUME_API_VERSION=2
 export OS_AUTH_URL=http://[YOUR_KEYSTONE_ENDPOINT_IP]:5000/v2.0
 export OS_TENANT_NAME="admin"
@@ -29,7 +29,7 @@ if [ -z "$OS_REGION_NAME" ]; then unset OS_REGION_NAME; fi
 ```
 
 使用方法如下：
-``` bash
+```bash
 $ source admin-openrc.sh
 ```
 
@@ -40,14 +40,15 @@ $ source admin-openrc.sh
 
 ### Cinder
 建立一個 1GB 的 volume
-``` bash
+```bash
 $ cinder create 1 --display-name MyFirstVolume
 $ cinder list
 ```
 
 ### Glance
 下載 & 上傳 cirros image 至 glance service
-``` bash
+
+```bash
 $ wget http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img
 $ glance image-create --name "cirros-0.3.4-x86_64-qcow2" --disk-format qcow2 --container-format bare --is-public True --file cirros-0.3.4-x86_64-disk.img --progress
 $ glance image-list
@@ -55,7 +56,8 @@ $ glance image-list
 
 ### Ceph
 驗證 cinder & glance 是否有使用 ceph 作為 storage backend
-``` bash
+
+```bash
 $ sudo ceph -s
 $ sudo ceph osd lspools
 $ sudo ceph -p cinder-ceph list
@@ -64,7 +66,7 @@ $ sudo ceph -p glance list
 
 ### Neutron
 #### 1、建立對外網路
-``` bash
+```bash
 # 建立連外網路 ext_net
 $ neutron net-create ext_net --router:external --provider:physical_network external --provider:network_type flat
 
@@ -73,7 +75,7 @@ $ neutron subnet-create ext_net --name ext_subnet --allocation-pool start=10.10.
 ```
 
 #### 2、建立內部網路(by tenant)
-``` bash
+```bash
 # 建立 tenant network
 $ neutron net-create demo-net
 
@@ -82,9 +84,12 @@ $ neutron subnet-create demo-net --name demo-subnet --gateway 192.168.50.1 192.1
 ```
 
 #### 3、建立 virtual router 並將上述建立的網路附加上來
+
 router 是用來連接對外網路 & 內部網路之用，概念示意如下：
-`demo-subnet <====> demo-router <====> ext_net <====> Internet`
-``` bash
+
+> demo-subnet <====> demo-router <====> ext_net <====> Internet
+
+```bash
 # 建立 router
 $ neutron router-create demo-router
 
@@ -103,7 +108,7 @@ $ neutron router-gateway-set demo-router ext_net
 
 建立 instance
 ============
-``` bash
+```bash
 # 建立金鑰(假設檔案位置在 ~/.ssh/id_rsa.pub)
 $ ssh-keygen
 
