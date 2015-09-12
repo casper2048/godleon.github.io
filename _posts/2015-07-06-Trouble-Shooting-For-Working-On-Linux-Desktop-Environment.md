@@ -67,7 +67,7 @@ $ sudo vagrant plugin install vagrant-vbguest
 
 1. 下載 Linux ISO (e.g. <font color='blue'>**ubuntu-14.04.2-server-amd64.iso**</font>)
 
-2. 透過 `sudo fdisk -l` 確認 USB disk 的 device name (e.g. /dev/sbb)
+2. 透過 `sudo fdisk -l` 確認 USB disk 的 device name (e.g. /dev/sdb)
 
 3. 執行以下指令，卸載 usb disk，並將 ISO 解壓縮到 USB disk 中
 
@@ -80,10 +80,51 @@ $ sudo sh -c "cat ubuntu-14.04.2-server-amd64.iso > /dev/sdb" && sync && sync &&
 
 - [Nmap 網路診斷工具基本使用技巧與教學 - G. T. Wang](http://blogger.gtwang.org/2014/10/nmap-command-examples-tutorials.html)
 
+## 清除 ARP cache
 
+``` bash
+$ sudo ip -s -s neigh flush all
+```
+
+- [clearing the arp cache in linux » Linux Shtuff](http://g33kinfo.com/info/archives/4356)
 
 -----------------------------------
 
+網路
+===
+
+## L2TP + IPSec VPN
+
+安裝套件：**l2tp-ipsec-vpn**
+
+接著按照以下連結安裝 gnome network manager for L2TP
+
+- [networking - vpn l2tp connection on ubuntu 14.10 - Ask Ubuntu](http://askubuntu.com/questions/581981/vpn-l2tp-connection-on-ubuntu-14-10)
+
+【註】設定 IPSec Pre-shared Key 之後就無法連，暫時先不設定，問題之後再找時間排除
+
+## PPTP VPN
+
+- [[HowTo] PPTP: Ubuntu Client 連接到 Windows VPN Server [論壇 - Ubuntu基本設定] | Ubuntu 正體中文站](http://www.ubuntu-tw.org/modules/newbb/viewtopic.php?topic_id=40626)
+
+### Ubuntu 12.04
+
+- [第二十四個夏天後: [Linux] VPN L2TP client mode @ Ubuntu 12.04 Desktop](http://blog.changyy.org/2014/02/linux-vpn-l2tp-client-mode-ubuntu-1204.html)
+
+
+## 測試網路速度 (iperf)
+
+- [利用 iperf 測試網路效能 - 可丁丹尼@一路往前走2.0](http://cms.35g.tw/coding/%E5%88%A9%E7%94%A8-iperf-%E6%B8%AC%E8%A9%A6%E7%B6%B2%E8%B7%AF%E6%95%88%E8%83%BD/)
+
+
+## 修改 Default gateway
+
+``` bash
+# sample
+$ sudo ip route change default via 192.168.10.1 dev eth0
+```
+
+-----------------------------------
 
 通訊軟體
 =======
