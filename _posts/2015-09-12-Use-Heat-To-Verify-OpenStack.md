@@ -253,13 +253,19 @@ resources:
 ```
 ------------------------------------------------
 
-Create Heat stack
+Create & Delete Heat stack
 =================
 
-接著我們只要使用以下指令，就可以透過 Heat 將定義好的 virtual infrastructure 建置到 OpenStack 環境上：
+接著我們只要使用以下指令，就可以透過 Heat 將定義好的 virtual infrastructure(稱為 **<font color='red'>stack</font>**) 建置到 OpenStack 環境上：
 
 ```bash
 $ heat stack-create -f heat_sample.yaml -P "ExtNetID=$(neutron net-list | awk '/ ext _net / { print $2 }')" quick_stack
+```
+
+當然，移除 stack 也很容易，使用以下指令即可完成：
+
+```bash
+$ heat stack-delete quick_stack
 ```
 
 ------------------------------------------------
