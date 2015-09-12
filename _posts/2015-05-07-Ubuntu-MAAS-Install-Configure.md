@@ -55,11 +55,19 @@ Ubuntu MAAS 的環境安裝於 VirtualBox 上，MAAS server 上只有一張網�
 安裝 MAAS @ Ubuntu 14.04.02
 ===========================
 
+### 補上 locale 資訊
+
+```bash
+$ sudo sh -c "echo 'LC_ALL=\"en_US.UTF-8\"' >> /etc/environment"
+```
+
+**<font color='red'>【重要!】此時必須重新開機!</font>**
+
 ### 更新 repository
 
 ``` bash
 $ sudo add-apt-repository -y ppa:maas-maintainers/stable
-$ sudo apt-get -y update 
+$ sudo apt-get -y update
 ```
 
 ### 安裝 MAAS
@@ -314,7 +322,7 @@ node 加入到 MAAS server 成功之後，可以在 MAAS web portal 上看到 no
 
 ![MAAS node detail info](https://lh3.googleusercontent.com/-YpbcaeBXRSY/VUOEfoWsN1I/AAAAAAAAKzE/k-wSWPQXOHs/w1040-h831-no/maas_node_detail.png)
 
-### 這個階段完成了什麼工作? 
+### 這個階段完成了什麼工作?
 
 1. 在這個階段中，每台透過 PXE boot 的 node，會取得來自 MAAS server 之前所 import 的 boot image，並執行一段開機流程
 
@@ -343,7 +351,7 @@ Commission Node
 
 若是在實體機，應該是都不會有甚麼問題才對.....
 
-## 這個階段完成了什麼工作? 
+## 這個階段完成了什麼工作?
 
 此時 node 會再一次的開機，並載入 boot image 之後，回報更多資訊給 MAAS server，例如：CPU core 數量、記憶體大小、硬碟大小 ... 等等。
 
@@ -365,3 +373,5 @@ Commission Node
 - [Installing MAAS](http://people.canonical.com/~gavin/maas/building-packages/install.html)
 
 - [Boot images import configuration — MAAS dev documentation](https://maas.ubuntu.com/docs/bootsources.html)
+
+- [Juju 1.20 is out the door! - Jorge's Stompbox](http://www.jorgecastro.org/2014/07/08/juju-1-dot-20-is-out-the-door/)
