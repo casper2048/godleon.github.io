@@ -1,12 +1,12 @@
 ---
 layout: post
 title:  "[OpenStack] 簡單驗證 OpenStack 環境的 script"
-description: "此篇文章中提供了可以用來驗證 OpenStack 環境中的每個 service 是否有正常提供服務的 script，可用來提供簡單快速的驗"
+description: "此篇文章中提供了可以用來驗證 OpenStack 環境中的每個 service 是否有正常提供服務的 script，可用來提供簡單快速的驗證"
 date: 2015-09-01 15:00
 published: true
 comments: true
 categories: [openstack]
-tags: [OpenStack]
+tags: [OpenStack, Neutron, Nova, Glance, Cinder, Ceph]
 ---
 
 切換身份用的 script
@@ -39,7 +39,7 @@ $ source admin-openrc.sh
 ============
 
 ### Cinder
-建立一個 1GB 的 volume
+建立一個 5GB 的 volume
 
 ```bash
 $ cinder create 5 --display-name MyFirstVolume
@@ -56,8 +56,8 @@ $ glance image-create --name "cirros-0.3.4-x86_64-qcow2" --disk-format qcow2 --c
 # 上傳 ubuntu cloud image
 $ glance image-create --name "ubuntu-trusty-server-amd64-qcow2" --disk-format qcow2 --container-format bare --is-public True --copy-from https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
 
-# 上傳 fedora cloud image
-$ glance image-create --name "Fedora-22-x86_64-qcow2" --disk-format qcow2 --container-format bare --is-public True --copy-from https://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud/x86_64/Images/Fedora-Cloud-Base-22-20150521.x86_64.qcow2
+# 上傳 centos cloud image
+$ glance image-create --name "CentOS-7-x86_64.qcow2c" --disk-format qcow2 --container-format bare --is-public True --copy-from http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2c
 
 $ glance image-list
 ```
@@ -73,9 +73,9 @@ $ sudo rbd -p glance list
 ```
 
 ### Neutron
-#### 1、建立對外網路
+#### 1、建立對外網路 (FLAT or VLAN)
 ```bash
-# 建立連外網路 ext_net
+# 建立連外網路 ext_net (FLAT)
 $ neutron net-create ext_net --router:external --provider:physical_network external --provider:network_type flat
 
 # 設定連外網路所使用的 ip 範圍(請根據自己的環境調整參數設定)
@@ -85,10 +85,14 @@ $ neutron subnet-create ext_net --name ext_subnet --allocation-pool start=10.10.
 #### 2、建立內部網路(by tenant)
 ```bash
 # 建立 tenant network
-$ neutron net-create demo-net
+$ neutron net-create production-net --provider:network_type vxlan
+$ neutron net-create staging-net --provider:network_type vxlan
+$ neutron net-create test-net --provider:network_type vxlan
 
 # 在 tenant network 的基礎上建立 subnet (IP range 可自行定義)
-$ neutron subnet-create demo-net --name demo-subnet --gateway 192.168.50.1 192.168.50.0/24 --dns-nameservers list=true 8.8.8.8 8.8.4.4
+$ neutron subnet-create production-net --name production-subnet --gateway 192.168.50.1 192.168.50.0/24 --dns-nameservers list=true 8.8.8.8 8.8.4.4
+$ neutron subnet-create staging-net --name staging-subnet --gateway 192.168.50.1 192.168.50.0/24 --dns-nameservers list=true 8.8.8.8 8.8.4.4
+$ neutron subnet-create test-net --name test-subnet --gateway 192.168.50.1 192.168.50.0/24 --dns-nameservers list=true 8.8.8.8 8.8.4.4
 ```
 
 #### 3、建立 virtual router 並將上述建立的網路附加上來
@@ -99,13 +103,19 @@ router 是用來連接對外網路 & 內部網路之用，概念示意如下：
 
 ```bash
 # 建立 router
-$ neutron router-create demo-router
+$ neutron router-create production-router
+$ neutron router-create staging-router
+$ neutron router-create test-router
 
 # 附加 tenant subnet(demo-subnet) 到 router 上
-$ neutron router-interface-add demo-router demo-subnet
+$ neutron router-interface-add production-router production-subnet
+$ neutron router-interface-add staging-router staging-subnet
+$ neutron router-interface-add test-router test-subnet
 
 # 附加對外網路(ext_net)到 router 上
-$ neutron router-gateway-set demo-router ext_net
+$ neutron router-gateway-set production-router ext_net
+$ neutron router-gateway-set staging-router ext_net
+$ neutron router-gateway-set test-router ext_net
 ```
 
 #### 4、驗證 router 可否對外
@@ -124,6 +134,14 @@ $ neutron floatingip-create ext_net
 
 ``` bash
 $ neutron floatingip-list
+```
+
+#### 7、清除 floating ip
+
+若要清除 floating ip，可使用下列指令：
+
+``` bash
+$ neutron floatingip-delete $(neutron floatingip-list | sed -n 4p | awk '{print $2}')
 ```
 
 ------------------------------------------------
@@ -154,13 +172,13 @@ $ neutron net-list
 $ nova secgroup-list
 
 # 啟用 instance (cirros)
-$ nova boot --flavor m1.tiny --image cirros-0.3.4-x86_64-qcow2 --nic net-id=$(neutron net-list | grep 'demo-net' | awk '{print $2}') --security-group default --key-name demo-key cirros-instance
+$ nova boot --flavor m1.tiny --image cirros-0.3.4-x86_64-qcow2 --nic net-id=$(neutron net-list | grep 'test-net' | awk '{print $2}') --security-group default --key-name demo-key cirros-instance
 
 # 啟用 instance (ubuntu)
-$ nova boot --flavor m1.medium --image ubuntu-trusty-server-amd64-qcow2 --nic net-id=$(neutron net-list | grep 'demo-net' | awk '{print $2}') --security-group default --key-name demo-key ubuntu-instance
+$ nova boot --flavor m1.medium --image ubuntu-trusty-server-amd64-qcow2 --nic net-id=$(neutron net-list | grep 'staging-net' | awk '{print $2}') --security-group default --key-name demo-key ubuntu-instance
 
-# 啟用 instance (fedora)
-$ nova boot --flavor m1.medium --image Fedora-22-x86_64-qcow2 --nic net-id=$(neutron net-list | grep 'demo-net' | awk '{print $2}') --security-group default --key-name demo-key fedora-instance
+# 啟用 instance (centos)
+$ nova boot --flavor m1.medium --image CentOS-7-x86_64.qcow2c --nic net-id=$(neutron net-list | grep 'production-net' | awk '{print $2}') --security-group default --key-name demo-key centos-instance
 
 # 查詢 instance 啟用狀況
 $ nova list
@@ -172,7 +190,7 @@ $ nova list
 # 查詢 vnc console
 $ nova get-vnc-console cirros-instance novnc
 $ nova get-vnc-console ubuntu-instance novnc
-$ nova get-vnc-console fedora-instance novnc
+$ nova get-vnc-console centos-instance novnc
 ```
 
 上述步驟執行完後，可以從 Horizon 進入 VM console，也可以透過上面的指令取得的 vnc console url 進入 instance console 畫面。
@@ -207,8 +225,8 @@ $ nova floating-ip-associate cirros-instance 10.10.198.102
 # 連結 floating ip 至 ubuntu-instance
 $ nova floating-ip-associate ubuntu-instance 10.10.198.103
 
-# 連結 floating ip 至 fedora-instance
-$ nova floating-ip-associate fedora-instance 10.10.198.104
+# 連結 floating ip 至 centos-instance
+$ nova floating-ip-associate centos-instance 10.10.198.104
 ```
 
 
@@ -221,8 +239,8 @@ $ ssh -i ~/.ssh/id_rsa cirros@10.10.198.102
 # ubuntu cloud image 預設使用者名稱為 ubuntu
 $ ssh -i ~/.ssh/id_rsa ubuntu@10.10.198.103
 
-# fedora cloud image 預設使用者名稱為 fedora
-$ ssh -i ~/.ssh/id_rsa fedora@10.10.198.104
+# centos cloud image 預設使用者名稱為 centos
+$ ssh -i ~/.ssh/id_rsa cetos@10.10.198.104
 ```
 
 如此一來就可以不用輸入密碼就可以登入囉!
@@ -234,11 +252,21 @@ $ ssh -i ~/.ssh/id_rsa fedora@10.10.198.104
 參考資料
 =======
 
-- [Launch an instance with OpenStack Networking (neutron) - OpenStack Installation Guide for Ubuntu 14.04](http://docs.openstack.org/kilo/install-guide/install/apt/content/launch-instance-neutron.html)
-
-- [OpenStack Docs: OpenStack command-line interface cheat sheet](http://docs.openstack.org/user-guide/cli_cheat_sheet.html)
+### Ceph
 
 - [Ceph cheatsheet - ShainMiley.com](http://www.shainmiley.com/wordpress/2014/08/23/ceph-cheatsheet/)
+
+- [BlockDeviceConfig - OpenStack](https://wiki.openstack.org/wiki/BlockDeviceConfig)
+
+### Neutron
+
+- [Launch an instance with OpenStack Networking (neutron) - OpenStack Installation Guide for Ubuntu 14.04](http://docs.openstack.org/kilo/install-guide/install/apt/content/launch-instance-neutron.html)
+
+- [Rackspace Developer Center - Neutron Networking: Simple Flat Network](https://developer.rackspace.com/blog/neutron-networking-simple-flat-network/)
+
+### OpenStack CLI
+
+- [OpenStack Docs: OpenStack command-line interface cheat sheet](http://docs.openstack.org/user-guide/cli_cheat_sheet.html)
 
 - [Support for ISO images - OpenStack Configuration Reference  - kilo](http://docs.openstack.org/kilo/config-reference/content/iso-support.html)
 
@@ -248,8 +276,8 @@ $ ssh -i ~/.ssh/id_rsa fedora@10.10.198.104
 
 - [OpenStack Nova: Boot From Volume - Chen Xiao, OpenStack博客 - 博客频道 - CSDN.NET](http://blog.csdn.net/juvxiao/article/details/22614663)
 
+### Misc
+
 - [Where to Find OpenStack Cloud Images](http://thornelabs.net/2014/06/01/where-to-find-openstack-cloud-images.html)
 
-- [BlockDeviceConfig - OpenStack](https://wiki.openstack.org/wiki/BlockDeviceConfig)
-
-- [Rackspace Developer Center - Neutron Networking: Simple Flat Network](https://developer.rackspace.com/blog/neutron-networking-simple-flat-network/)
+- [CentOS Linux 7 发布滚动构建版-新闻 ◆ 快讯|Linux.中国-开源社区](https://linux.cn/article-4394-1.html)
