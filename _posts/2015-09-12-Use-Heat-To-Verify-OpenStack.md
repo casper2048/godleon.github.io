@@ -57,7 +57,7 @@ resources:
     type: "OS::Nova::KeyPair"
     properties:
       name: "demo-key"
-      public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCq37Y8IgAthTnRBVj1JSRgPjIKgrD8fvZC2/IdP/6xkJyxk/FnNUgZ2wUokqroIagx6QXaFWD+a6oGZYISlBbgrsF24JqovMsRiYxoiHcy//qXuZJC5PlC/F8An46yUsFjcQzaJPktxxJ0fxdh0p2VSFmgFJ/B+nLgC0Q852WeR2Tm83I00HNTaqDEpdlbCfrOZoLXfO2wzm8McAjXJaKoT0/fb/4JwzgpBMjmjcZdZrqzLYJI79bdQDI4nKr3K4p+mCDS86XU7c9E9EMBcstNpntNvMT1sVupmiTwMEs22ycJrheOAA6ZA3uK6PTHq3dYyp8tbl6pykTpY0bCwwPB vagrant@vagrant-ubuntu-trusty-64"
+      public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCq37Y8IgAthTnRBVj1JSRgPjIKgrD8fvZC2/IdP/6xkJyxk/FnNUgZ2wUokqroIagx6QXaFWD+a6oGZYISlBbgrsF24JqovMsRiYxoiHcy//qXuZJC5PlC/F8An46yUsFjcQzaJPktaaJ0fxdh0p2VSFmgFJ/B+nLgC0Q852WeR2Tm83I00HNTaqDEpdlbCfrOZoLXfO2wzm8McAjXJaKoT0/fb/4JwzgpBMjmjcZdZrqzLYJI79bdQDI4nKr3K4p+mCDS86XU7c0E0EMBcstNpntNvMT1sVupmiTwMEs22ycJrheOAA6ZA3uK6PTHq3dYyp8tbl6pykTpY0bCwwPB user@ubuntu-trusty-64"
 
 # ========== cloud images list ==========
   cirros-0.3.4-x86_64-qcow2:
