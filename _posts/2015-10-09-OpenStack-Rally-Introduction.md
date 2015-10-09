@@ -118,7 +118,7 @@ $ nova quota-defaults
 
 以下是我們所使用的 task scenario：
 
-```yaml
+```
 {% set flavor_name = flavor_name or "m1.medium" %}
 {% set image_name = "ubuntu-trusty-server-amd64-qcow2" %}
 {% set instance_count = 5 %}
