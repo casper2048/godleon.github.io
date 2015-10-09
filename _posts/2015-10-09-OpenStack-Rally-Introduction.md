@@ -157,31 +157,77 @@ $ rally task report --out output.html
 ### 加上 SLA 條件
 
 ```yaml
-\{\% set flavor_name = flavor_name or "m1.medium" \%\}
-\{\% set image_name = "ubuntu-trusty-server-amd64-qcow2" \%\}
-\{\% set instance_count = 5 \%\}
+---
+  NovaServers.boot_and_delete_server:
+    - args:
+        flavor:
+            name: "m1.medium"
+        image:
+            name: "ubuntu-trusty-server-amd64-qcow2"
+        force_delete: false
+      runner:
+        type: "constant"
+        times: 5
+        concurrency: 5
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 2
+        network:
+          start_cidr: "100.1.0.0/16"
+    sla:
+      max_avg_duration: 600
+      max_seconds_per_iteration: 480
+      failure_rate:
+        max: 0
+```
+
+### 同時執行多個 task
+
+```yaml
+{% set flavor_name = flavor_name or "m1.medium" %}
+{% set image_name = "ubuntu-trusty-server-amd64-qcow2" %}
+{% set instance_count = 5 %}
 
 ---
 NovaServers.boot_and_delete_server:
   - args:
       flavor:
-          name: "{{ flavor_name }}"
+          name: "m1.medium"
       image:
-          name: {{ image_name }}
+          name: "ubuntu-trusty-server-amd64-qcow2"
       force_delete: false
     runner:
       type: "constant"
-      times: {{ instance_count }}
-      concurrency: {{ instance_count }}
+      times: 5
+      concurrency: 5
     context:
       users:
         tenants: 3
         users_per_tenant: 2
       network:
         start_cidr: "100.1.0.0/16"
-    sla:
-      max_avg_duration: 600
-      max_seconds_per_iteration: 480
-      failure_rate:
-        max: 0
+
+NovaServers.boot_and_bounce_server:
+  - args:
+      flavor:
+          name: "m1.medium"
+      image:
+          name: "ubuntu-trusty-server-amd64-qcow2"
+      force_delete: false
+      actions:
+        - hard_reboot: 1
+        - soft_reboot: 1
+        - stop_start: 1
+        - rescue_unrescue: 1
+      runner:
+        type: "constant"
+        times: 5
+        concurrency: 5
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 2
+        network:
+          start_cidr: "100.1.0.0/16"
 ```
