@@ -118,23 +118,19 @@ $ nova quota-defaults
 
 以下是我們所使用的 task scenario：
 
-```
-{% set flavor_name = flavor_name or "m1.medium" %}
-{% set image_name = "ubuntu-trusty-server-amd64-qcow2" %}
-{% set instance_count = 5 %}
-
+```yaml
 ---
 NovaServers.boot_and_delete_server:
   - args:
       flavor:
-          name: "{{ flavor_name }}"
+          name: "m1.medium"
       image:
-          name: {{ image_name }}
+          name: "ubuntu-trusty-server-amd64-qcow2"
       force_delete: false
     runner:
       type: "constant"
-      times: {{ instance_count }}
-      concurrency: {{ instance_count }}
+      times: 5
+      concurrency: 5
     context:
       users:
         tenants: 3
