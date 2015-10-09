@@ -185,10 +185,6 @@ $ rally task report --out output.html
 ### 同時執行多個 task
 
 ```yaml
-{% set flavor_name = flavor_name or "m1.medium" %}
-{% set image_name = "ubuntu-trusty-server-amd64-qcow2" %}
-{% set instance_count = 5 %}
-
 ---
 NovaServers.boot_and_delete_server:
   - args:
