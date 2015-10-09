@@ -227,3 +227,45 @@ NovaServers.boot_and_bounce_server:
         network:
           start_cidr: "100.1.0.0/16"
 ```
+
+### 使用 [Jinja2](http://jinja.pocoo.org/docs/dev/) 語法
+
+因為程式碼貼出來放到 GitPage 就會壞掉....所以就不貼了....
+
+基本上可以使用 loop + macro 的語法
+
+就可以不用複製貼上很多次，就透過一個檔案描述複雜的 task 囉!
+
+```
+
+-----------------------------------
+
+結語
+====
+
+Rally 不只可以當 Benchmark 的工具，也可以透過使用多個 plugin 的方式來進行 functional  test，甚至還可以將 CI 的概念整合進來，是個相當值得花時間投資學習的一個工具。
+
+-----------------------------------
+
+參考資料
+=======
+
+- [Rally 0.0.4 documentation](https://rally.readthedocs.org/en/latest/index.html)
+
+- [Manage Compute service quotas - OpenStack Configuration Reference  - havana](http://docs.openstack.org/havana/config-reference/content/cli_set_compute_quotas.html)
+
+- [rally samples @GitHub](https://github.com/openstack/rally/tree/master/samples/tasks/scenarios)
+
+- [Rally Tricks: “Stop load before your OpenStack goes wrong” | The glorious boris-42](http://boris-42.me/rally-tricks-stop-load-before-your-openstack-goes-wrong/)
+
+- [Rally - Mirantis | The #1 Pure Play OpenStack Company](https://www.mirantis.com/tag/rally/)
+
+- [Rally Plugins Reference — Rally 0.0.4 documentation](http://rally.readthedocs.org/en/latest/plugin/plugin_reference.html#plugin-reference)
+
+- [rally/rally/plugins at master · openstack/rally](https://github.com/openstack/rally/tree/master/rally/plugins)
+
+- [stackforge/tomograph @GitHub](https://github.com/stackforge/tomograph)
+
+- [User’s guide — Zipkin 1.2.0-SNAPSHOT documentation](http://twitter.github.io/zipkin/)
+
+- [python - Parameterized reusable blocks with Jinja2 (Flask) templating engine - Stack Overflow](http://stackoverflow.com/questions/15106741/parameterized-reusable-blocks-with-jinja2-flask-templating-engine)
