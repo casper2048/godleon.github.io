@@ -138,3 +138,50 @@ NovaServers.boot_and_delete_server:
       network:
         start_cidr: "100.1.0.0/16"
 ```
+
+
+
+程式執行完後，可使用以下指令匯出測試報告：
+
+```bash
+$ rally task report --out output.html
+```
+
+-----------------------------------
+
+其他進階使用方式
+===============
+
+當然以上是最基本的使用方式，以下介紹幾種不同變化：
+
+### 加上 SLA 條件
+
+```yaml
+\{\% set flavor_name = flavor_name or "m1.medium" \%\}
+\{\% set image_name = "ubuntu-trusty-server-amd64-qcow2" \%\}
+\{\% set instance_count = 5 \%\}
+
+---
+NovaServers.boot_and_delete_server:
+  - args:
+      flavor:
+          name: "{{ flavor_name }}"
+      image:
+          name: {{ image_name }}
+      force_delete: false
+    runner:
+      type: "constant"
+      times: {{ instance_count }}
+      concurrency: {{ instance_count }}
+    context:
+      users:
+        tenants: 3
+        users_per_tenant: 2
+      network:
+        start_cidr: "100.1.0.0/16"
+    sla:
+      max_avg_duration: 600
+      max_seconds_per_iteration: 480
+      failure_rate:
+        max: 0
+```
