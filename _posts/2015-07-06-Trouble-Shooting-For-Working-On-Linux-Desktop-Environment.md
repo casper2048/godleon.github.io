@@ -124,6 +124,10 @@ $ sudo ip -s -s neigh flush all
 $ sudo ip route change default via 192.168.10.1 dev eth0
 ```
 
+## 遠端連線工具
+
+- [Connect to a Windows PC from Ubuntu via Remote Desktop Connection](http://www.digitalcitizen.life/connecting-windows-remote-desktop-ubuntu)
+
 -----------------------------------
 
 通訊軟體
