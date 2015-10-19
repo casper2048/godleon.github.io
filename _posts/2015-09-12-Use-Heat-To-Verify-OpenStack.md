@@ -32,7 +32,7 @@ $ neutron net-create ext_net --router:external --provider:physical_network exter
 ```yaml
 heat_template_version: 2014-10-16
 
-description: Heat example of QCT QuickStack.
+description: Heat example
 
 parameters:
   ExtNetID:
