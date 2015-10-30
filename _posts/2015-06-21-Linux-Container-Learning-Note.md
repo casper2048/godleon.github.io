@@ -1,13 +1,24 @@
 ---
 layout: post
 title:  "[LXC] Linux Container(LXC) 學習筆記"
-description: "將門學習 LXC 的筆記"
+description: "專門學習 LXC 的筆記"
 date: 2015-06-21 18:55:00
 published: true
 comments: true
 categories: [lxc]
 tags: [Linux, Container]
 ---
+
+安裝 LXC @Ubuntu 14.04.3
+========================
+
+使用以下指令安裝 LXC 相關的套件：
+
+```bash
+$ sudo apt-get -y install lxc lxc-templates bridge-utils debootstrap
+```
+
+--------------------------------------------------
 
 操作 Linux Container
 ====================
@@ -31,6 +42,7 @@ $ sudo lxc-create -t ubuntu -n lxc_ubuntu
 
 若 container type 是 ubuntu，則預設的帳號密碼皆為 <font color='blue'>**ubuntu**</font>。
 
+--------------------------------------------------
 
 ### 查詢 container 結構
 
@@ -160,7 +172,7 @@ $ sudo ifconfig br_private up
 $ sudo brctl show
 [sudo] password for qct:
 bridge name     bridge id               STP enabled     interfaces
-br_private      8000.fe642c445344       no              
+br_private      8000.fe642c445344       no
 lxcbr0          8000.000000000000       no
 ```
 
@@ -217,7 +229,7 @@ $ sudo apt-get install openvswitch-controller openvswitch-switch openvswitch-dat
 $ sudo brctl addbr superbr0
 ```
 
-#### 2、建立 GRE tap device 
+#### 2、建立 GRE tap device
 
 分別在不同的 host 執行指令：
 
@@ -344,4 +356,3 @@ $ sudo dnsmasq --strict-order --bind-interfaces --pid-file=/var/run/dnsmasq-supe
 [2013-12-18 Managing Open vSwitch with Puppet · Scott's Weblog · The weblog of an IT pro specializing in virtualization, networking, open source, and cloud computing](http://blog.scottlowe.org/2013/12/18/managing-open-vswitch-with-puppet/)
 
 [2015-05-06 A Quick Introduction to LXD · Scott's Weblog · The weblog of an IT pro specializing in virtualization, networking, open source, and cloud computing](http://blog.scottlowe.org/2015/05/06/quick-intro-lxd/)
-
