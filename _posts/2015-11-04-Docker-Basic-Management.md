@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Docker 學習筆記 - 基本管理"
-description: "此文章記錄學習 docker 的過程，此篇為基礎管理的部份，包含資料管理、基礎網路應用 ... 等"
+description: "此文章記錄學習 docker 的過程，此篇為基礎管理的部份，包含資料管理、基礎網路應用、container 之間互連的方式 ... 等"
 date: 2015-11-04 10:36:00
 published: true
 comments: true
@@ -248,6 +248,45 @@ PING db_link (172.17.0.33) 56(84) bytes of data.
 64 bytes from db_link (172.17.0.33): icmp_seq=2 ttl=64 time=0.042 ms
 64 bytes from db_link (172.17.0.33): icmp_seq=3 ttl=64 time=0.038 ms
 ... (略)
+```
+
+--------------------------------------------
+
+建立 wordpress + mysql 應用 (使用 link)
+======================================
+
+首先，先建立 mysql container
+
+```bash
+# 建立 mysql container，名稱為 mysqpwp
+# 設定 root password = wpdocker
+$ docker run --name mysqlwp -d -e MYSQL_ROOT_PASSWORD=wpdocker mysql
+```
+
+接著建立 wordpress container，並使用 link 與 mysql container 連結
+
+```bash
+# 建立 wordpress container，名稱為 wordpress
+# 將 container:80 對映到 host:1080
+$ docker run --name wordpress -d --link mysqlwp:mysql -p 1080:80 wordpress
+
+# 查詢 wordpress 與 mysql 的連結關係
+$ docker inspect -f "{{.HostConfig.Links}}" wordpress
+[/mysqlwp:/wordpress/mysql]
+
+# 查詢在 wordpress 上的環境變數(可以發現多了 MYSQL 的部分)
+$ docker exec wordpress env
+.....(略)
+MYSQL_PORT=tcp://172.17.0.2:3306
+MYSQL_PORT_3306_TCP=tcp://172.17.0.2:3306
+MYSQL_PORT_3306_TCP_ADDR=172.17.0.2
+MYSQL_PORT_3306_TCP_PORT=3306
+MYSQL_PORT_3306_TCP_PROTO=tcp
+MYSQL_NAME=/wordpress/mysql
+MYSQL_ENV_MYSQL_ROOT_PASSWORD=wpdocker
+MYSQL_ENV_MYSQL_MAJOR=5.7
+MYSQL_ENV_MYSQL_VERSION=5.7.9-1debian8
+.....(略)
 ```
 
 --------------------------------------------
