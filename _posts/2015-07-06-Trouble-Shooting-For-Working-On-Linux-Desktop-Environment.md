@@ -93,6 +93,13 @@ $ sudo ip -s -s neigh flush all
 網路
 ===
 
+## Bluetooth
+
+Linux Mint 在啟動時會自動開啟藍芽，但無法在畫面右下角關閉它，因此上網找自動關閉的方式：
+(
+- [How To Turn Off Bluetooth By Default In Ubuntu 14.04](http://itsfoss.com/turn-off-bluetooth-by-default-in-ubuntu-14-04/)
+
+
 ## L2TP + IPSec VPN
 
 安裝套件：**l2tp-ipsec-vpn**
