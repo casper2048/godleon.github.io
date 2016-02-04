@@ -102,13 +102,7 @@ Linux Mint 在啟動時會自動開啟藍芽，但無法在畫面右下角關閉
 
 ## L2TP + IPSec VPN
 
-安裝套件：**l2tp-ipsec-vpn**
-
-接著按照以下連結安裝 gnome network manager for L2TP
-
-- [networking - vpn l2tp connection on ubuntu 14.10 - Ask Ubuntu](http://askubuntu.com/questions/581981/vpn-l2tp-connection-on-ubuntu-14-10)
-
-【註】設定 IPSec Pre-shared Key 之後就無法連，暫時先不設定，問題之後再找時間排除
+- [Set up a L2TP/IPSec VPN connection on Ubuntu desktop – Just Make It Work](https://soeasytomakeitwork.wordpress.com/2014/05/02/set-up-a-l2tpipsec-vpn-connection-on-ubuntu-desktop/)
 
 ## PPTP VPN
 
