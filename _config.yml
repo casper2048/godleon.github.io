@@ -1,20 +1,77 @@
-# Site settings
-title: 小信豬的原始部落
-email: godleon@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  從 <a href='http://godleon.blogspot.com' target='_blank'>Google Blogger</a> 搬過來囉!<p />
-  記錄在 IT 方面學習的點點滴滴<p />
-  一步一腳印朝 open source 的方向努力學習!
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://godleon.github.io" # the base hostname & protocol for your site
-#twitter_username: jekyllrb
-github_username:  godleon
+# Site wide configuration
 
-permalink: /blog/:year/:month/:day/:title
+title:            Site Title
+locale:           en_US
+url:
 
-# Build settings
-#markdown: kramdown
-markdown: redcarpet
 
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+# Jekyll configuration
+
+#permalink:   /:categories/:title/
+permalink:   /blog/:year/:month/:day/:title
+markdown:    kramdown
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: compressed
+gems:
+  - jekyll-sitemap
+  - jekyll-gist
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  enable_coderay: false
+
+
+# Octopress
+
+# Default extensions
+post_ext: md
+page_ext: md
+
+# Found in _templates/
+post_layout: post
+page_layout: page
+
+# Format titles with titlecase?
+titlecase: true
+
+
+# Site owner
+owner:
+  name: godleon
+  avatar: bio-photo.jpg
+  bio: "Leon Tseng"
+  email:
+  disqus-shortname: godleon
+  twitter: #username
+  facebook: godleon
+  google:
+    plus: godleon
+    analytics:
+    verify:
+    ad-client:
+    ad-slot:
+  bing-verify:
+  github: godleon
+  stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
+  linkedin: #username
+  xing: #username
+  instagram: #username
+  lastfm: #username
+  tumblr: #username
+  pinterest: #username
+  foursquare: #username
+  steam: #username
+  dribbble: #username
+  youtube: godleon
+  soundcloud: #username
+  weibo: #username
+  flickr: #username
+  codepen: #username
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
