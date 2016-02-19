@@ -9,7 +9,7 @@ url:  https://godleon.github.io
 
 #permalink:   /:categories/:title/
 permalink:   /blog/:year/:month/:day/:title
-markdown:    kramdown
+markdown:    redcarpet
 highlighter: rouge
 sass:
   sass_dir: _sass
