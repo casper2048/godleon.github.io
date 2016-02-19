@@ -63,7 +63,7 @@ Chapter 1. ACCESSING THE COMMAND LINE
 
 若沒有 GUI 環境，則 6 個 virtual console 都會是純文字模式。
 
-要調整 virtual console 的數量，可修改 `/etc/systemd/login.conf` 中的 <font color='red'>**NAutoVTs**</font> 的選項，
+要調整 virtual console 的數量，可修改 `/etc/systemd/login.conf` 中的 **<font color='red'>NAutoVTs</font>** 的選項，
 
 
 1.2 Accrssing the Command Line Using the Desktop
@@ -77,7 +77,7 @@ Chapter 1. ACCESSING THE COMMAND LINE
 
 ### Auto Login
 
-要在 RHEL 7 作到 Auto Login，要修改 `/etc/gdm/custom.conf`，並調整 <font color='blue'>**daemon**</font> section 中的 <font color='red'>**AutomaticLoginEnable**</font> & <font color='red'>**AutomaticLogin**</font> 兩個參數
+要在 RHEL 7 作到 Auto Login，要修改 `/etc/gdm/custom.conf`，並調整 <font color='blue'>**daemon</font>** section 中的 **<font color='red'>AutomaticLoginEnable</font>** & **<font color='red'>AutomaticLogin</font>** 兩個參數
 
 
 1.3 Executing Commands Using the Bash Shell
@@ -85,7 +85,7 @@ Chapter 1. ACCESSING THE COMMAND LINE
 
 ### Examples of simple commands
 
-<font color='red'>**file**</font> 可用來檢查檔案的型態 & 格式 (也可以用 **[stat](http://www.computerhope.com/unix/stat.htm)**)
+**<font color='red'>file</font>** 可用來檢查檔案的型態 & 格式 (也可以用 **[stat](http://www.computerhope.com/unix/stat.htm)**)
 
 ```bash
 $ file /etc/passwd
@@ -155,15 +155,15 @@ RHEL 中的重要目錄：
 | `/usr`<br />(Unix Software Resource)  | 安裝的軟體、shared library ... 等資料都會放在此處，其中幾個重要目錄：<br />`/usr/bin`：使用者用指令<br />`/usr/sbin`：系統管理者用指令<br />`/usr/local`：使用者自行安裝的軟體 |
 | `/etc` | 設定檔存放路徑 |
 | `/var` | 持續不斷變動的資料，例如 log、print spool、資料庫檔案 ... 等等 |
-| `/run` | 從上次開機以來的 runtime 資訊(<font color='red'>**此目錄的資料在每次重開機都會清空**</font>) |
-| `/tmp` | 所有人都有權限存取的站存資料目錄(<font color='red'>**此目錄中日期大於 10 天的資料會被自動清除**</font>)，若是在目錄 `/var/tmp` 中的資料，則是超過 30 天的資料會被清除 |
+| `/run` | 從上次開機以來的 runtime 資訊(**<font color='red'>此目錄的資料在每次重開機都會清空</font>**) |
+| `/tmp` | 所有人都有權限存取的站存資料目錄(**<font color='red'>此目錄中日期大於 10 天的資料會被自動清除</font>**)，若是在目錄 `/var/tmp` 中的資料，則是超過 30 天的資料會被清除 |
 | `/boot` | 系統開機所需要的檔案 |
 | `/dev` | 存放系統用來存取硬體裝置所需要的檔案 |
 
 > 原本在 `/` 下的某些目錄，在 RHEL 7 後都被移到 `/usr` 下了，包含 `/bin`(=> `/usr/bin`)、`/sbin`(=> `/usr/sbin`)、`/lib`(=> `/usr/lib`)、`/lib64`(=> `/usr/lib64`)
 > 但原本在 `/` 的以上四個目錄都還存在，只是改成用 symbolic link 的方式連到 `/usr` 中的子目錄
 
-詳細資料可查詢 <font color='blue'>**hier(7)**</font> man page
+詳細資料可查詢 <font color='blue'>**hier(7)</font>** man page
 
 ```bash
 $ man 7 hier
@@ -328,21 +328,21 @@ Linux manual 包含多個 section：
 
 | Section | Content Type |
 |---------|--------------|
-| <font color='red'>**1**</font>  | 一般使用者命令(包含可執行程式 & shell script) |
+| **<font color='red'>1</font>**  | 一般使用者命令(包含可執行程式 & shell script) |
 | `2`  | System calls(kernal routines invoked from user space) |
 | `3`  | Library functions (程式函式庫提供) |
 | `4`  | 特殊檔案(例如：設備檔 /dev 目錄中的檔案) |
-| <font color='red'>**5**</font>  | <font color='blue'>檔案格式(設定檔 & 內容結構說明)</font> |
+| **<font color='red'>5</font>**  | <font color='blue'>檔案格式(設定檔 & 內容結構說明)</font> |
 | `6`  | Games |
-| <font color='red'>**7**</font>  | 慣例、標準、其他...等等(協定、檔案系統) |
-| <font color='red'>**8**</font>  | <font color='blue'>系統管理員以及特殊指令(用於維護工作)</font> |
+| **<font color='red'>7</font>**  | 慣例、標準、其他...等等(協定、檔案系統) |
+| **<font color='red'>8</font>**  | <font color='blue'>系統管理員以及特殊指令(用於維護工作)</font> |
 | `9`  | Linux kernal API (internal kernel calls) |
 
 `man 1 passwd` or `man passwd`(未指定 section 則預設帶 1) 可以知道使用指令的方式 & 相關參數
 
 `man 5 passwd` 則是說明 **/etc/passwd** 的檔案結構，組成內容....等資訊
 
-> 以上資訊要安裝 <font color='red'>**man-pages**</font> 套件才會有
+> 以上資訊要安裝 **<font color='red'>man-pages</font>** 套件才會有
 
 ### 3.1.3 Searching for man pages by keywords
 

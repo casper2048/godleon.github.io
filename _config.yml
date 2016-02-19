@@ -1,8 +1,8 @@
 # Site wide configuration
 
-title:            Site Title
+title:            小信豬的原始部落
 locale:           en_US
-url:
+url:  https://godleon.github.io
 
 
 # Jekyll configuration
