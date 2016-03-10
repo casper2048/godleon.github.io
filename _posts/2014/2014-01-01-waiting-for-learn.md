@@ -7,6 +7,17 @@ categories: [learning]
 tags: [Linux, RHCE, PostgreSQL, NoSQL, MongoDB, Django, Shell Scripting, SDN, OpenFlow]
 ---
 
+Python 3
+========
+
+- [專欄文章：Python Tutorial](http://openhome.cc/Gossip/CodeData/PythonTutorial/index.html)
+
+- [Python/第一次用就上手 - Python Taiwan Wiki](http://wiki.python.org.tw/Python/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%94%A8%E5%B0%B1%E4%B8%8A%E6%89%8B)
+
+- [Coding 初學指南－Python – Liang2's blog](https://blog.liang2.tw/posts/2016/01/lab-coding-python/)
+
+
+
 IT Automation Tools
 ===================
 
@@ -37,7 +48,7 @@ SDN (Software-Defined Network)
 
 隨著雲端、虛擬化的議題越來越普及，主機、儲存都虛擬化後，當然網路也要虛擬化....
 
-虛擬化後的網路可達到的彈性可不是實體網路設備所能比擬的! 
+虛擬化後的網路可達到的彈性可不是實體網路設備所能比擬的!
 
 而要了解網路虛擬化，當然要從 SDN(Software-Defined Network) 開始著手了!
 
