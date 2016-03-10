@@ -9,7 +9,7 @@ url:  https://godleon.github.io
 
 #permalink:   /:categories/:title/
 permalink:   /blog/:year/:month/:day/:title
-markdown:    redcarpet
+markdown:    kramdown
 highlighter: rouge
 sass:
   sass_dir: _sass
@@ -45,7 +45,7 @@ owner:
   name: godleon
   avatar: bio-photo.jpg
   bio: "Leon Tseng"
-  email:
+  email: godleon@gmail.com
   disqus-shortname: godleon
   twitter: #username
   facebook: godleon
