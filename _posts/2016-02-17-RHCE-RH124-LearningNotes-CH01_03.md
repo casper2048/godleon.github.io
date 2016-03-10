@@ -328,15 +328,15 @@ Linux manual 包含多個 section：
 
 | Section | Content Type |
 |---------|--------------|
-| **<font color='red'>1</font>**  | 一般使用者命令(包含可執行程式 & shell script) |
-| `2`  | System calls(kernal routines invoked from user space) |
-| `3`  | Library functions (程式函式庫提供) |
-| `4`  | 特殊檔案(例如：設備檔 /dev 目錄中的檔案) |
-| **<font color='red'>5</font>**  | <font color='blue'>檔案格式(設定檔 & 內容結構說明)</font> |
-| `6`  | Games |
-| **<font color='red'>7</font>**  | 慣例、標準、其他...等等(協定、檔案系統) |
-| **<font color='red'>8</font>**  | <font color='blue'>系統管理員以及特殊指令(用於維護工作)</font> |
-| `9`  | Linux kernal API (internal kernel calls) |
+| **<font color='red'>1</font>** | 一般使用者命令(包含可執行程式 & shell script) |
+| `2` | System calls(kernal routines invoked from user space) |
+| `3` | Library functions (程式函式庫提供) |
+| `4` | 特殊檔案(例如：設備檔 /dev 目錄中的檔案) |
+| **<font color='red'>5</font>** | <font color='blue'>檔案格式(設定檔 & 內容結構說明)</font> |
+| `6` | Games |
+| **<font color='red'>7</font>** | 慣例、標準、其他...等等(協定、檔案系統) |
+| **<font color='red'>8</font>** | <font color='blue'>系統管理員以及特殊指令(用於維護工作)</font> |
+| `9` | Linux kernal API (internal kernel calls) |
 
 `man 1 passwd` or `man passwd`(未指定 section 則預設帶 1) 可以知道使用指令的方式 & 相關參數
 
