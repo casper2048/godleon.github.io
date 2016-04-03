@@ -1,4 +1,13 @@
-
+---
+layout: post
+title:  "[RHCE] RH124 Chapter 1~3 學習筆記"
+description: "此文章記錄學習 RHCE RH124 所留下的內容，此篇包含 RH124 chapter 4~6，分別是 'Creating, Viewing, and Editing Text Files', 'Chapter 5. Managing Local Linux Users and Groups', 以及 'Controlling Access to Files with Linux File System Permissions'"
+date: 2016-04-03 16:45:00
+published: true
+comments: true
+categories: [linux]
+tags: [Linux, RHCE, RH124]
+---
 
 Chapter 4. Creating, Viewing, and Editing Text Files
 ====================================================

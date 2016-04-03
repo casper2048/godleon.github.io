@@ -6,7 +6,7 @@ date: 2016-02-17 23:20:00
 published: true
 comments: true
 categories: [linux]
-tags: [Linux, RHCE]
+tags: [Linux, RHCE, RH124]
 ---
 
 
