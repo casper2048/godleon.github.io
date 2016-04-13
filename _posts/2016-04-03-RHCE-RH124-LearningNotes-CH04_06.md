@@ -278,6 +278,8 @@ passwd: all authentication tokens updated successfully.
 
 #### groupadd
 
+- `-r`：用來增加 system group (GID > 1000)
+
 ```bash
 # 使用 -g 選項指定 GID
 $ sudo groupadd -g 5000 ateam
@@ -295,18 +297,38 @@ SYS_GID_MAX               999
 
 > `/etc/login.defs` 檔案中紀錄了許多與使用者 & 群組管理上相關的預設參數
 
+#### groupmod
+
+- `-n`：修改群組名稱
+
+- `-g`：修改 GID (這會衍生非預期的問題)
+  - 家目錄不會改
+  - 相對應的檔案 & 目錄皆不會改
+
 #### usermod alters group membership
+
+- `-g`：指定 primary group
 
 - `sudo usermod -g NEW_PRIMARY_GROUPNAME USERNAME`：變更指定使用者的 primary group
 
-- `sudo uermod -aG SUPPLYMENTARY_GROUP USERNAME`：新增使用者的 supplementary group
+- `-G`：指定 supplementary group
 
+- `sudo uermod -aG SUPPLYMENTARY_GROUP USERNAME`：新增使用者的 supplementary group
 
 ## 5.5 Managing User Passwords
 
 ### 5.5.1 Shadow passwords and password policy
 
-現在為了安全性，密碼都已經改存到只有 root 能讀取的 `/etc/shadow` 中：
+現在為了安全性，密碼都已經改存到只有 root 能讀取的 `/etc/shadow` 中，分為幾個欄位：
+1. `name`：使用者名稱
+2. `password`：密碼
+3. `lastchange`：上次修改時間 (為單一數值，從 1970/01/01 作為第1天起算) (改為 0，強制使用者必須在下次登入時改密碼)
+4. `minage`：密碼存活的最小生命周期(0 表示馬上可以改回來)
+5. `maxage`：密碼存活的最大生命周期(最大為 99999，從 `lastchange` 開始算)
+6. `warning`：提醒使用者的時間 (default: 7，七天前提醒)
+7. `inactive`：寬限期，最多密碼可以存活 (maxage + inactive) 天；在寬限期登入會被強制要求更改密碼
+8. `expire`：密碼失效日期，不受前面欄位影響，過期就表示密碼完全失效
+9. `blank`：保留作為未來使用
 
 說明第 2 個欄位 `password`
 
@@ -349,6 +371,19 @@ hamlet:$6$Nu8r/BWW$PqoSIv9iRx9oQEH2ziw4L2WH0HMXs2YXFvEH8SFHmmKd/WxeAV0qOweqAXUN6
 
 ![Linux Password Aging](https://lh3.googleusercontent.com/2bDqeWVGlV0vGtV0lm6TE-1KwHmNixd6pUAaDGh30pcFJGF3tI3WUsV6dxUzdRbSPh7dR3mzznf_EdinGaKeWQA1xrA9cdOJFajn-jQFCcgEfni4Sdpn4zd-6R4T-Rj0Cezry17a0m_hI61F1nD8TjQFomv6NltRNseZgPgHVM1JU0or0xr8Y322N7MfhzoQIXeLQgQMLTsKtLAr19avk7A3yUQiZn5m6RI6T0rVqmW2FsXYwGEiQiDQlmg9POKDIndNH9LknDoIGHK5PAL_03cmbuY5EdouDrBMQu1PCESLO5GvZgzG-UIWNXMYk692Rai3Cpw6zNbyMUdwqpzvUaCgsPFHYcRfA9C3U1VJ4p-O2Q9iIKq5-8DWzEzGb7HELfYNwAHny8QGnXBGnHa7qtzVUJseFngyW3I2T-rCD7rriDbNYep4-V_fSqMSCNFSpVcs6Xnaj9TmnmXoegWDt3p43VTQxqPPb5C1LpyOK8mwwzFJdrYEjRJNmRzz6o4tUTqfbeay_UdKTzARA4MrsP6k2X5wHPWlDOao9eh7cMtRsyQpk9KE3Mp2l44mIHs_tuIE=w657-h235-no)
 
+RHEL7 用來加密密碼的 hash algorithm 已經預設改為 `SHA-512`(<font color='red'>**6**</font>)
+
+```bash
+# 強制使用者下次登入修改密碼
+$ chage -d 0 USER_NAME
+
+# 以 human readable 的方式顯示 /etc/shadow 的內容
+$ chage -l USER_NAME
+
+# 指定密碼失效日期 (也可以改用數字)
+$ chage -E YYYY-MM-DD USER_NAME
+```
+
 ```bash
 # 檢視 juliet 目前的密碼期限相關設定
 [vagrant@desktop ~]$ sudo chage -l juliet
@@ -369,6 +404,18 @@ Number of days of warning before password expires       : 7
 
 ### 5.5.3 Restricting access
 
+限制使用者存取的方式：
+
+1. Lock USER_NAME
+2. 給 Expiration Date
+3. 把 shell 給成 /sbin/nologin
+
+``` bash
+# 以下兩個功能相同
+$ sudo usermod -L USER_NAME
+$ sudo passwd -l USER_NAME
+```
+
 ```bash
 # lock user
 $ sudo usermod -L juliet
@@ -378,6 +425,33 @@ $ sudo usermod -U juliet
 
 # 設定 nologin shell 給使用者，使用者就沒有 shell 可用(例如：mail service)
 $ sudo usermod -s /sbin/nologin juliet
+```
+
+### 5.5.4 Lab: Managing Local Linux Users and Groups
+
+修改 `/etc/login.defs`(<font color='red'>**PASS_MAX_DAYS**</font>) 將密碼預設過期日改為 30
+
+``` bash
+# 新增一個 GID 40000，名稱為 consultants 的群組
+$ groupadd -g 40000 consultants
+
+# 新增使用者，指定 GID 為 40000，並設定密碼為 default
+$ USR=sspade; useradd -G 40000 ${USR}; echo "default" | passwd --stdin ${USR}
+$ USR=bboop; useradd -G 40000 ${USR}; echo "default" | passwd --stdin ${USR}
+$ USR=dtracy; useradd -G 40000 ${USR}; echo "default" | passwd --stdin ${USR}
+
+# 設定 sspade, bboop, dreacy 的密碼過期日(expiration date)為 90 天後
+$ chage -E $(date -d "+90 days" +%Y-%m-%d) sspade
+$ chage -E $(date -d "+90 days" +%Y-%m-%d) bboop
+$ chage -E $(date -d "+90 days" +%Y-%m-%d) dtracy
+
+# 限制 bboop 每 15 天要改一次密碼
+$ chage -M 15 bboop
+
+# 強制 sspade, bboop, dreacy 下次登入時要改密碼
+$ chage -d 0 sspade
+$ chage -d 0 bboop
+$ chage -d 0 dtracy
 ```
 
 ## 5.6 Practice: Managing User Password Aging
@@ -460,6 +534,8 @@ Chapter 6. Controlling Access to Files with Linux File System Permissions
 
 ### 6.1.1 Linux file system permissions
 
+> 新增/刪除檔案不是看檔案本身權限，而是看上層目錄的權限
+
 當使用者擁有目錄的 `w(write)` & `x(execute)` 權限時，可以刪除該目錄中自己也沒有權限的檔案，但這問題可以透過 `sticky bit` 來解決!
 
 正常對目錄有存取權限的使用者，會同時有 `r(read)` & `w(write)` 兩個權限：
@@ -467,6 +543,9 @@ Chapter 6. Controlling Access to Files with Linux File System Permissions
 - 若沒有目錄的 `r(read)` 權限，使用者無法列出目錄中的檔案，但若知道明確檔名還是可以存取
 
 - 若沒有目錄的 `w(write)` 權限，就只能列出目錄中的檔案內容，但都無法存取目錄中的任何檔案(連 timestamp 資訊都看不到)
+
+- 但如果進不了目錄(**<font color='red'>沒有 execute 權限</font>**)，還是無法刪除檔案
+
 
 ### 6.1.2 Viewing file/directory permissions and ownership
 
@@ -496,8 +575,24 @@ drwxr-xr-x. 3 root root 20 Jan  3 04:22 /home
 [vagrant@server ch06]$ sudo chown :vboxsf 1st/aa
 [vagrant@server ch06]$ sudo chgrp vboxsf 1st/aa
 ```
-
 > 只有 root 可以修改檔案的 ownership，一般使用者儘可以針對自己所屬的群組設定 ownership
+
+一般 web 網站的目錄，只會開啟目錄的 execute 權限，並且讓目錄內的檔案有 others read 的權限，讓使用者可以進入目錄，可以存取目錄中檔案的內容，但卻無法列出目錄中所有的檔案
+
+``` bash
+# 檔案 file1 拿掉 group & others 的 read & write 權限
+$ chmod go-rw file1
+
+# 針對多層目錄 & 檔案透過遞迴的方式設定權限(group 給予所有權限)
+$ chmod -R g+rwx multi_layer_dir
+
+# 針對多層目錄(只有目錄，沒有檔案)，使用遞迴的方式指定所有人有 execute 的權限
+# 透過大寫 X，指定套用權限時僅會套用在目錄上，不會在檔案上
+$ chmod -R a+X multi_layer_dir
+```
+
+只有 root 可以變更檔案的 ownership
+> 例外：檔案擁有者可以改檔案所屬群組，但只可以改成屬於自己群組
 
 ## 6.3 Managing Default Permissions and File Access
 
@@ -532,16 +627,38 @@ $ chmod g+s,o-rx some_dir
 $ chmod 2770 some_dir
 ```
 
+#### SetUID
+- 檔案
+> -rwsr-xr-x 1 root root 47032 Jul 16  2015 /usr/bin/passwd -> /etc/shadow
+> passwd 指令的 owner 為 root，因此執行此指令時是以 root 的權限執行
+
+#### SetGID
+- 檔案
+> /usr/bin/locate -> /var/lib/mlocate/mlocate.db
+
+- 目錄
+> SetGID 設定在目錄上，則表示在該目錄中建立的檔案 or 目錄的擁有群組都會被強制設定為該目錄的擁有群組
+
+#### Sticky Bit
+- 目錄
+> `o+t` 表示該目錄中的檔案只有擁有者可以移除
+
+> **<font color='red'>T</font>**：表示 others 原本沒有 execute 權限
+
+> **<font color='red'>t</font>**：表示 others 原本有 execute 權限
+
 ### 6.3.2 Default file permissions
 
 
-Default permission:
+Default permission (system)
 - File: `666`
-- Firectory: `777`
+- Directory: `777`
 
-Default umask:
-- root: `022`
-- regular user: `002`
+Default Umask:
+- root：`022`
+- regular user：`002`
+
+umask 使用 3 個數字進行修改，若少於 3 個數字，前面會被自動補 0；且更改的效果僅限於該 terminal session 中，重新登入後就會無效。
 
 umask 的設定，若是要設定 global 的，可以到 **<font color='red'>/etc/profile</font>** & **<font color='red'>/etc/bashrc</font>** 中進行調整
 

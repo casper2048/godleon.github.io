@@ -44,7 +44,7 @@ sudo usermod -aG docker ubuntu
 $ sudo sh -c "echo 'DOCKER_OPTS=\"--dns 8.8.8.8 --dns 8.8.4.4\"' >> /etc/default/docker"
 
 # 重新啟動 docker daemon
-$ sudo restart docker
+$ sudo service restart docker
 ```
 
 --------------------------------------------
