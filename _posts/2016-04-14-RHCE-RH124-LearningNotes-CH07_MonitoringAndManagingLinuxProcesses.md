@@ -9,12 +9,10 @@ categories: [linux]
 tags: [Linux, RHCE, RH124]
 ---
 
-Chapter 7. Monitoring and Managing Linux Processes
-==================================================
+7.1 Process
+===========
 
-## 7.1 Process
-
-### 7.1.1 What is a process?
+## 7.1.1 What is a process?
 
 每個 process 都會有個獨一無二的 PID，而 parent process ID(PPID) 則為 PID 的父程序所擁有的 ID；process 可透過 `fork` 的方式產生 child process，而這些 child process 則會繼承 parent process 的 security identifiers, file descriptors, port, resource privileges, 環境變數....等等，整個 process lifeycle 可以參考下圖：
 
@@ -22,7 +20,7 @@ Chapter 7. Monitoring and Managing Linux Processes
 
 在 RHEL7 中，所有的 process 都是 **<font color='red'>systemd(1)</font>** 的 child process。
 
-### 7.1.2 Process States
+## 7.1.2 Process States
 
 ![Linux Process States](http://4.bp.blogspot.com/-5jYQDgc6Z4M/UyV1ni478uI/AAAAAAAADZw/rpBf813wpbg/s1600/ProcessStates.JPG)
 
@@ -37,7 +35,7 @@ Chapter 7. Monitoring and Managing Linux Processes
 | Zombie | Z | **<font color='red'>EXIT_ZOMBIE</font>**：已通知 parent process 準備離開後的狀態，除了 process identity 之外的資源都會被釋放 |
 | Zombie | X | **<font color='red'>EXIT_DEAD</font>**：所有資源都被釋放，ps 也看不見了 |
 
-### 7.1.2 Listing processes
+## 7.1.2 Listing processes
 
 ps 指定常用的參數：
 - `aux`
@@ -129,8 +127,10 @@ root      2064  0.0  0.0 107892   364 ?        S    20:24   0:00 sleep 60
 root      2001  0.0  0.0      0     0 ?        S    20:19   0:00 [kworker/0:0]
 ```
 
+-------------------------------------------------------
 
-## 7.2 Controlling Jobs
+7.2 Controlling Jobs
+====================
 
 `jobs` 指令只會顯示目前 session 中的 job
 
@@ -148,13 +148,13 @@ $ fg %1
 CTRL + C (終止目前前景執行的程式)
 ```
 
-### 7.2.1 Jobs and sessions
+## 7.2.1 Jobs and sessions
 
 當 terminal or console 被開啟時，會產生一個 process session，所以透過同一個 terminal or console 產生出來的 process，都會使用相同的 session ID，而每個 session 中，一次只能有一個 process 在前景執行。
 
 service daemon 或是 kernel process thread 在 `ps` 出來的結果中，`TTY` 欄位會以 `?` 來呈現，因為此類的 background process 並沒有 controlling terminal。
 
-### 7.2.2 Running jobs in the background
+## 7.2.2 Running jobs in the background
 
 `Ctrl + z`：可送出 suspend 要求，用來讓 process 進入 Stopped 狀態(T)
 
@@ -183,10 +183,12 @@ $ ps au | grep sleep
 $ dd if=/dev/zero bs=1M count=50 of=/run/media/...../test.txt
 ```
 
+-------------------------------------------------------
 
-## 7.3 Killing Processes
+7.3 Killing Processes
+=====================
 
-### 7.3.1 Process control using signals
+## 7.3.1 Process control using signals
 
 signal 是送到 process 的一種軟體型式的中斷，有以下幾種：
 
@@ -265,10 +267,12 @@ sshd(2827)───bash(2829)─┬─pstree(2896)
 sshd(2827)───bash(2829)───pstree(2945)
 ```
 
+-------------------------------------------------------
 
-## 7.4 Monitoring Process Activity
+7.4 Monitoring Process Activity
+===============================
 
-### 7.4.1 Load average
+## 7.4.1 Load average
 
 靜態呈現，使用 `w -f` or `uptime`：
 
@@ -285,7 +289,7 @@ godleon  tty8      09:08    7:29m  9:30   0.37s mate-session
 
 > load average 超過 1 就表示系統負擔過重(要先除以 CPU 執行緒數量)
 
-### 7.4.2 Real-time process monitoring
+## 7.4.2 Real-time process monitoring
 
 動態呈現，使用 `top`：
 
