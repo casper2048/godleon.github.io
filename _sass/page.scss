@@ -231,28 +231,24 @@ $button-size: 1.5rem;
 	.page {
 		@include container;
 		@include grid(12,10);
-		/*@include grid(12,12);*/
 		@include prefix(12,1);
 		@include suffix(12,1);
 		margin-bottom: 2em;
 		@media #{$small} {
 			@include grid(12,8);
-			/*@include grid(12,10);*/
 			@include prefix(12,0);
 			@include suffix(12,0);
 		}
 		@media #{$large} {
 		@include grid(12,6);
-		/*@include grid(12,8);*/
 		}
 		@media #{$x-large} {
-		    @include grid(12,5);
-			/*@include grid(12,7);*/
+			@include grid(12,5);
 		}
 	}
 }
 
-/* Index listing specific styling 
+/* Index listing specific styling */
 #index {
 	@include container;
 	@include grid(12,10);
@@ -743,10 +739,3 @@ $button-size: 1.5rem;
 #goog-wm-sb {
 	@extend .btn;
 }
-
-
-/*
-   Table (User define)
-   ========================================================================== */
-
-
