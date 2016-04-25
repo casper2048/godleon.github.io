@@ -9,7 +9,7 @@ categories: [linux]
 tags: [Linux, RHCE, RH124]
 ---
 
-
+<a name="intro"/>
 Introduction
 ============
 
@@ -50,7 +50,7 @@ LANG=zh_TW.UTF-8
 
 -------------------------------------------------
 
-
+<a name="ch1"/>
 Chapter 1. ACCESSING THE COMMAND LINE
 =====================================
 
@@ -141,7 +141,7 @@ $ file /home
 
 -------------------------------------------------
 
-
+<a name="ch2"/>
 Chapter 2. MANAGING FILES FROM THE COMMAND LINE
 ===============================================
 
@@ -316,7 +316,7 @@ mystery_chapter5_1455368579.odf  mystery_chapter5_2016-02-13.odf  mystery_chapte
 
 -------------------------------------------------
 
-
+<a name="ch3"/>
 Chapter 3. GETTING HELP IN RED HAT ENTERPRISE LINUX
 ===================================================
 
