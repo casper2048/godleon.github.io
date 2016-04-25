@@ -229,7 +229,7 @@ $button-size: 1.5rem;
 	}
 	.post {
 	    @include container;
-		@include grid(12,10);
+		@include grid(12,12);
 		@include prefix(12,1);
 		@include suffix(12,1);
 		margin-bottom: 2em;
