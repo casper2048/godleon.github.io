@@ -3,7 +3,7 @@ layout: post
 title:  "[RHCE] RH124 Chapter 8 Controlling Services and Daemons 學習筆記"
 description: "此文章記錄學習 RHCE RH124 Chapter 8 Controlling Services and Daemons 所留下的內容"
 date: 2016-04-19 04:30:00
-published: true
+published: false
 comments: true
 categories: [linux]
 tags: [Linux, RHCE, RH124]

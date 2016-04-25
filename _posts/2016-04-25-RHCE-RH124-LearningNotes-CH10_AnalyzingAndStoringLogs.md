@@ -3,7 +3,7 @@ layout: post
 title:  "[RHCE] RH124 Chapter 10 Analyzing and Storing Logs 學習筆記"
 description: "此文章記錄學習 RHCE RH124 Chapter 10 Analyzing and Storing Logs 留下的內容"
 date: 2016-04-24 21:30:00
-published: true
+published: false
 comments: true
 categories: [linux]
 tags: [Linux, RHCE, RH124]
@@ -134,6 +134,8 @@ Apr 23 23:26:04 server0 student: Log entry created on server0
 - `sudo journalctl --since today`：顯示今天發生的 system journal
 
 - `sudo journalctl --since '2016-04-24 00:00:00' --until '2016-04-24 01:00:00'`：顯示特定時段內的 system journal
+
+- `sudo journalctl --since="$(date -d "-30 minutes" +%F' '%H:%M:%S)"`：尋找 30 分鐘前的 system journal
 
 - `sudo journalctl -o verbose`：顯示完整 system journal 訊息
 

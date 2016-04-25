@@ -3,7 +3,7 @@ layout: post
 title:  "[RHCE] RH124 Chapter 9 Controlling and Securing OpenSSH Service 學習筆記"
 description: "此文章記錄學習 RHCE RH124 Chapter 9 Controlling and Securing OpenSSH Service 留下的內容"
 date: 2016-04-20 04:50:00
-published: true
+published: false
 comments: true
 categories: [linux]
 tags: [Linux, RHCE, RH124]
