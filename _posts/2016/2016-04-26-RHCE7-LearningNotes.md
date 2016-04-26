@@ -2,7 +2,7 @@
 layout: post
 title:  "RedHat RHCE7 學習筆記"
 description: "此文章記錄學習 RedHat RHCE7 時所留下的相關筆記"
-date: 2016-04-26 04:20:00
+date: 2016-04-26 00:00:00
 published: true
 comments: true
 categories: [Linux]
