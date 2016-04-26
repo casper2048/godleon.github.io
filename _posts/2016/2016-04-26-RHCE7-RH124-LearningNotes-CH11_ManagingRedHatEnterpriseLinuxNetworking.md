@@ -195,6 +195,8 @@ $ hostnamectl status
 
 ## 11.5.2 Configuring name resolution
 
+> 若查詢簡短名稱，系統會自動戴上 `/etc/resolv.conf` 中的 `domain` or `search` 的值再查詢
+
 使用 `getent` & `host` 測試 DNS 設定：
 
 ```bash
@@ -225,3 +227,5 @@ $ getent hosts www.google.com
 ```
 
 另外，一般網路設定若使用 DHCP，會把原有的 DNS 設定覆蓋，若要避免此情況，可用 `sudo nmcli connection "System eth0" ipv4.ignore-auto-dns yes` 來避免這樣的狀況發生。
+
+> 也可以用 nslookup 來測試 DNS，但需要額外加裝 `bind-utils` 套件
