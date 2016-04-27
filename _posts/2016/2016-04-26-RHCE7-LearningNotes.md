@@ -9,7 +9,6 @@ categories: [Linux]
 tags: [Linux, RHCE]
 ---
 
-
 RHEL7 RH124
 ===========
 
@@ -39,3 +38,4 @@ RHEL7 RH124
 
 - [Chapter 12. Archiving And Copying Files Between Systems](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-01-25-RHCE7-RH124-LearningNotes-CH12-ArchvingAndCopyingFilesBetweenSystems.md)
 
+- [Chapter 13. Installing and Updating Software Packages](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-28-RHCE7-RH124-LearningNotes-CH13_InstallingAndUpdatingSoftwarePackages.md)
