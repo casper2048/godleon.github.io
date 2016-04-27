@@ -35,16 +35,7 @@ RHEL7 RH124
 
 - [Chapter 10. Analyzing and Storing Logs](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-25-RHCE7-RH124-LearningNotes-CH10_AnalyzingAndStoringLogs.md)
 
-
 - [Chapter 11. Managing Red Hat Enterprise Linux Networking](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-26-RHCE7-RH124-LearningNotes-CH11_ManagingRedHatEnterpriseLinuxNetworking.md)
-  - [11.1 Network Concepts](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-26-RHCE7-RH124-LearningNotes-CH11_ManagingRedHatEnterpriseLinuxNetworking.md#ch11.1)
-  - [11.2 Validating Network Configuration](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-26-RHCE7-RH124-LearningNotes-CH11_ManagingRedHatEnterpriseLinuxNetworking.md#ch11.2)
-  - [11.3 Configuring Network with nmcli](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-26-RHCE7-RH124-LearningNotes-CH11_ManagingRedHatEnterpriseLinuxNetworking.md#ch11.3)
-  - [11.4 Editing Network Configuration Files](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-26-RHCE7-RH124-LearningNotes-CH11_ManagingRedHatEnterpriseLinuxNetworking.md#ch11.4)
-  - [11.5 Configuring Host Names and Name Resolution](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-26-RHCE7-RH124-LearningNotes-CH11_ManagingRedHatEnterpriseLinuxNetworking.md#ch11.5)
-  
-  
+
 - [Chapter 12. Archiving And Copying Files Between Systems](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-01-25-RHCE7-RH124-LearningNotes-CH12-ArchvingAndCopyingFilesBetweenSystems.md)
-  - [12.1 Managing Compressed tar Archives](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-01-25-RHCE7-RH124-LearningNotes-CH12-ArchvingAndCopyingFilesBetweenSystems.md#ch12.1)
-  - [12.2 Copying Files Between Systems Securely](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-01-25-RHCE7-RH124-LearningNotes-CH12-ArchvingAndCopyingFilesBetweenSystems.md#ch12.2)
-  - [12.3 Synchronizing Files Between Systems Securely](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-01-25-RHCE7-RH124-LearningNotes-CH12-ArchvingAndCopyingFilesBetweenSystems.md#ch12.3)
+
