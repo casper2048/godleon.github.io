@@ -182,7 +182,5 @@ find 還可以針對搜尋結果加上 action：
 
 參考資料
 =======
-
 - [鳥哥的 Linux 私房菜 -- 第七章、Linux 磁碟與檔案系統管理 >> 7.2.2 實體連結與符號連結： ln](http://linux.vbird.org/linux_basic/0230filesystem.php#link)
-
 - [鳥哥的 Linux 私房菜 -- 第六章、Linux 檔案與目錄管理 >> 6.5 指令與檔案的搜尋](http://linux.vbird.org/linux_basic/0220filemanager.php#file_find)
