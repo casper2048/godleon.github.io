@@ -9,8 +9,26 @@ categories: [openstack]
 tags: [OpenStack, python]
 ---
 
+Getting Start!
+==============
+
+- [如何学习OpenStack-Openstack开发-about云开发](http://www.aboutyun.com/thread-16825-1-1.html)
+
+- [最近在学习 OpenStack，已经了解了其作用、架构。想进一步学习研究OpenStack各组件，对于源代码的阅读和学习，想得到大家的建议？ - Python - 知乎](https://www.zhihu.com/question/20758224)
+
+- [如何学习OpenStack与精通OpenStack好书推荐 ( by quqi99 ) - 技术并艺术着 - 博客频道 - CSDN.NET](http://blog.csdn.net/quqi99/article/details/12030851)
+
+- [openstack - 代码改变世界 - 博客频道 - CSDN.NET](http://blog.csdn.net/lynn_kong/article/category/1259739)
+
+- [OpenStack资源整理（转自陈沙克） - workdog的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/workdog/article/details/8246914)
+
+----------------------------------------------------------------------
+
+
 基礎知識
 =======
+
+## 透過 demo 學習 OpenStack 開發系列
 
 - [通过demo学习OpenStack开发所需的基础知识 — 软件包管理 | UnitedStack有云](https://www.ustack.com/blog/demo1/)
 
@@ -29,6 +47,19 @@ tags: [OpenStack, python]
 - [通过demo学习OpenStack开发——数据库(2)](http://www.infoq.com/cn/articles/learning-openstack-through-demo-part02)
 
 - [通过demo学习OpenStack开发所需的基础知识 -- 单元测试](https://segmentfault.com/a/1190000004595130)
+
+
+## 零基礎學習 OpenStack 系列
+
+- [零基础学习openstack【完整中级篇】及openstack资源汇总-openstack学习-about云开发](http://www.aboutyun.com/thread-10306-1-1.html)
+
+- [零基础学习openstack【初级篇】-openstack学习-about云开发](http://www.aboutyun.com/thread-10061-1-1.html)
+
+  - [OpenStack新手开发指南-openstack学习-about云开发](http://www.aboutyun.com/thread-5242-1-1.html)
+  
+- [零基础学习openstack（上）【中级篇】-openstack学习-about云开发](http://www.aboutyun.com/thread-10124-1-1.html)
+
+- [【新提醒】零基础学习openstack（下）【中级篇】-openstack学习-about云开发](http://www.aboutyun.com/thread-10229-1-1.html)
 
 
 ----------------------------------------------------------------------
@@ -72,7 +103,18 @@ tags: [OpenStack, python]
 
 - [使用DEVSTACK搭建OPENSTACK可remote debug的开发测试环境 – bingotree](http://bingotree.cn/?p=687)
 
+
 ----------------------------------------------------------------------
+
+
+Plugin 相關
+==========
+
+- [学习Python动态扩展包stevedore](http://yansu.org/2013/06/09/learn-python-stevedore-module-in-detail.html)
+
+
+----------------------------------------------------------------------
+
 
 OpenStack.Org 相關文件
 ======================
@@ -95,3 +137,5 @@ References
 - [pbr - Python Build Reasonableness — pbr 1.8.2.dev25 documentation](http://docs.openstack.org/developer/pbr/)
 
 - [Docker Registry](https://docs.docker.com/registry/)
+
+- [IBM developerWorks 中国 : Cloud computing : 文档库](http://www.ibm.com/developerworks/cn/views/cloud/libraryview.jsp?site_id=10&contentarea_by=Cloud%20computing&sort_by=Date&sort_order=2&start=1&end=65&topic_by=-1&product_by=-1&type_by=%E6%89%80%E6%9C%89%E7%B1%BB%E5%88%AB&show_abstract=true&search_by=openstack&industry_by=&series_title_by=)
