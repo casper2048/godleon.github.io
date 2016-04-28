@@ -51,6 +51,21 @@ $ sudo umount /mnt/newspace
 14.3 Making Links Between Files
 ===============================
 
+## Partition UUID & inode
+
+> UUID 存於 super block 中
+
+inode block -> inode table 結構：
+1. inode number
+2. Permission
+3. Hard Link Subdirectory 數量
+4. UID
+5. GID
+6. Size
+7. Timestamp
+8. Filename
+9. Pointer
+
 ## Hard Link
 
 **<font color='red'>inode 在 Linux 中是真正指向檔案實際內容的指標</font>**
@@ -64,22 +79,21 @@ $ sudo umount /mnt/newspace
 total 4
 -rw-rw-r--. 1 student student 12  4月 28 15:05 newfile.txt
 
-# 建立 hard link (注意數字從 1 變成 2)
+# 建立 hard link (注意數字從 1 變成 2, inode number 相同)
 [student@server0 ~]$ ln newfile.txt ~/newfile-hlink.txt
-[student@server0 ~]$ ls -l
+[student@server0 ~]$ ls -li
 total 8
--rw-rw-r--. 2 student student 12  4月 28 15:05 newfile-hlink.txt
--rw-rw-r--. 2 student student 12  4月 28 15:05 newfile.txt
+12889 -rw-rw-r--. 2 student student 12  4月 28 15:05 newfile-hlink.txt
+12889 -rw-rw-r--. 2 student student 12  4月 28 15:05 newfile.txt
 ```
 
 Hard Link 特性 & 說明：
-- 上面建立 Hard Link 的示範，可看出指向同一個 inode 的連結，從一個變成兩個
+- 上面建立 Hard Link 的示範，可看出指向同一個 inode 的連結，從一個變成兩個(可防止檔案誤刪)
+- 增加 hard link 不會增加磁碟空間
 - 不能跨 File System
-- 不能 link 目錄
+- 不能 link 目錄，只能建立在檔案上
 
 ## Symbolic Link 
-
-類似 Windows 中的捷徑!
 
 ```bash
 # 建立 symbolic link
@@ -92,7 +106,7 @@ lrwxrwxrwx. 1 student student 11  4月 28 15:19 newfile-symlink.txt -> newfile.t
 
 # 移除 symbolic link 指向的檔案(系統會標示連結失效)
 $ rm newfile.txt 
-[student@server0 ~]$ ls -l
+$ ls -l
 total 4
 -rw-rw-r--. 1 student student 12  4月 28 15:05 newfile-hlink.txt
 lrwxrwxrwx. 1 student student 11  4月 28 15:19 newfile-symlink.txt -> newfile.txt (這裡會有底色標記連結失效)
@@ -100,6 +114,10 @@ lrwxrwxrwx. 1 student student 11  4月 28 15:19 newfile-symlink.txt -> newfile.t
 # link 目錄
 $ ln -s /etc ~/config_files
 ```
+
+特色：
+1. 類似捷徑
+2. 不能防止檔案誤刪
 
 --------------------------------------------
 
@@ -147,6 +165,18 @@ $ ln -s /etc ~/config_files
 - `sudo find -size -10M`：尋找小於 10MB 的檔案
 
 - `sudo find / -type f -links +1`：尋找擁有超過 1 個 hard link 的一般檔案
+
+### find 的特別功能
+
+find 還可以針對搜尋結果加上 action：
+
+`sudo find /etc/yum.repos.d/ -type f -exec mv {} {}1 \;`
+
+以上指令表示：
+
+1. 搜尋 /etc/yum.repos.d/ 目錄中的一般檔案
+
+2. 將每個檔案進行改名，在檔名後面多加一個 1
 
 --------------------------------------------
 
