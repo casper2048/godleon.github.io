@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[RHCE] RH124 Chapter 14 Accessing Linux File Systems 學習筆記"
-description: "此文章記錄學習 RHCE RH124 Chapter 14 Accessing Linux File System 留下的內容"
+description: "此文章記錄學習 RHCE7 RH124 Chapter 14 Accessing Linux File System 留下的內容"
 date: 2016-04-28 15:25:00
 published: false
 comments: true
