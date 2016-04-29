@@ -14,11 +14,11 @@ RHEL7 RH124
 
 - [Introduction](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-02-17-RHCE7-RH124-LearningNotes-CH01_03.md#intro)
 
-- [Chapter 1. ACCESSING THE COMMAND LINE](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-02-17-RHCE7-RH124-LearningNotes-CH01_03.md#ch1)
+- [Chapter 1. Accessing the Command Line](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-02-17-RHCE7-RH124-LearningNotes-CH01_03.md#ch1)
 
-- [Chapter 2. MANAGING FILES FROM THE COMMAND LINE](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-02-17-RHCE7-RH124-LearningNotes-CH01_03.md#ch2)
+- [Chapter 2. Managing File From the Command Line](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-02-17-RHCE7-RH124-LearningNotes-CH01_03.md#ch2)
 
-- [Chapter 3. GETTING HELP IN RED HAT ENTERPRISE LINUX](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-02-17-RHCE7-RH124-LearningNotes-CH01_03.md#ch3)
+- [Chapter 3. Geting Help in Red Hat Enterprise Linux](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-02-17-RHCE7-RH124-LearningNotes-CH01_03.md#ch3)
 
 - [Chapter 4. Creating, Viewing, and Editing Text Files](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-03-RHCE7-RH124-LearningNotes-CH04_06.md#ch4)
 
@@ -41,3 +41,10 @@ RHEL7 RH124
 - [Chapter 13. Installing and Updating Software Packages](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-28-RHCE7-RH124-LearningNotes-CH13_InstallingAndUpdatingSoftwarePackages.md)
 
 - [Chapter 14 Accessing Linux File Systems](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-28-RHCE7-RH124-LearningNotes-CH14_AccessingLinuxFileSystems.md)
+
+---------------------------------
+
+RHCE7 RH134
+===========
+
+- [Chapter 1. Automating Installation with Kickstart](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-29-RHCE7-RH134-LearningNotes-CH1_AutomatingInstallationWithKickstart.md)
