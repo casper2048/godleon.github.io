@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "[RHCE7] RH134 Chapter 2 Using Regular Expressions with grep 學習筆記"
-description: "此文章記錄學習 RHCE7 RH134 Chapter 2 Using Regular Expressions with grep 留下的內容"
-date: 2016-04-29 11:50:00
+title:  "[RHCE7] RH134 Chapter 4 Scheduling Future Linux Tasks 學習筆記"
+description: "此文章記錄學習 RHCE7 RH134 Chapter 4 Scheduling Future Linux Tasks 留下的內容"
+date: 2016-05-05 04:25:00
 published: false
 comments: true
 categories: [linux]
