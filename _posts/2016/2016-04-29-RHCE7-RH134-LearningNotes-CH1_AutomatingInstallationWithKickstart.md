@@ -38,7 +38,7 @@ Kickstart:
 
 > ks.cfg 也可以放置於其他地方，不一定要放在磁碟片中
 
-
+<a name="ch1.1" />
 1.1 Defining the Anaconda Kickstart System
 ==========================================
 
@@ -194,7 +194,7 @@ logging --host=loghost.example.com --level=INFO
 
 --------------------------------------------------------------------------
 
-
+<a name="ch1.2" />
 1.2 Deploying a New Virtual System with Kickstart
 =================================================
 
