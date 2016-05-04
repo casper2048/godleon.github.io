@@ -47,8 +47,11 @@ RHEL7 RH124
 RHCE7 RH134
 ===========
 
-- [Chapter 1. Automating Installation with Kickstart](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-29-RHCE7-RH134-LearningNotes-CH1_AutomatingInstallationWithKickstart.md)
+- [Chapter 1. Automating Installation with Kickstart](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-29-RHCE7-RH134-LearningNotes-CH01_AutomatingInstallationWithKickstart.md)
 
-- [Chapter 2. Using Regular Expressions with grep](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-29-RHCE7-RH134-LearningNotes-CH2_UsingRegularExpressionsWithGrep.md)
+- [Chapter 2. Using Regular Expressions with grep](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-29-RHCE7-RH134-LearningNotes-CH02_UsingRegularExpressionsWithGrep.md)
+
+- [Chapter 3. Creating and Editing Text Files with vim](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH03_CreatingAndEditingTextFilesWithVim.md)
 
 - [Chapter 4. Scheduling Future Linux Tasks](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH4_SchedulingFutureLinuxTasks.md)
+
