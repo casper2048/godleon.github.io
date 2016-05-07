@@ -56,3 +56,5 @@ RHCE7 RH134
 - [Chapter 4. Scheduling Future Linux Tasks](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH4_SchedulingFutureLinuxTasks.md)
 
 - [Chapter 5. Managing Priority pf Linux Processes](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH05_ManagingPriorityOfLinuxProcesses.md)
+
+- [Chapter 6. Controlling Access to Files with Access Control Lists(ACLs)](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-07-RHCE7-RH134-LearningNotes-CH06_ControllingAccessToFilesWithAccessControlLists.md)
