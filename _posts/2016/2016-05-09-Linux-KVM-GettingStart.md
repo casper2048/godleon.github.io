@@ -9,7 +9,7 @@ categories: [linux]
 tags: [Linux, KVM]
 ---
 
-1. libvirt and libvirt tools
+1、libvirt and libvirt tools
 ============================
 
 ## libvirt
@@ -38,7 +38,7 @@ virt-install 是專門用來協助 provision VM 的 CLI，支援純文字 & 圖�
 
 ------------------------------------------------
 
-2. Virtualized hardware devices
+2、Virtualized hardware devices
 ===============================
 
 ##  Para-virtualized devices
@@ -65,7 +65,7 @@ N_Port ID Virtualization (NPIV) 是種應用在高速企業級儲存裝置的功
 
 ------------------------------------------------
 
-3. Storage
+3、Storage
 ==========
 
 ## Disk Images 的存在型式
