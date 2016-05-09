@@ -58,3 +58,7 @@ RHCE7 RH134
 - [Chapter 5. Managing Priority pf Linux Processes](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH05_ManagingPriorityOfLinuxProcesses.md)
 
 - [Chapter 6. Controlling Access to Files with Access Control Lists(ACLs)](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-07-RHCE7-RH134-LearningNotes-CH06_ControllingAccessToFilesWithAccessControlLists.md)
+
+- [Chapter 7. Managing SELinux Security](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-09-RHCE7-RH134-LearningNotes-CH07_ManagingSELinuxSecurity.md)
+
+- [Chapter 8. Connecting to Network-defined Users and Groups](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-10-RHCE7-RH134-LearningNotes-CH08_ConnectingToNetwork-DefinedUsersAndGroups.md)
