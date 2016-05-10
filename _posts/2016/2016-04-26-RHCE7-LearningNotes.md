@@ -62,3 +62,5 @@ RHCE7 RH134
 - [Chapter 7. Managing SELinux Security](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-09-RHCE7-RH134-LearningNotes-CH07_ManagingSELinuxSecurity.md)
 
 - [Chapter 8. Connecting to Network-defined Users and Groups](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-10-RHCE7-RH134-LearningNotes-CH08_ConnectingToNetwork-DefinedUsersAndGroups.md)
+
+- [Chapter 9. Adding Disks, Partitions, and File Systems to a Linux System](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-11-RHCE7-RH134-LearningNotes-CH09_AddingDisksPartitionAndFileSystemsToALinuxSystem.md)
