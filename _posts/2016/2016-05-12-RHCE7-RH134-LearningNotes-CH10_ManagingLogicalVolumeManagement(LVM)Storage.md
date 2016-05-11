@@ -18,9 +18,9 @@ tags: [Linux, RHCE, RH134]
 
 此外，還有 PE(Physical Extent) & LE(Logical Extent) 與上述其他概念的組成關係：
 
-![PE & LE](http://s3.51cto.com/wyfs02/M00/72/35/wKioL1XetQ7wtmzfAAJ6MCQFC90143.jpg)
+![PE_LE_1](http://s3.51cto.com/wyfs02/M00/72/35/wKioL1XetQ7wtmzfAAJ6MCQFC90143.jpg)
 
-![PE & LE](http://www.linux-tips-and-tricks.de/images/stories/lvm.jpg)
+![PE_LE_2](http://www.linux-tips-and-tricks.de/images/stories/lvm.jpg)
 
 ----------------------------------------------------------------
 
