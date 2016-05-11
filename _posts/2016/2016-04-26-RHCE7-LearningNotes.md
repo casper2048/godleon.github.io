@@ -64,3 +64,5 @@ RHCE7 RH134
 - [Chapter 8. Connecting to Network-defined Users and Groups](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-10-RHCE7-RH134-LearningNotes-CH08_ConnectingToNetwork-DefinedUsersAndGroups.md)
 
 - [Chapter 9. Adding Disks, Partitions, and File Systems to a Linux System](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-11-RHCE7-RH134-LearningNotes-CH09_AddingDisksPartitionAndFileSystemsToALinuxSystem.md)
+
+- [Chapter 10. Managing Logical Volume Management(LVM) Storage](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-12-RHCE7-RH134-LearningNotes-CH10_ManagingLogicalVolumeManagement%28LVM%29Storage.md)
