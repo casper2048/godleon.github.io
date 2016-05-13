@@ -226,6 +226,8 @@ RHEL 7 之後：systemd service unit = service(對應到原先的 daemon) + sock
 Practice: Managing Temporary Files
 ==================================
 
+RHEL7 中，暫存檔由 `systemd-tmpfiles` 這個服務來進行管理。
+
 將 /tmp 中的自動清除設定由 10 天改為 5 天：
 
 ```bash

@@ -100,3 +100,53 @@ $ sha1sum /etc/passwd
 $ echo "1234" | sha1sum
 1be168ff837f043bde17c0314341c84271047b31  -
 ```
+
+------------------------------------------------------------
+
+Practice: Discovery Process Properties
+======================================
+
+```bash
+# 根據 cpu 的核心數，執行兩倍數量的運算工作
+$ for i in $( seq $(($(grep -c '^processor' /proc/cpuinfo) * 2)) ); do sha1sum /dev/zero & done
+[1] 31701
+[2] 31702
+
+$ jobs
+[1]-  Running                 sha1sum /dev/zero &
+[2]+  Running                 sha1sum /dev/zero &
+
+# 使用參數 u 可檢視資源使用率
+$ ps u $(pgrep sha1sum)
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+student  31701 50.0  0.0 116096  1044 pts/0    R    14:26   1:29 sha1sum /dev/zero
+student  31702 50.0  0.0 116096  1044 pts/0    R    14:26   1:29 sha1sum /dev/zero
+
+$ nice -n 10 sha1sum /dev/zero &
+[3] 31764
+
+# 透過參數 o 指定顯示欄位 (nice value = 10 的 process 所佔的資源相對低)
+$ ps o pid,pcpu,nice,comm $(pgrep sha1sum)
+  PID %CPU  NI COMMAND
+31701 49.8   0 sha1sum
+31702 49.8   0 sha1sum
+31764  4.0  10 sha1sum
+
+# 調整 process nice value，可看出資源使用率有提升
+$ sudo renice -n 5 31764
+$ ps o pid,pcpu,nice,comm $(pgrep sha1sum)
+  PID %CPU  NI COMMAND
+31701 48.8   0 sha1sum
+31702 48.8   0 sha1sum
+31764  6.2   5 sha1sum
+
+# 移除所有使用 sha1sum 指令產生的 process
+$ killall sha1sum
+$ ps o pid,pcpu,nice,comm $(pgrep sha1sum)
+  PID %CPU  NI COMMAND
+ 2052  0.0   0 bash
+31825  0.0   0 ps
+[1]   Terminated              sha1sum /dev/zero
+[2]-  Terminated              sha1sum /dev/zero
+[3]+  Terminated              nice -n 10 sha1sum /dev/zero
+```
