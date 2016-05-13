@@ -220,3 +220,41 @@ D /var/run/lsm 0755 libstoragemgmt libstoragemgmt -
 RHEL 7 之前：standalone(daemon) service + xinetd(短暫式服務)
 
 RHEL 7 之後：systemd service unit = service(對應到原先的 daemon) + socket(對應到原先的 xinetd) + path(監控目錄中檔案的變化，來決定執行的程式，例如：cups.path)
+
+-------------------------------------------------------------
+
+Practice: Managing Temporary Files
+==================================
+
+將 /tmp 中的自動清除設定由 10 天改為 5 天：
+
+```bash
+# 複製 template
+$ sudo cp /usr/lib/tmpfiles.d/tmp.conf /etc/tmpfiles.d/
+$ cat /etc/tmpfiles.d/tmp.conf
+.......
+d /tmp 1777 root root 5d
+d /var/tmp 1777 root root 30d
+....
+
+# 修改 /etc/tmpfiles.d/tmp.conf 檔案，將 10d 改為 5d
+$ sudo sed -i '/^d .tmp /s/10d/5d/' /etc/tmpfiles.d/tmp.conf
+
+# 測試設定是否成功
+$ sudo systemd-tmpfiles --clean tmp.conf
+```
+
+設定 **/run/gallifrey** 每 30 秒清空一次：
+
+```bash
+# 編輯設定檔
+$ echo "d /run/gallifrey 0700 root root 30s" | sudo tee /etc/tmpfiles.d/gallifrey.conf
+
+# 建立規則
+$ sudo systemd-tmpfiles create gallifrey.conf
+
+# 測試是否有效
+$ sudo touch /run/gallifrey/helloworld
+$ sudo systemd-tmpfiles --clean gallifrey.conf
+$ sudo ls -l /run/gallifrey/
+```
