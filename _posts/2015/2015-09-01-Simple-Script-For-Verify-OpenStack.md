@@ -73,7 +73,9 @@ $ sudo rbd -p glance list
 ```
 
 ### Neutron
+
 #### 1、建立對外網路 (FLAT or VLAN)
+
 ```bash
 # 建立連外網路 ext_net (FLAT)
 $ neutron net-create ext_net --router:external --provider:physical_network external --provider:network_type flat
@@ -83,6 +85,7 @@ $ neutron subnet-create ext_net --name ext_subnet --allocation-pool start=10.10.
 ```
 
 #### 2、建立內部網路(by tenant)
+
 ```bash
 # 建立 tenant network
 $ neutron net-create production-net --provider:network_type vxlan
