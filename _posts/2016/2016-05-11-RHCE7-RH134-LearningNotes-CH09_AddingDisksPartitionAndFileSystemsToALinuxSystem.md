@@ -71,7 +71,7 @@ major minor  #blocks  name
  253        2   29827072 dm-2
 ```
 
-切割完 partition 後，記得執行 `sudo partprobe [device name]` 強制 kernel 重新讀取最新的 partition table
+切割完 partition 後，記得執行 `sudo partprobe [device name]` or `sudo partprobe -s` 強制 kernel 重新讀取最新的 partition table
 
 ## 9.1.4 Creating file systems
 

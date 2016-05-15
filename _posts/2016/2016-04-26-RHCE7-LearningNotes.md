@@ -36,7 +36,7 @@ RHEL7 RH124
 
 - [Chapter 11. Managing Red Hat Enterprise Linux Networking](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-26-RHCE7-RH124-LearningNotes-CH11_ManagingRedHatEnterpriseLinuxNetworking.md)
 
-- [Chapter 12. Archiving And Copying Files Between Systems](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-01-25-RHCE7-RH124-LearningNotes-CH12-ArchvingAndCopyingFilesBetweenSystems.md)
+- [Chapter 12. Archiving And Copying Files Between Systems](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-27-RHCE7-RH124-LearningNotes-CH12-ArchvingAndCopyingFilesBetweenSystems.md)
 
 - [Chapter 13. Installing and Updating Software Packages](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-28-RHCE7-RH124-LearningNotes-CH13_InstallingAndUpdatingSoftwarePackages.md)
 
@@ -53,7 +53,7 @@ RHCE7 RH134
 
 - [Chapter 3. Creating and Editing Text Files with vim](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH03_CreatingAndEditingTextFilesWithVim.md)
 
-- [Chapter 4. Scheduling Future Linux Tasks](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH4_SchedulingFutureLinuxTasks.md)
+- [Chapter 4. Scheduling Future Linux Tasks](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH04_SchedulingFutureLinuxTasks.md   )
 
 - [Chapter 5. Managing Priority pf Linux Processes](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-05-RHCE7-RH134-LearningNotes-CH05_ManagingPriorityOfLinuxProcesses.md)
 
