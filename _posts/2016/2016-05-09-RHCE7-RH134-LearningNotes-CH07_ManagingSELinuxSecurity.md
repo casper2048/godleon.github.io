@@ -188,7 +188,7 @@ drwxr-xr-x. root root system_u:object_r:root_t:s0      ..
 7.4 Chaging SELinux Booleans
 ============================
 
-安裝 `selinux-policy-devel` 套件可取得與 SELinux Booleans 相關的說明資訊，位於 *_selinux(8)，可使用 `man -k _selinux` 來查詢目前系統中存在的文件。
+安裝 `selinux-policy-devel` 套件可取得與 SELinux Booleans 相關的說明資訊，位於 **selinux(8)**，可使用 `man -k _selinux` 來查詢目前系統中存在的文件。
 
 SELinux Booleans 是用來決定 rule 是否啟用的設定值，可透過 `getsebool` & `setsebool` 兩個指令來設定：
 
@@ -257,7 +257,7 @@ httpd_enable_homedirs          (on   ,   on)  Allow httpd to read home directori
 <title>403 Forbidden</title>
 </head><body>
 <h1>Forbidden</h1>
-<p>You don't have permission to access /file3
+<p>You don\'t have permission to access /file3
 on this server.</p>
 </body></html>
 
@@ -490,4 +490,57 @@ pegasus_https_port_t           tcp      5989
 [vagrant@server tmp] manage port -l | grep http_port_t
 http_port_t                    tcp      5678, 80, 81, 443, 488, 8008, 8009, 8443, 9000
 pegasus_http_port_t            tcp      5988
+```
+
+-------------------------------------------------------------------------------
+
+Practice: Changing SELinux Booleans
+===================================
+
+啟用 web server 的使用者家目錄 web 功能
+
+```bash
+# 安裝 apache
+$ sudo yum -y install httpd
+
+# 啟動 apache server
+$ sudo systemctl enable httpd.service
+ln -s '/usr/lib/systemd/system/httpd.service' '/etc/systemd/system/multi-user.target.wants/httpd.service'
+$ sudo systemctl start httpd.service
+$ sudo systemctl status httpd.service
+httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled)
+   Active: active (running) since Mon 2016-05-16 17:55:59 JST; 5s ago
+.......
+
+# 開啟使用者 web 目錄為 ~/public_html
+$ sudo sed -i 's/^\s*#\(UserDir public_html\)/    \1/g' /etc/httpd/conf.d/userdir.conf
+$ sudo sed -i 's/^\s*\(UserDir\sdisabled\)/    # \1/g' /etc/httpd/conf.d/userdir.conf
+$ sudo systemctl restart httpd.service
+
+# 建立 index.html，但還是沒有權限可以存取
+$ mkdir ~/public_html
+$ echo "Hello Internet" | sudo tee /home/student/public_html/index.html
+Hello Internet
+$ chmod 711 /home/student
+$ curl http://localhost/~student/index.html
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>403 Forbidden</title>
+</head><body>
+<h1>Forbidden</h1>
+<p>You don't have permission to access /~student/index.html
+on this server.</p>
+</body></html>
+
+# 檢視 SELinux Boolean 設定
+$ getsebool -a | grep httpd | grep home
+httpd_enable_homedirs --> off
+
+# 開啟 httpd_enable_homedirs
+$ sudo setsebool -P httpd_enable_homedirs on
+$ getsebool -a | grep httpd | grep home
+httpd_enable_homedirs --> on
+$ curl http://localhost/~student/index.html
+Hello Internet
 ```
