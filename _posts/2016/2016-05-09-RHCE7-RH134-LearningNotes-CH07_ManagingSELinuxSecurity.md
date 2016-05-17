@@ -428,6 +428,7 @@ drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /var/www
 [vagrant@server tmp]$ ls -ldZ /WWW
 drwxr-xr-x. root root unconfined_u:object_r:default_t:s0 /WWW
 
+# 透過 semanage fcontext 修改目錄預設的 SELinux context
 [vagrant@server tmp]$ sudo semanage fcontext -a -f a -t httpd_sys_content_t '/WWW(/.*)?'
 [vagrant@server tmp]$ sudo semanage fcontext -l | grep WWW
 /WWW(/.*)?                                         all files          system_u:object_r:httpd_sys_content_t:s0
@@ -529,7 +530,7 @@ $ curl http://localhost/~student/index.html
 <title>403 Forbidden</title>
 </head><body>
 <h1>Forbidden</h1>
-<p>You don't have permission to access /~student/index.html
+<p>You don\'t have permission to access /~student/index.html
 on this server.</p>
 </body></html>
 
