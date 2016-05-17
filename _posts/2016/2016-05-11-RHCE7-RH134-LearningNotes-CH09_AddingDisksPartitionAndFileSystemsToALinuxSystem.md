@@ -434,10 +434,8 @@ $ sudo blkid
 ```bash
 $ sudo mkdir /backup
 $ echo "UUID=796676d5-0e5c-4023-82e3-3417e8d00952 /backup xfs defaults 0 2" | sudo tee --append /etc/fstab
-
 $ echo "UUID=a875704a-d0ba-4542-98a6-f201f1b3a539 swap swap defaults 0 0" | sudo tee --append /etc/fstab
-
-$ echo "UUID=9a906cce-e50e-44ee-a880-b3811252e5e1 swap swap defaults 0 0" | sudo tee --append /etc/fstab
+$ echo "UUID=9a906cce-e50e-44ee-a880-b3811252e5e1 swap swap pri=1 0 0" | sudo tee --append /etc/fstab
 
 $ sudo mount -a
 $ sudo swapon -a
