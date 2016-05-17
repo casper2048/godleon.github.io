@@ -173,10 +173,65 @@ Practice: Connecting to a Central LDAP and Kerberos Server
 
 設定 LDAP + Kerberos 驗證的步驟：
 
-1. 安裝相關套件：`sudo yum -y install sssd authconfig-gtk krb5-workstation`
+1、安裝相關套件：`sudo yum -y install sssd authconfig-gtk krb5-workstation`
 
-2. 使用圖形工具進行設定(設定如下)
+2、使用圖形工具進行設定(設定如下)
 
 ![system-config-authentication](https://lh3.googleusercontent.com/yrIOq6ZotETj8rEMxH3hnoBqJzUmaF4A_aYQQlvMTuqU6u2-xBCA7aUMIkVBUi_uwjiSOcEr5V_TXrlv0jYDX_ikqhPjZVWPiXo5XKIoWUovuYNtbyPu4nibuVU1sZ150Y43kME_1dExiLtYF3cowhoHA_ex4CbHBDGULMGkfPJQnJkoWM_PVlb-xk1ENpKjElCw0If4VUMnyk6QsSjWTeKrUt6gl8A9Szi-DEWgh2FuhnXFFfL2BOlUmcvLeUDDDu7cT1v09QRqQI1usK3bDKIjrmNUaSAYQ8hPoxDqZaT0-KMycPnDwc8SWJXmm4En8uQMHSGMqFKlx1LmJqufLKZMaFZgF3rM1BN8pCYFxkUkws2nNuG-tmzHi0yxVq7T0vYFerWX66XTvhrOHiReMjLKp3IEm7ue4-AUNY9bcwlPgyjoOBJXId1vT4AgyHeR7sivsMFvwfw2jTwZdEEp2723scmSxiYoO0baKp7rrSnls11b9SI_ZIPd7gAD_42AqnstDCEWWsKzXCpGLXuAXFFjk14lO5g0MHtCd73J2aJmsz8QN_rMZK_Hd9YW44VJ6AEQF3rB4Sxq09bT6q8HPF9ht-ak_qg=w474-h710-no)
 
-3. 測試設定結果：`sudo getent passwd ldapuser1` or `ssh ldapuser1@server1`(密碼 `kerberos`)
+3、驗證設定結果：`sudo getent passwd ldapuser1` or `ssh ldapuser1@server1`(密碼 `kerberos`)
+
+-----------------------------------------------------------
+
+Lab: Connecting to Network-defined Users and Groups
+===================================================
+
+Lab 設計為連線到 IPA server 進行驗證，步驟如下：
+
+1、安裝相關套件：`sudo yum -y install ipa-client`
+
+2、設定連線：`sudo ipa-client-install --domain=server1.example.com --no-ntp --mkhomedir`
+
+```bash
+$ sudo ipa-client-install --domain=server0.example.com --no-ntp --mkhomedir
+
+Discovery was successful!
+Hostname: desktop1.example.com
+Realm: SERVER0.EXAMPLE.COM
+DNS Domain: server1.example.com
+IPA Server: server1.example.com
+BaseDN: dc=server1,dc=example,dc=com
+
+Continue to configure the system with these values? [no]: yes
+User authorized to enroll computers: admin
+Synchronizing time with KDC...
+Unable to sync time with IPA NTP server, assuming the time is in sync. Please check that 123 UDP port is opened.
+Password for admin@SERVER1.EXAMPLE.COM:
+Successfully retrieved CA cert
+    Subject:     CN=Certificate Authority,O=SERVER1.EXAMPLE.COM
+    Issuer:      CN=Certificate Authority,O=SERVER1.EXAMPLE.COM
+    Valid From:  Tue May 17 20:31:07 2016 UTC
+    Valid Until: Sat May 17 20:31:07 2036 UTC
+
+Enrolled in IPA realm SERVER1.EXAMPLE.COM
+Created /etc/ipa/default.conf
+New SSSD config will be created
+Configured /etc/sssd/sssd.conf
+Configured /etc/krb5.conf for IPA realm SERVER1.EXAMPLE.COM
+trying https://server1.example.com/ipa/xml
+Forwarding 'ping' to server 'https://server1.example.com/ipa/xml'
+Forwarding 'env' to server 'https://server1.example.com/ipa/xml'
+Adding SSH public key from /etc/ssh/ssh_host_rsa_key.pub
+Adding SSH public key from /etc/ssh/ssh_host_ecdsa_key.pub
+Forwarding 'host_mod' to server 'https://server1.example.com/ipa/xml'
+Could not update DNS SSHFP records.
+SSSD enabled
+Configured /etc/openldap/ldap.conf
+Configured /etc/ssh/ssh_config
+Configured /etc/ssh/sshd_config
+Client configuration complete.
+```
+
+3、驗證設定結果：`sudo getent passwd ipauser` & `ssh ipauser@localhost`(原本密碼為 `password`，改為 `redhat123`)
+
+4、程式驗證：`lab ipaclient grade` (@desktop)
