@@ -165,3 +165,18 @@ LDAP 認証可用 SSL/TLS 加密
 在 RHEL 7 中提供了方便工具設定，安裝 `ipa-client` 套件即可。
 
 以 non-interactive 的方式設定 IPA server 認証：`sudo ipa-client-install --domain=serverX.example.com --no-ntp --mkhomedir -p admin -w redhat123 -U`
+
+-----------------------------------------------------------
+
+Practice: Connecting to a Central LDAP and Kerberos Server
+==========================================================
+
+設定 LDAP + Kerberos 驗證的步驟：
+
+1. 安裝相關套件：`sudo yum -y install sssd authconfig-gtk krb5-workstation`
+
+2. 使用圖形工具進行設定(設定如下)
+
+![system-config-authentication](https://lh3.googleusercontent.com/yrIOq6ZotETj8rEMxH3hnoBqJzUmaF4A_aYQQlvMTuqU6u2-xBCA7aUMIkVBUi_uwjiSOcEr5V_TXrlv0jYDX_ikqhPjZVWPiXo5XKIoWUovuYNtbyPu4nibuVU1sZ150Y43kME_1dExiLtYF3cowhoHA_ex4CbHBDGULMGkfPJQnJkoWM_PVlb-xk1ENpKjElCw0If4VUMnyk6QsSjWTeKrUt6gl8A9Szi-DEWgh2FuhnXFFfL2BOlUmcvLeUDDDu7cT1v09QRqQI1usK3bDKIjrmNUaSAYQ8hPoxDqZaT0-KMycPnDwc8SWJXmm4En8uQMHSGMqFKlx1LmJqufLKZMaFZgF3rM1BN8pCYFxkUkws2nNuG-tmzHi0yxVq7T0vYFerWX66XTvhrOHiReMjLKp3IEm7ue4-AUNY9bcwlPgyjoOBJXId1vT4AgyHeR7sivsMFvwfw2jTwZdEEp2723scmSxiYoO0baKp7rrSnls11b9SI_ZIPd7gAD_42AqnstDCEWWsKzXCpGLXuAXFFjk14lO5g0MHtCd73J2aJmsz8QN_rMZK_Hd9YW44VJ6AEQF3rB4Sxq09bT6q8HPF9ht-ak_qg=w474-h710-no)
+
+3. 測試設定結果：`sudo getent passwd ldapuser1` or `ssh ldapuser1@server1`(密碼 `kerberos`)
