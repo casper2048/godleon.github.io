@@ -154,7 +154,86 @@ LABEL=EXT4  /EXT4   ext4  defaults    1   2
 
 --------------------------------------------------------------------
 
-## 9.2 Managing Swap Space
+Practice: Adding Partitions, File Systems, and Persistent Mounts
+================================================================
+
+## 目標：從 `/dev/vdb` 中切割 1GB 的空間，並掛載在 `/archive` 目錄
+
+### 1、切割 1GB partition
+
+```bash
+# 從 /dev/vdb 中切割出 1GB 空間
+$ sudo fdisk /dev/vdb
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0x1825a331.
+
+Command (m for help): bn
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1):
+First sector (2048-20971519, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519): +1G
+Partition 1 of type Linux and of size 1 GiB is set
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+# 強制 kernel 重新讀取 partition Table
+$ sudo partprobe -s
+/dev/vda: msdos partitions 1
+/dev/vdb: msdos partitions 1
+
+$ cat /proc/partitions
+major minor  #blocks  name
+
+ 253        0   10485760 vda
+ 253        1   10484142 vda1
+ 253       16   10485760 vdb
+ 253       17    1048576 vdb1
+```
+
+### 2、格式化 partition
+
+```bash
+# 格式化 partition
+$ sudo mkfs.ext4 /dev/vdb1
+$ sudo blkid /dev/vdb1
+/dev/vdb1: UUID="200ad7d4-aeef-4ffc-ac27-25fbcef5d5b2" TYPE="ext4"
+```
+
+### 3、建立目錄並掛載
+
+```bash
+# 建立掛載目錄
+$ sudo mkdir /archive
+
+# 編輯 /etc/fstab 以達成永久掛載的目的
+$ echo "UUID=200ad7d4-aeef-4ffc-ac27-25fbcef5d5b2 /archive ext4 defaults 0 2" | sudo tee --append /etc/fstab
+$ sudo mount -a
+$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+......
+/dev/vdb1       976M  2.6M  907M   1% /archive
+$ mount
+.....
+/dev/vdb1 on /archive type ext4 (rw,relatime,seclabel,data=ordered)
+```
+
+--------------------------------------------------------------------
+
+9.2 Managing Swap Space
+=======================
 
 以下以切割 /dev/vdb 為例：
 
@@ -172,4 +251,207 @@ LABEL=EXT4  /EXT4   ext4  defaults    1   2
 
 - `sudo swapon -a`：檢查 `/etc/fstab` 中的 swap partition 設定並掛載
 
-- `swap -s`：檢視目前系統中 swap partition 的資訊以及使用優先權
+- `sudo swapon -s`：檢視目前系統中 swap partition 的資訊以及使用優先權
+
+--------------------------------------------------------------------
+
+Practice: Adding and Enabling Swap Space
+========================================
+
+## 目標：在第二個硬碟中切割出 500 MB 的空間作為 swap
+
+### 1、切割 500MB partition
+
+```bash
+$ sudo fdisk /dev/vdb
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0x7db6d48a.
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1):
+First sector (2048-20971519, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519): +500MB
+Partition 1 of type Linux and of size 500 MiB is set
+
+Command (m for help): t
+Selected partition 1
+Hex code (type L to list all codes): 82
+Changed type of partition 'Linux' to 'Linux swap / Solaris'
+
+Command (m for help): p
+
+Disk /dev/vdb: 10.7 GB, 10737418240 bytes, 20971520 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x7db6d48a
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/vdb1            2048     1026047      512000   82  Linux swap / Solaris
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+```
+
+### 2、格式化 partition
+
+```bash
+$ sudo mkswap /dev/vdb1
+Setting up swapspace version 1, size = 511996 KiB
+no label, UUID=ffb162b9-c1e6-4ce9-bde7-964b3ce9c43a
+```
+
+### 3、編輯 /etc/fstab 並掛載
+
+```bash
+$ sudo mkswap /dev/vdb1
+Setting up swapspace version 1, size = 511996 KiB
+no label, UUID=ffb162b9-c1e6-4ce9-bde7-964b3ce9c43a
+
+$ sudo blkid /dev/vdb1
+/dev/vdb1: UUID="ffb162b9-c1e6-4ce9-bde7-964b3ce9c43a" TYPE="swap"
+
+[student@desktop0 ~]$ echo "UUID=ffb162b9-c1e6-4ce9-bde7-964b3ce9c43a swap swap defaults 0 0" | sudo tee --append /etc/fstab
+UUID=ffb162b9-c1e6-4ce9-bde7-964b3ce9c43a swap swap defaults 0 0
+
+$ sudo mount -a
+$ sudo swapon /dev/vdb1
+$ sudo swapon -s
+Filename                                Type            Size    Used    Priority
+/dev/vdb1                               partition       511996  0       -1
+```
+
+--------------------------------------------------------------------
+
+Lab: Adding Disks, Partitions, and File Systems to a Linux System
+=================================================================
+
+## 目標：
+
+1. 在第二個硬碟中新增一個 2GB 的 XFS partition，並永久掛載於 /backup 目錄
+
+2. 在第二個硬碟中新增 512MB swap，擁有預設的 priority
+
+3. 在第二個硬碟中新增 512MB swap，priority 為 1
+
+### 1、建立三個 partition
+
+```bash
+$ sudo gdisk /dev/vdb
+Command (? for help): n
+Partition number (1-128, default 1):
+First sector (34-20971486, default = 2048) or {+-}size{KMGTP}:
+Last sector (2048-20971486, default = 20971486) or {+-}size{KMGTP}: +2G
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300):
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2):
+First sector (34-20971486, default = 4196352) or {+-}size{KMGTP}:
+Last sector (4196352-20971486, default = 20971486) or {+-}size{KMGTP}: +512M
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300): 8200
+Changed type of partition to 'Linux swap'
+
+Command (? for help): n
+Partition number (3-128, default 3):
+First sector (34-20971486, default = 5244928) or {+-}size{KMGTP}:
+Last sector (5244928-20971486, default = 20971486) or {+-}size{KMGTP}: +512M
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300): 8200
+Changed type of partition to 'Linux swap'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/vdb.
+The operation has completed successfully.
+```
+
+### 2、格式化硬碟
+
+```bash
+$ sudo partprobe -s
+/dev/vda: msdos partitions 1
+/dev/vdb: gpt partitions 1 2 3
+
+$ cat /proc/partitions
+major minor  #blocks  name
+
+ 253        0   10485760 vda
+ 253        1   10484142 vda1
+ 253       16   10485760 vdb
+ 253       17    2097152 vdb1
+ 253       18     524288 vdb2
+ 253       19     524288 vdb3
+
+ $ sudo mkfs.xfs /dev/vdb1
+meta-data=/dev/vdb1              isize=256    agcount=4, agsize=131072 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=0
+data     =                       bsize=4096   blocks=524288, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=0
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+
+$ sudo mkswap /dev/vdb2
+Setting up swapspace version 1, size = 524284 KiB
+no label, UUID=a875704a-d0ba-4542-98a6-f201f1b3a539
+
+$ sudo mkswap /dev/vdb3
+Setting up swapspace version 1, size = 524284 KiB
+no label, UUID=9a906cce-e50e-44ee-a880-b3811252e5e1
+
+$ sudo blkid
+/dev/vda1: UUID="9bf6b9f7-92ad-441b-848e-0257cbb883d1" TYPE="xfs"
+/dev/vdb1: UUID="796676d5-0e5c-4023-82e3-3417e8d00952" TYPE="xfs" PARTLABEL="Linux filesystem" PARTUUID="bf36a837-22e7-44c5-8c74-9d9fe8161aa3"
+/dev/vdb2: UUID="a875704a-d0ba-4542-98a6-f201f1b3a539" TYPE="swap" PARTLABEL="Linux swap" PARTUUID="794f5ef2-2fec-410d-a72d-9195ded90386"
+/dev/vdb3: UUID="9a906cce-e50e-44ee-a880-b3811252e5e1" TYPE="swap" PARTLABEL="Linux swap" PARTUUID="ff0fe2fa-a946-4d83-9290-4a0629767548"
+```
+
+### 3、建立目錄並掛載 partition
+
+```bash
+$ sudo mkdir /backup
+$ echo "UUID=796676d5-0e5c-4023-82e3-3417e8d00952 /backup xfs defaults 0 2" | sudo tee --append /etc/fstab
+
+$ echo "UUID=a875704a-d0ba-4542-98a6-f201f1b3a539 swap swap defaults 0 0" | sudo tee --append /etc/fstab
+
+$ echo "UUID=9a906cce-e50e-44ee-a880-b3811252e5e1 swap swap defaults 0 0" | sudo tee --append /etc/fstab
+
+$ sudo mount -a
+$ sudo swapon -a
+```
+
+### 4、驗證是否設定完成
+
+```bash
+$ sudo swapon -s
+Filename                                Type            Size    Used    Priority
+/dev/vdb2                               partition       524284  0       -1
+/dev/vdb3                               partition       524284  0       1
+
+$ sudo mount
+...
+/dev/vdb1 on /backup type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+```
