@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "[RHCE7] RH134 Chapter 13. Accessing Network Storage with Network File System (NFS) 學習筆記"
-description: "此文章記錄學習 RHCE7 RH134 Chapter 13. Accessing Network Storage with Network File System (NFS) 留下的內容"
+title:  "[RHCE7] RH134 Chapter 11. Accessing Network Storage with Network File System (NFS) 學習筆記"
+description: "此文章記錄學習 RHCE7 RH134 Chapter 11. Accessing Network Storage with Network File System (NFS) 留下的內容"
 date: 2016-05-13 04:45:00
 published: false
 comments: true
@@ -64,6 +64,58 @@ RHEL 7 預設會使用 NFSv4，若不支援才會往下降；NFSv4 使用 TCP，
 > 若要讓 NFS 可以向 Kerberos 進行驗證，也同時需要有 `nfs-secure` 服務(在 `nfs-utils` 套件中)
 
 > 使用 `klist` 可以查詢目前所擁有的 kerberos ticket
+
+-------------------------------------------------------------------------
+
+Practice: Mounting and Unmounting NFS
+=====================================
+
+##  目前已存在設定
+
+1. server1 分享 `/shares/manual` & `/shares/public` 兩個目錄
+
+2. desktop1 掛載點為 `/mnt/manual` & `/mnt/public`
+
+3. `public` 分享目錄需要使用 `krb5p` 認證，`manual` 分享目錄則是使用 `sys` 認證
+
+4. `krb5.keytab` 位置位於 `http://classroom.example.com/pub/keytabs/desktop1.keytab`
+
+## 實作過程
+
+1、取得 krb5.keytab
+
+```bash
+$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktop1.keytab
+$ ls -lZ /etc/krb5.keytab
+-rw-r--r--. root root unconfined_u:object_r:krb5_keytab_t:s0 /etc/krb5.keytab
+```
+
+2、啟動 `nfs-secure.service`
+
+```bash
+$ sudo systemctl enable nfs-secure.service
+ln -s '/usr/lib/systemd/system/nfs-secure.service' '/etc/systemd/system/nfs.target.wants/nfs-secure.service'
+[student@desktop0 ~]$ sudo systemctl restart nfs-secure.service
+```
+
+3、建立目錄並設定掛載資訊
+
+```bash
+$ echo "server1:/shares/public /mnt/public nfs sec=krb5p,sync 0 0" | sudo tee --append /etc/fstab
+
+$ echo "server1:/shares/manual /mnt/manual nfs sec=sys,sync 0 0" | sudo tee --append /etc/fstab
+
+$ sudo mount -a
+$ $ sudo df -hT
+Filesystem             Type      Size  Used Avail Use% Mounted on
+/dev/vda1              xfs        10G  3.1G  7.0G  31% /
+devtmpfs               devtmpfs  906M     0  906M   0% /dev
+tmpfs                  tmpfs     921M   80K  921M   1% /dev/shm
+tmpfs                  tmpfs     921M   17M  904M   2% /run
+tmpfs                  tmpfs     921M     0  921M   0% /sys/fs/cgroup
+server1:/shares/public nfs4       10G  3.1G  7.0G  31% /mnt/public
+server1:/shares/manual nfs4       10G  3.1G  7.0G  31% /mnt/manual
+```
 
 -------------------------------------------------------------------------
 
