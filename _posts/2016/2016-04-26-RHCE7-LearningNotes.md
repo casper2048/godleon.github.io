@@ -66,3 +66,10 @@ RHCE7 RH134
 - [Chapter 9. Adding Disks, Partitions, and File Systems to a Linux System](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-11-RHCE7-RH134-LearningNotes-CH09_AddingDisksPartitionAndFileSystemsToALinuxSystem.md)
 
 - [Chapter 10. Managing Logical Volume Management(LVM) Storage](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-12-RHCE7-RH134-LearningNotes-CH10_ManagingLogicalVolumeManagement%28LVM%29Storage.md)
+
+- [Chapter 11. Accessing Network Storage with Network File System (NFS)](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-13-RHCE7-RH134-LearningNotes-CH11_AccessingNetworkStorageWithNetworkFileSystem%28NFS%29.md)
+
+
+- [Chapter 12. Accessing Network Storage with SMB](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-13-RHCE7-RH134-LearningNotes-CH12_AccessingNetworkStorageWithSMB.md)
+
+- [Chapter 13. Controlling and Troubleshooting the RHEL Boot Process](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-14-RHCE7-RH134-LearningNotes-CH13_ControllingAndTroubleshootingTheRHELBootProcess.md)
