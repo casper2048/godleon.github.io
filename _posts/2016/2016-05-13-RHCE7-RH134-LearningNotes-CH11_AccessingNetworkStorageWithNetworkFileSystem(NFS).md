@@ -154,5 +154,104 @@ server1:/shares/manual nfs4       10G  3.1G  7.0G  31% /mnt/manual
 
 可用萬用字元
 
+## 掛載方式
+
+### 1、安裝套件
+
+首先要安裝 `autofs` 套件
+
+### 2、編輯 master-map 檔案
+
+master-map 檔案名稱必須是 `.autofs` 結尾，並存放於 `/etc/auto.master.d` 目錄中，以下舉例：
+
+```bash
+$ sudo cat /etc/auto.master.d/demo.autofs
+# indirect-map，並以 "/share" 目錄作為掛載目錄的基底，詳細設定檔內容位於 /etc/auto.demo 檔案中
+/shares   /etc/auto.demo
+# direct-map，以 "/-" 作為掛載基底，詳細設定檔內容位於 /etc/auto.direct 檔案中
+/-        /etc/auto.direct
+```
+
+### 3、設定 mapping 檔案
+
+mapping 檔案則是要撰寫詳細的設定內容：
+
+`/etc/auto.demo` indirect-map 設定檔內容：
+
+```bash
+# 使用本地目錄 /shares/work，掛載遠端目錄 serverX:/shares/work
+work  -rw,sync  serverX:/shares/work
+# 使用本地目錄 /shares，掛載遠端目錄 serverX:/shares 下的所有目錄(會一一取得對應)
+*     -rw,sync  serverX:/shares/&
+```
+
+> indirect-map 設定使用的是相對路徑的設計概念
+
+`/etc/auto.direct` direct-map 設定檔內容：
+
+```bash
+# 使用本地目錄 /mnt/docs，掛載遠端目錄 serverX:/shares/docs
+/mnt/docs   -rw,sync  serverX:/shares/docs
+```
+
+> 由此可看出 direct-map 就是很明確的指定完整路徑
+
+### 4、啟動 autofs 服務
+
+```bash
+$ sudo systemctl enable autofs
+
+$ sudo systemctl start autofs
+```
 
 ------------------------------------------------------------------------
+
+Practice: Automounting NFS
+==========================
+
+## 環境設定
+
+1. 遠端主機 `server1` 使用 NFS 分享了 `/shares/{docs,work,public}` 三個目錄
+
+2. 存取遠端主機必須使用 Kerberos 協定，使用的是 `krb5p`
+
+3. 本地主機 `desktop1` 使用 `/shares/{docs,work}` & `/mnt/public` 目錄進行掛載
+
+4. `krb5.keytab` 檔案可到 `http://classroom.example.com/pub/keytabs/desktop1.keytab` 下載
+
+5. 必須要設定成永久性掛載
+
+## 設定方式
+
+```bash
+# 安裝 autofs 套件
+$ sudo yum -y install autofs
+
+# 建立掛載用目錄
+$ sudo mkdir /shares
+
+# 取得 krb5.keytab
+$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktop0.keytab
+# 驗證 SElinux context 是否正確
+$ ls -lZ /etc/krb5.keytab
+-rw-r--r--. root root unconfined_u:object_r:krb5_keytab_t:s0 /etc/krb5.keytab
+
+# 編輯 master-map 檔案
+$ echo "/shares   /etc/autofs.indirect" | sudo tee --append /etc/auto.master.d/practice.autofs
+$ echo "/-   /etc/autofs.direct" | sudo tee --append /etc/auto.master.d/practice.autofs
+
+# 編輯 indrect-map 檔案
+$ echo "docs  -rx,sync,sec=krb5p  server1:/shares/docs" | sudo tee --append /etc/autofs.indirect
+$ echo "work  -rx,sync,sec=krb5p  server1:/shares/work" | sudo tee --append /etc/autofs.indirect
+
+# 編輯 direct-map 檔案
+$ echo "/mnt/public  -rx,sync,sec=krb5p  server1:/shares/public" | sudo tee --append /etc/autofs.direct
+
+# 啟動 nfs-secure 服務(為了進行 Kerberos 認證)
+$ sudo systemctl start nfs-secure.service
+$ sudo systemctl restart autofs.service
+
+# 啟動 autofs 服務
+$ sudo systemctl enable autofs.service
+$ sudo systemctl start autofs.service
+```
