@@ -255,3 +255,36 @@ $ sudo systemctl restart autofs.service
 $ sudo systemctl enable autofs.service
 $ sudo systemctl start autofs.service
 ```
+
+Lab: Accessing Network Storage with Network File System(NFS)
+============================================================
+
+## 目標
+
+1. `desktop1` 已經設定好 LDAP & Kerberos 認証，遠端主機為 `classroom.example.com`
+
+2. 遠端主機分享了 `ldapuserX` 所有的家目錄，分享路徑為 `/home/guests` 底下
+
+3. 掛載於本地端的 `/home/guests` 下
+
+4. ldapuserX 登入後會位於 `/home/guests/ldapuserX` 家目錄中
+
+## 實作過程
+
+```bash
+$ sudo mkdir /home/guests
+$ sudo yum -y install autofs
+
+# autofs 設定
+$ echo "/home/guests    /etc/autofs.indirect" | sudo tee --append /etc/auto.master.d/lab.autofs
+$ echo "*   -rw,sync    classroom.example.com:/home/guests/&" | sudo tee --append /etc/autofs.indirect
+
+# 啟用服務
+$ sudo systemctl enable autofs.service
+$ sudo systemctl restart autofs.service
+
+# 登入驗證
+$ ssh ldapuser1@localhost
+[ldapuser1@desktop1 ~]$ pwd
+/home/guests/ldapuser1
+```
