@@ -256,6 +256,8 @@ $ sudo systemctl enable autofs.service
 $ sudo systemctl start autofs.service
 ```
 
+------------------------------------------------------------------------
+
 Lab: Accessing Network Storage with Network File System(NFS)
 ============================================================
 
