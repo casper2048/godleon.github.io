@@ -10,7 +10,7 @@ tags: [Linux, RHCE, RH134]
 ---
 
 
-12. Accessing Network Storage with SMB
+12.1 Accessing Network Storage with SMB
 ======================================
 
 ## Manually mounting and unmouting SMB file systems
@@ -76,3 +76,36 @@ domain=[DomainName]
 ```
 
 5、啟動 autofs：`sudo systemctl enable autofs && sudo systemctl restart autofs`
+
+---------------------------------------------------------
+
+Practice: Mounting a SMB File System
+====================================
+
+## 目標
+
+1. 掛載遠端目錄 `//server1/student` 到本地端 `~/work` 中
+
+2. 連線帳號/密碼/Domain = student/student/MYGROUP
+
+3. 永久性掛載
+
+## 實作過程
+
+```bash
+$ sudo yum -y install cifs-utils
+
+$ sudo bash -c 'cat << EOF > /root/student.smb
+username=student
+password=student
+domain=MYGROUP
+EOF'
+
+$ mkdir ~/work
+$ echo "//server0/student  /home/student/work  cifs  credentials=/root/student.smb  0 0" | sudo tee --append /etc/fstab
+$ sudo mount -a
+
+# 驗證連線結果
+[student@desktop0 ~]$ df -hT | grep work
+//server0/student cifs       10G  3.1G  7.0G  31% /home/student/work
+```
