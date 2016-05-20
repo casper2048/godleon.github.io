@@ -11,7 +11,7 @@ tags: [Linux, RHCE, RH134]
 
 
 12.1 Accessing Network Storage with SMB
-======================================
+=======================================
 
 ## Manually mounting and unmouting SMB file systems
 
@@ -108,4 +108,59 @@ $ sudo mount -a
 # 驗證連線結果
 [student@desktop0 ~]$ df -hT | grep work
 //server0/student cifs       10G  3.1G  7.0G  31% /home/student/work
+```
+
+----------------------------------------------------------
+
+Lab: Accessing Network Storage with SMB
+=======================================
+
+## 目標
+
+### 環境
+
+1. 遠端主機：`server1`
+
+2. DOMAIN：`MYGROUP`
+
+3. 使用者帳號密碼：`student` / `student`
+
+### 需求
+
+1. 自動掛載遠端主機的 `student` 到本地端的家目錄 `/shares/work`
+
+2. 自動掛載遠端主機的 `public` 到本地端目錄 `/shares/docs` 公開分享的目錄，允許任何人存取，權限為 `read-only`
+
+3. 自動掛載遠端主機的 `/shares/cases` 到本地端目錄 `/shares/cases`，並限制只有 `bakerst`(GID=10221) 群組可以存取，權限為 `read-write`
+
+4. 要設定為永久性掛載(重開機之後要依然生效)
+
+## 實作過程
+
+```bash
+# 安裝套件
+$ sudo yum -y install cifs-utils autofs
+
+$ sudo bash -c 'cat << EOF > /root/student.smb
+username=student
+password=student
+domain=MYGROUP
+EOF'
+
+# 建立本地掛載目錄
+[student@desktop0 ~]$ sudo mkdir -p /shares/{work,docs,cases}
+
+# 設定 autofs
+[student@desktop0 ~]$ echo "/shares /etc/autofs.indirect" | sudo tee --append /etc/auto.master.d/smb.autofs
+[student@desktop0 ~]$ echo "work -fstype=cifs,credentials=/root/student.smb ://server0/student" | sudo tee --append /etc/autofs.indirect
+[student@desktop0 ~]$ echo "docs -fstype=cifs,guest ://server0/public" | sudo tee --append /etc/autofs.indirect
+[student@desktop0 ~]$ echo "cases -fstype=cifs,credentials=/root/student.smb ://server0/bakerst" | sudo tee --append /etc/autofs.indirect
+
+# 啟動 autofs 服務
+[student@desktop0 ~]$ sudo systemctl enable autofs.service
+[student@desktop0 ~]$ sudo systemctl start autofs.service
+
+# 建立 backerst 群組，並將 student 帳號加入
+[student@desktop0 ~]$ sudo groupadd -g 10221 bakerst
+[student@desktop0 ~]$ sudo usermod -aG bakerst student
 ```
