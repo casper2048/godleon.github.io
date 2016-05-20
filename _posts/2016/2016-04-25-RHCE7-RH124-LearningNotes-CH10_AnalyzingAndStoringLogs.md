@@ -198,3 +198,30 @@ $ tzselect
 加上 `iburst` 選項會讓網路校時更快，且更正確
 
 `sudo hwclock -w`：強制將時間資訊寫入硬體
+
+## 補充：設定 NTP 校時的完整步驟 (**很重要**)
+
+- NTP server：`classroom.example.com`
+
+```bash
+$ sudo timedatectl set-ntp true
+
+$ echo "server classroom.example.com iburst" | sudo tee --append /etc/chrony.conf
+$ sudo systemctl restart chronyd.service
+
+# 驗證設定結果
+$ chronyc sources -v
+210 Number of sources = 1
+
+  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
+ / .- Source state '*' = current synced, '+' = combined , '-' = not combined,
+| /   '?' = unreachable, 'x' = time may be in error, '~' = time too variable.
+||                                                 .- xxxx [ yyyy ] +/- zzzz
+||                                                /   xxxx = adjusted offset,
+||         Log2(Polling interval) -.             |    yyyy = measured offset,
+||                                  \            |    zzzz = estimated error.
+||                                   |           |                         
+MS Name/IP address         Stratum Poll Reach LastRx Last sample
+===============================================================================
+^* classroom.example.com         8   6    17    18  +2830us[+3050us] +/- 3509us
+```
