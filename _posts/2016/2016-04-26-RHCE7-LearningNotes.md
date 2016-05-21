@@ -73,3 +73,10 @@ RHCE7 RH134
 - [Chapter 12. Accessing Network Storage with SMB](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-13-RHCE7-RH134-LearningNotes-CH12_AccessingNetworkStorageWithSMB.md)
 
 - [Chapter 13. Controlling and Troubleshooting the RHEL Boot Process](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-14-RHCE7-RH134-LearningNotes-CH13_ControllingAndTroubleshootingTheRHELBootProcess.md)
+
+---------------------------------
+
+RHCE7 RH254
+===========
+
+- [Chapter 1 Controlling Services and Daemons](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-21-RHCE7-RH254-LearningNotes-CH01_ControllingServicesAndDaemons.md)
