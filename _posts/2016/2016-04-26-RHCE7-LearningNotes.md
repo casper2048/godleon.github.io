@@ -9,8 +9,8 @@ categories: [Linux]
 tags: [Linux, RHCE]
 ---
 
-RHEL7 RH124
-===========
+RH124
+=====
 
 - [Introduction](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-02-17-RHCE7-RH124-LearningNotes-CH01_03.md#intro)
 
@@ -44,8 +44,8 @@ RHEL7 RH124
 
 ---------------------------------
 
-RHCE7 RH134
-===========
+RH134
+=====
 
 - [Chapter 1. Automating Installation with Kickstart](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-04-29-RHCE7-RH134-LearningNotes-CH01_AutomatingInstallationWithKickstart.md)
 
@@ -76,7 +76,9 @@ RHCE7 RH134
 
 ---------------------------------
 
-RHCE7 RH254
-===========
+RH254
+=====
 
-- [Chapter 1 Controlling Services and Daemons](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-21-RHCE7-RH254-LearningNotes-CH01_ControllingServicesAndDaemons.md)
+- [Chapter 1. Controlling Services and Daemons](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-21-RHCE7-RH254-LearningNotes-CH01_ControllingServicesAndDaemons.md)
+
+- [Chapter 2. Managing IPv6 Networking](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-24-RHCE7-RH254-LearningNotes-CH02_ManagingIPv6Networking.md)
