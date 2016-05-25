@@ -82,3 +82,5 @@ RH254
 - [Chapter 1. Controlling Services and Daemons](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-21-RHCE7-RH254-LearningNotes-CH01_ControllingServicesAndDaemons.md)
 
 - [Chapter 2. Managing IPv6 Networking](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-24-RHCE7-RH254-LearningNotes-CH02_ManagingIPv6Networking.md)
+
+- [Chapter 3. Configuring Link Aggregation And Bridging](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-25-RHCE7-RH254-LearningNotes-CH03_ConfiguringLinkAggregationAndBridging.md)
