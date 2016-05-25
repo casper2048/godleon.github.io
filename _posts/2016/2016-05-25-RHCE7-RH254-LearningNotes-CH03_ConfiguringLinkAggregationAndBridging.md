@@ -238,7 +238,7 @@ Practice: Managing Network Teaming
 
 2. 將 runner 從 `activebackup` 改為 `roundrobin`
 
-## 實作方式
+## 實作過程
 
 ```bash
 # 匯出 network teaming interface 設定檔
@@ -374,7 +374,7 @@ Practice: Configuring Software Bridges
 
 2. 設定 static ip 為 `192.168.0.100/24`
 
-## 實作步驟
+## 實作過程
 
 ```bash
 $ sudo nmcli connection add con-name br1 type bridge ifname br1 ip4 192.168.0.100/24
@@ -419,7 +419,7 @@ Lab: Configuration Link Aggregation and Bridging
 
 2. 建立一個 bridge `brteam0`，連接步驟一設定好的 team0，並設定 IP 為 `192.168.0.100/24`
 
-### 實作步驟
+### 實作過程
 
 設定 network teaming interface：
 
