@@ -84,3 +84,7 @@ RH254
 - [Chapter 2. Managing IPv6 Networking](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-24-RHCE7-RH254-LearningNotes-CH02_ManagingIPv6Networking.md)
 
 - [Chapter 3. Configuring Link Aggregation And Bridging](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-25-RHCE7-RH254-LearningNotes-CH03_ConfiguringLinkAggregationAndBridging.md)
+
+- [Chapter 4. Network Port Security](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-29-RHCE7-RH254-LearningNotes-CH04_NetworkPortSecurity.md)
+
+- [Chapter 6. Configuring Email Transmission](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-29-RHCE7-RH254-LearningNotes-CH06_ConfiguringEmailTransmission.md)
