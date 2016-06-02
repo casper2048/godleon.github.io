@@ -3,7 +3,7 @@ layout: post
 title:  "[Linux] 如何加速 X11 Forwarding"
 description: "此文章介紹如何透過修改 ssh 連線加密演算法，來達到加速 X11 Forwarding 的效果"
 date: 2016-06-02 08:30:00
-published: false
+published: true
 comments: true
 categories: [linux]
 tags: [Linux, Ubuntu]
