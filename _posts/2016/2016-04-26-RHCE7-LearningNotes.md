@@ -88,3 +88,9 @@ RH254
 - [Chapter 4. Network Port Security](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-29-RHCE7-RH254-LearningNotes-CH04_NetworkPortSecurity.md)
 
 - [Chapter 6. Configuring Email Transmission](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-29-RHCE7-RH254-LearningNotes-CH06_ConfiguringEmailTransmission.md)
+
+- [Chapter 7. Providing Remote Block Storage](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-05-31-RHCE7-RH254-LearningNotes-CH07_ProvidingRemoteBlockStorage.md)
+
+- [Chapter 8. Providing File-Based Storage](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-06-03-RHCE7-RH254-LearningNotes-CH08_ProvidingFileBasedStorage.md)
+
+- [Chapter 9. Configuring MariaDB Databases](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-06-05-RHCE7-RH254-LearningNotes-CH09_ConfiguringMariaDBDatabases.md)
