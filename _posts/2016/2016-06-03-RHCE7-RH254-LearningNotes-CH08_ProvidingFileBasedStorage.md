@@ -94,14 +94,14 @@ $ sudo systemctl restart nfs-server.service
 ```bash
 # 掛載 remote NFS share folder
 $ sudo mkdir /mnt/nfsshare
-$ echo "server0:/nfsshare /mnt/nfsshare nfs defaults 0 0" | sudo tee --append /etc/fstab
+$ echo "serverX:/nfsshare /mnt/nfsshare nfs defaults 0 0" | sudo tee --append /etc/fstab
 $ sudo mount -a
 
 # 查詢目前掛載狀況
 $ sudo df -h
 Filesystem         Size  Used Avail Use% Mounted on
 ......
-server0:/nfsshare   10G  3.1G  7.0G  31% /mnt/nfsshare
+serverX:/nfsshare   10G  3.1G  7.0G  31% /mnt/nfsshare
 
 # 驗證
 $ echo "Hello NFS" | sudo tee /mnt/nfsshare/123
@@ -141,7 +141,7 @@ Hello NFS
 
 ```bash
 # 取得 krb5.keytab 檔案，並確認 SELinux context type
-$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/server0.keytab
+$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/serverX.keytab
 $ ls -lZ /etc/krb5.keytab
 -rw-r--r--. root root unconfined_u:object_r:krb5_keytab_t:s0 /etc/krb5.keytab
 
@@ -158,8 +158,8 @@ nfs-secure-server.service - Secure NFS Server
    CGroup: /system.slice/nfs-secure-server.service
            └─1904 /usr/sbin/rpc.svcgssd
 
-Jun 01 05:06:44 server0.example.com systemd[1]: Starting Secure NFS Server...
-Jun 01 05:06:44 server0.example.com systemd[1]: Started Secure NFS Server.
+Jun 01 05:06:44 serverX.example.com systemd[1]: Starting Secure NFS Server...
+Jun 01 05:06:44 serverX.example.com systemd[1]: Started Secure NFS Server.
 
 # 設定 NFS share
 $ sudo mkdir /securedexport
@@ -175,7 +175,7 @@ $ sudo firewall-cmd --reload
 
 ```bash
 # 取得 krb5.keytab 檔案，並確認 SELinux context type
-$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktop0.keytab
+$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktopX.keytab
 $ ls -lZ /etc/krb5.keytab
 -rw-r--r--. root root unconfined_u:object_r:krb5_keytab_t:s0 /etc/krb5.keytab
 
@@ -195,11 +195,11 @@ nfs-secure.service - Secure NFS
    CGroup: /system.slice/nfs-secure.service
            └─1978 /usr/sbin/rpc.gssd
 
-Jun 01 05:16:18 desktop0.example.com systemd[1]: Started Secure NFS.
+Jun 01 05:16:18 desktopX.example.com systemd[1]: Started Secure NFS.
 
 # 建立目錄並掛載 NFS remote shared folder
 $ sudo mkdir /mnt/securedexport
-$ sudo mount -o sec=krb5 server0:/securedexport /mnt/securedexport
+$ sudo mount -o sec=krb5 serverX:/securedexport /mnt/securedexport
 ```
 
 ## 8.2.3 SELinux and labeled NFS
@@ -259,7 +259,7 @@ Practice：Protecting NFS Exports (很重要)
 1、取得 krb5 keytab
 
 ```bash
-$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/server0.keytab
+$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/serverX.keytab
 
 # 確認 SELinux context type
 $ ls -Z /etc/krb5.keytab
@@ -283,9 +283,9 @@ $ sudo systemctl restart nfs-secure-server.service
 
 ```bash
 $ sudo mkdir /securenfs
-$ echo "/securenfs  desktop0(sec=krb5p,rw)" | sudo tee --append /etc/exports
+$ echo "/securenfs  desktopX(sec=krb5p,rw)" | sudo tee --append /etc/exports
 $ sudo exportfs -rv
-exporting desktop0.example.com:/securenfs
+exporting desktopX.example.com:/securenfs
 
 # 設定防火牆
 $ sudo firewall-cmd --permanent --add-service=nfs
@@ -297,7 +297,7 @@ $ sudo firewall-cmd --reload
 1、取得 krb5 keytab
 
 ```bash
-$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktop0.keytab
+$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktopX.keytab
 
 # 確認 SELinux context type
 $ ls -Z /etc/krb5.keytab
@@ -317,7 +317,7 @@ $ sudo systemctl restart nfs-secure.service
 
 ```bash
 $ sudo mkdir /mnt/secureshare
-$ echo "server0:/securenfs  /mnt/secureshare  nfs  defaults,v4.2,sec=krb5p  0  0" | sudo tee --append /etc/fstab
+$ echo "serverX:/securenfs  /mnt/secureshare  nfs  defaults,v4.2,sec=krb5p  0  0" | sudo tee --append /etc/fstab
 $ sudo mount -a
 ```
 
@@ -572,16 +572,16 @@ password=redhat
 EOF'
 
 # 設定掛載
-$ echo "//server0/smbshare  /mnt/brian  cifs  credentials=/root/brian.smb  0  0" | sudo tee --append /etc/fstab
-$ echo "//server0/smbshare  /mnt/rob  cifs  credentials=/root/rob.smb  0  0" | sudo tee --append /etc/fstab
+$ echo "//serverX/smbshare  /mnt/brian  cifs  credentials=/root/brian.smb  0  0" | sudo tee --append /etc/fstab
+$ echo "//serverX/smbshare  /mnt/rob  cifs  credentials=/root/rob.smb  0  0" | sudo tee --append /etc/fstab
 $ sudo mount -a
 
 # 驗證
 $ sudo df -h
 Filesystem          Size  Used Avail Use% Mounted on
 ......
-//server0/smbshare   10G  3.1G  7.0G  31% /mnt/brian
-//server0/smbshare   10G  3.1G  7.0G  31% /mnt/rob
+//serverX/smbshare   10G  3.1G  7.0G  31% /mnt/brian
+//serverX/smbshare   10G  3.1G  7.0G  31% /mnt/rob
 
 # brian 的目錄可以寫入資料
 $ sudo touch /mnt/brian/123
@@ -637,11 +637,11 @@ Practice: Performing a Multiuser SMB Mount
 
 ## 目標
 
-- desktop0 永久掛載 `//server0/smbshare` 到 `/mnt/multiuser` 目錄下，**以 multiple user 的型式掛載**
+- desktopX 永久掛載 `//serverX/smbshare` 到 `/mnt/multiuser` 目錄下，**以 multiple user 的型式掛載**
 
 - 建立 `/root/smb-multiuser.txt` 作為 samba credential 檔案，帳號 = `brian`，密碼 = `redhat`
 
-- 在 server0 中有另一個 samba user `rob`(密碼為 `redhat`) 存在，在 desktop0 中也有相對應的 system user，驗證 rob 僅有 read-only 的權限
+- 在 serverX 中有另一個 samba user `rob`(密碼為 `redhat`) 存在，在 desktopX 中也有相對應的 system user，驗證 rob 僅有 read-only 的權限
 
 ## 實作過程
 
@@ -654,36 +654,36 @@ password=redhat
 EOF'
 
 [student@desktopX ~]$ sudo mkdir /mnt/multiuser
-[student@desktopX ~]$ echo "//server0/smbshare  /mnt/multiuser  cifs  credentials=/root/smb-multiuser.txt,multiuser,sec=ntlmssp  0  0" | sudo tee --append /etc/fstab
+[student@desktopX ~]$ echo "//serverX/smbshare  /mnt/multiuser  cifs  credentials=/root/smb-multiuser.txt,multiuser,sec=ntlmssp  0  0" | sudo tee --append /etc/fstab
 [student@desktopX ~]$ sudo mount -a
 [student@desktopX ~]$ sudo df -h
 Filesystem          Size  Used Avail Use% Mounted on
 .....
-//server0/smbshare   10G  3.1G  7.0G  31% /mnt/multiuser
+//serverX/smbshare   10G  3.1G  7.0G  31% /mnt/multiuser
 
 # 切換到使用者 brian 做測試
 $ su - brian
 Password: redhat
 
-[brian@desktop0 ~]$ cifscreds add server0
+[brian@desktopX ~]$ cifscreds add serverX
 Password: redhat
 
-[brian@desktop0 ~]$ echo "Hello World" > /mnt/multiuser/brian.txt
-[brian@desktop0 ~]$ cat /mnt/multiuser/brian.txt
+[brian@desktopX ~]$ echo "Hello World" > /mnt/multiuser/brian.txt
+[brian@desktopX ~]$ cat /mnt/multiuser/brian.txt
 Hello World
 
 # 切換到使用者 rob 做測試
 $ su - rob
 Password: redhat
 
-[rob@desktop0 ~]$ cifscreds add server0
+[rob@desktopX ~]$ cifscreds add serverX
 Password: redhat
 
 # 僅有 read-only 權限
-[rob@desktop0 ~]$ echo "Hello World" > /mnt/multiuser/rob.txt
+[rob@desktopX ~]$ echo "Hello World" > /mnt/multiuser/rob.txt
 -bash: /mnt/multiuser/rob.txt: Permission denied
 
-[rob@desktop0 ~]$ cat /mnt/multiuser/brian.txt
+[rob@desktopX ~]$ cat /mnt/multiuser/brian.txt
 Hello World
 ```
 
@@ -698,11 +698,11 @@ Lab: Providing File-Based Storage
 
 1. 在 serverX 上設定 NFS 分享服務，分享 `/krbnfs` 目錄，並搭配 `krb5p` 安全性認証 & SELinux Label
 
-2. Kerberos Keytab 檔案分別在 `http://classroom.example.com/pub/keytabs/server0.keytab` & `http://classroom.example.com/pub/keytabs/desktop0.keytab`
+2. Kerberos Keytab 檔案分別在 `http://classroom.example.com/pub/keytabs/serverX.keytab` & `http://classroom.example.com/pub/keytabs/desktopX.keytab`
 
 3. 允許 `desktopX` 對 NFS 分享進行 `read-write` 的存取
 
-4. desktop0 掛載 NFS 分享在本地端的 `/mnt/securespace` 目錄
+4. desktopX 掛載 NFS 分享在本地端的 `/mnt/securespace` 目錄
 
 ### Samba share
 
@@ -716,7 +716,7 @@ Lab: Providing File-Based Storage
 
 5. 建立一個 samba-only 的使用者 `martin`，不屬於 `sales` 群組，密碼為 `redhat`
 
-6. 在 desktop0 的本地目錄 `/mnt/salesshare` 上，以 `multiuser` 的模式掛載 samba 分享
+6. 在 desktopX 的本地目錄 `/mnt/salesshare` 上，以 `multiuser` 的模式掛載 samba 分享
 
 7. 掛載使用 `/root/smb-multiuser.txt` 認証檔，並搭配使用者 `frank` 的身份
 
@@ -728,7 +728,7 @@ Lab: Providing File-Based Storage
 
 ```bash
 # 取得 kerberos keytab & 確認 SELinux context type
-$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/server0.keytab
+$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/serverX.keytab
 $ ls -Z /etc/krb5.keytab
 -rw-r--r--. root root unconfined_u:object_r:krb5_keytab_t:s0 /etc/krb5.keytab
 
@@ -741,7 +741,7 @@ $ sudo systemctl restart nfs-secure-server.service nfs-server.service
 
 # 分享 NFS 目錄
 $ sudo mkdir /krbnfs
-$ echo "/krbnfs  desktop0(sec=krb5p,rw)" | sudo tee --append /etc/exports
+$ echo "/krbnfs  desktopX(sec=krb5p,rw)" | sudo tee --append /etc/exports
 $ sudo exportfs -rv
 
 # 開啟防火牆 for NFS
@@ -753,7 +753,7 @@ $ sudo firewall-cmd --reload
 
 ```bash
 # 取得 kerberos keytab & 確認 SELinux context type
-$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktop0.keytab
+$ sudo wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktopX.keytab
 $ ls -Z /etc/krb5.keytab
 -rw-r--r--. root root unconfined_u:object_r:krb5_keytab_t:s0 /etc/krb5.keytab
 
@@ -767,12 +767,12 @@ $ sudo systemctl status nfs-secure.service
 
 # 掛載 & 驗證
 $ sudo mkdir /mnt/securespace
-$ echo "server0:/krbnfs  /mnt/securespace  nfs  defaults,v4.2,sec=krb5p  0  0" | sudo tee --append /etc/fstab
+$ echo "serverX:/krbnfs  /mnt/securespace  nfs  defaults,v4.2,sec=krb5p  0  0" | sudo tee --append /etc/fstab
 $ sudo mount -a
 $ sudo df -h
 Filesystem       Size  Used Avail Use% Mounted on
 ....
-server0:/krbnfs   10G  3.1G  7.0G  31% /mnt/securespace
+serverX:/krbnfs   10G  3.1G  7.0G  31% /mnt/securespace
 ```
 
 ### Samba share
@@ -853,13 +853,13 @@ EOF'
 
 # 設定掛載目錄
 $ sudo mkdir /mnt/salesshare
-$ echo "//server0/smbspace  /mnt/salesshare  cifs  credentials=/root/smb-multiuser.txt,multiuser,sec=ntlmssp  0  0" | sudo tee --append /etc/fstab
+$ echo "//serverX/smbspace  /mnt/salesshare  cifs  credentials=/root/smb-multiuser.txt,multiuser,sec=ntlmssp  0  0" | sudo tee --append /etc/fstab
 $ sudo mount -a
 $ sudo df -h
 Filesystem          Size  Used Avail Use% Mounted on
 ....
-server0:/krbnfs      10G  3.1G  7.0G  31% /mnt/securespace
-//server0/smbspace   10G  3.1G  7.0G  31% /mnt/salesshare
+serverX:/krbnfs      10G  3.1G  7.0G  31% /mnt/securespace
+//serverX/smbspace   10G  3.1G  7.0G  31% /mnt/salesshare
 
 # 驗證
 $ sudo groupadd sales
@@ -869,20 +869,20 @@ $ echo "frank:redhat" | sudo chpasswd
 $ echo "martin:redhat" | sudo chpasswd
 $ su - frank
 Password: redhat
-$ cifscreds add server0
+$ cifscreds add serverX
 Password: redhat
-[frank@desktop0 ~]$ echo "Hello I am Frank" > /mnt/salesshare/frank.txt
-[frank@desktop0 ~]$ cat /mnt/salesshare/frank.txt
+[frank@desktopX ~]$ echo "Hello I am Frank" > /mnt/salesshare/frank.txt
+[frank@desktopX ~]$ cat /mnt/salesshare/frank.txt
 Hello I am Frank
-[frank@desktop0 ~]$ exit
+[frank@desktopX ~]$ exit
 logout
 $ su - martin
 Password: redhat
-[martin@desktop0 ~]$ cifscreds add server0
+[martin@desktopX ~]$ cifscreds add serverX
 Password: redhat
-[martin@desktop0 ~]$ echo "Hello I am Martin" > /mnt/salesshare/martin.txt
+[martin@desktopX ~]$ echo "Hello I am Martin" > /mnt/salesshare/martin.txt
 -bash: /mnt/salesshare/martin.txt: Permission denied
-[martin@desktop0 ~]$ cat /mnt/salesshare/frank.txt
+[martin@desktopX ~]$ cat /mnt/salesshare/frank.txt
 Hello I am Frank
 ```
 
