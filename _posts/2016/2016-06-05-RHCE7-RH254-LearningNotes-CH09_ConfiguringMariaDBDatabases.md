@@ -155,7 +155,7 @@ Bye
 
 # 還原資料庫
 $ mysql -u root inventory < /home/student/inventory.dump
-[student@server0 ~]$ mysql -u root
+[student@serverX ~]$ mysql -u root
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 9
 Server version: 5.5.35-MariaDB MariaDB Server
@@ -237,7 +237,7 @@ Query OK, 1 row affected (0.00 sec)
 
 MariaDB [(none)]> exit
 Bye
-[student@server0 ~]$ mysql -u root legacy < /home/student/mariadb.dump
+[student@serverX ~]$ mysql -u root legacy < /home/student/mariadb.dump
 
 # 設定使用者存取資料庫相關權限 (注意! 一定要先 CREATE USER!)
 $ mysql -u root
