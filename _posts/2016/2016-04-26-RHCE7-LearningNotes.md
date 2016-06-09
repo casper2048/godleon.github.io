@@ -94,3 +94,7 @@ RH254
 - [Chapter 8. Providing File-Based Storage](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-06-03-RHCE7-RH254-LearningNotes-CH08_ProvidingFileBasedStorage.md)
 
 - [Chapter 9. Configuring MariaDB Databases](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-06-05-RHCE7-RH254-LearningNotes-CH09_ConfiguringMariaDBDatabases.md)
+
+- [Chapter 10. Providing Apache HTTPD Web Service](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-06-07-RHCE7-RH254-LearningNotes-CH10_ProvidingApacheHttpdWebService.md)
+
+- [Chapter 11. Writing Bash Scripts](https://github.com/godleon/godleon.github.io/blob/master/_posts/2016/2016-06-08-RHCE7-RH254-LearningNotes-CH11_WritingBashScripts.md)
