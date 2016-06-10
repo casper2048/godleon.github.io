@@ -416,6 +416,8 @@ $ sudo restorecon -vvFR /sharedpath
   - `desktopX.example.com`
   - `.example.com` (指定 domain)
 
+- `hostname lookups = yes`：加上此設定才有辦法進行 domain name 的反查來進行 domain 相關的限制
+
 #### file share sections
 
 samba 可以一次設定多個檔案分享的 section，以下是比較重要的設定參數：
