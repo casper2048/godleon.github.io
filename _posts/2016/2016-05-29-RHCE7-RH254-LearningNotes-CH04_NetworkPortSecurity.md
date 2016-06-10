@@ -381,7 +381,7 @@ $ sudo systemctl start httpd.service
 $ curl http://localhost
 NEW HTTP
 
-[root@server ~]# firewall-cmd --permanent --add-rich-rule='rule family=ipv4 source address=172.25.0.10/32 service name="http" log level=notice prefix="NEW HTTP " lim it value="3/s" accept'
+[root@server ~]# firewall-cmd --permanent --add-rich-rule='rule family=ipv4 source address=172.25.0.10/32 service name="http" log level=notice prefix="NEW HTTP " limit value="3/s" accept'
 [root@server ~]# firewall-cmd --reload
 
 ###### dekstop 連入一次 ######
