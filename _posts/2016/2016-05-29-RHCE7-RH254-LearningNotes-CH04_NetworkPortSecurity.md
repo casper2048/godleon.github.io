@@ -417,7 +417,7 @@ firewalld 也支援了 `masquerading`(**SNAT**, 稍有差異) & `port forwarding
 
 設定 port forwarding 的語法如下：
 
-> firewall-cmd --permanent --zone=<ZONE> --add-forward-port=port=<PORT NUMBER>:proto=<PROTOCOL>[:toport=<PORTNUMBER>] [:toaddr=<IPADDR>]
+> firewall-cmd --permanent --zone=\<ZONE\> --add-forward-port=port=\<PORT NUMBER\>:proto=\<PROTOCOL\>[:toport=\<PORTNUMBER\>] [:toaddr=\<IPADDR\>]
 
 ```bash
 # 在 zone "public" 中，將到達 tcp:513 的流量導向 192.168.0.254:132
