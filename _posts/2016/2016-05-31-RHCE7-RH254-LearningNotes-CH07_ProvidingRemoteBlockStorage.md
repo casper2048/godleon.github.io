@@ -415,9 +415,9 @@ node.discovery_port = 3260
 ```bash
 $ echo "InitiatorName=iqn.2016-05.com.example.desktop0" | sudo tee /etc/iscsi/initiatorname.iscsi
 
-# 重新啟動 iscsi.service
-$ sudo systemctl enable iscsi.service
-$ sudo systemctl restart iscsi.service
+# 重新啟動 iscsid.service
+$ sudo systemctl enable iscsid.service
+$ sudo systemctl restart iscsid.service
 ```
 
 與 iSCSI target 互動：
@@ -583,7 +583,7 @@ total 0
 $ sudo systemctl restart iscsi.service
 ```
 
-> 若要設定在 `/etc/fstab`，可加入設定 `/dev/sda  /mnt  ext4  -netdev  0 0` (使用 `-netdev` 會確保網路通了之後才會掛載 remote disk)
+> 若要設定在 `/etc/fstab`，可加入設定 `/dev/sda  /mnt  ext4  _netdev  0 0` (使用 `_netdev` 會確保網路通了之後才會掛載 remote disk)
 
 -----------------------------------------------
 
