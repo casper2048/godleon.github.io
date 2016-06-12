@@ -415,9 +415,9 @@ node.discovery_port = 3260
 ```bash
 $ echo "InitiatorName=iqn.2016-05.com.example.desktop0" | sudo tee /etc/iscsi/initiatorname.iscsi
 
-# 重新啟動 iscsid.service
-$ sudo systemctl enable iscsid.service
-$ sudo systemctl restart iscsid.service
+# 重新啟動 iscsi.service & iscsid.service
+$ sudo systemctl enable iscsi.service iscsid.service
+$ sudo systemctl restart iscsi.service iscsid.service
 ```
 
 與 iSCSI target 互動：
