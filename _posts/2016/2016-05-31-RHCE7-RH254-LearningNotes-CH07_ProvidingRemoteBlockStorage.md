@@ -698,5 +698,8 @@ $ echo "UUID=fff253e8-2ee6-47e4-91d8-cd0fe521731d   /iscsidisk  xfs  _netdev  0 
 $ sudo mount -a
 echo "Hello iSCSI remote disk" | sudo tee /iscsidisk/123
 
+# 指定開機過程先 login iSCSI target
+$ echo "iscsiadm -m node -T iqn.2014-06.com.example.server0 -l" | sudo tee --append /etc/rc.local
+
 # 重開機後確認檔案是否存在
 ```
