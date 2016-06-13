@@ -9,6 +9,78 @@ categories: [linux]
 tags: [Linux, RHCE, RH254]
 ---
 
+老師補充
+=======
+
+### 設定網路卡以舊的方式呈現(eth0, eth1...)
+
+1. 編輯 `/boot/grub2/grub.cfg`
+
+2. 尋找 kernel 參數列：尋找 `linux16` 開頭的設定
+
+3. 加上參數 `biosdevname=0 net.ifnames=0`，重開機後即完成
+
+### ip 指令可達成的功能
+
+- 不考慮 network namespace 的前提下，Linux kernel 有 256 個 routing table
+
+- 設定 tc(traffic control) 的功能
+
+- `ip route show`：可查詢 default gateway
+
+- 查詢 network namespace：`ip netns show`
+
+- 切換到指定的 network namespace(**hidden**)：`ip exec netns hidden bash`
+
+### nmcli
+
+- 沒有加上 ip 資訊則表示設定為 DHCP：`nmcli connection add con-name office type ethernet ifname eth1`
+
+- 把跟 eth1 相關的 connection 全部停掉：`nmcli device disconnect eth1`
+
+- 把 DHCP 改為 static 的示範：`nmcli connection modify office ipv4.method manual ipv4.addresses "192.168.0.1/24 192.168.0.254"`
+
+### IPV6
+
+- `::1/128`：等同於 ipv4 的 **127.0.0.1/8**
+
+- `::`：等同於 ipv4 的 **0.0.0.0**(for listen port check)
+
+- `::/0`：default gateway ipv4 的 **0.0.0.0/0**
+
+- `2000::/3`：`2000::/16` ~ `3ffff::/16`：為 ipv6 的 public ip
+
+- `fd00::/8`：ipv6 所使用的 private ip
+
+- `fe80::/64`：link local address，沒有 DHCP service 的時候會用這一段的 ip(避免 ip 衝突，Linux 會把 MAC address 嵌入到 ip 內)
+
+- `ff00::/8`：作為 multicast 之用，等同 ipv4 的 **224.0.0.0/4**
+
+- 顯示 ipv6 address：`ip -6 addr show`
+
+- 顯示 ipv6 routing table：`ip -6 route show`
+
+- 指定網卡 ping 其他 ipv6 ip(**%** 之後帶網卡名稱)：`ping6 ff02:;1%eth0`
+
+- 持續監控傳遞延遲時間：`mtr 8.8.8.8`
+
+### 其他
+
+- 參數補齊功能要安裝 `bash-completion` 套件才會有
+
+- 查詢 hostname 對應的 ip：`dig server0.example.com`
+
+- 查詢 ip 對應的 hostname：`dig -x 172.25.0.11`
+  - client 向 DHCP 要求 ip
+  - client 取得 ip
+  - client 拿 ip 向 DNS server 作反向名稱解析
+  - DNS server 給 client 對應的 hostname
+  - client 使用上一個步驟給的 hostname 作為自己的 hostname
+
+> 透過 DHCP 取得 ip 的狀況下不會有 `/etc/hostname` 這個檔案
+
+----------------------------------------------------
+
 2.1 Reviewing of IPv4 Networking Configuration
 ==============================================
 
@@ -128,6 +200,12 @@ PING otherhost (192.168.0.254) 56(84) bytes of data.
 --- otherhost ping statistics ---
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 0.055/0.055/0.055/0.000 ms
+
+# 顯示目前有那些額外的 network namespace
+$ ip netns show
+hidden
+# 切換到指定的 network namespace
+$ ip exec netns hidden bash
 ```
 
 ----------------------------------------------------
@@ -204,7 +282,6 @@ DHCP client 會從自己的 link-local address 送出 DHCP request 到 all-dhcp-
 ### SLAAC configuration
 
 這是另一種透過 router 協助來完成位址配發的技術，詳細的資訊可以參考下列網址：
-
 
 - [2012台網中心電子報─IPv6位址配發技術介紹](http://www.myhome.net.tw/2012_09/p03.htm)
 
