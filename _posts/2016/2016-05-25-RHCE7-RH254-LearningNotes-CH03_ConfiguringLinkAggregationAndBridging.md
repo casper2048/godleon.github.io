@@ -9,6 +9,27 @@ categories: [linux]
 tags: [Linux, RHCE, RH254]
 ---
 
+老師補充
+=======
+
+### runner
+
+- **activebackup**：同時間只有一張網卡提供服務
+
+- **roundrobin**：outbound 頻寬可以合併，但 inbound 無法
+
+- **broadcast**：封包往外送時，會往每張網卡都各送一份
+
+- **loadbalance**：以 client ip 作 hash 後決定用哪個網卡提供網路服務
+
+- **lacp**：進出都有 load balance
+
+### teaming
+
+透過 nmcli 修改 runner：`nmcli connection modify team0 team.config '{"runner": {"name": "activebackup"}}'`
+
+-------------------------------------------------------
+
 3.1 Configuring Network Teaming
 ===============================
 
@@ -19,6 +40,8 @@ Network Teaming 的用途是將兩個實體的網路卡結合成一張邏輯上�
 RHEL 7 中有一個 kernel driver(負責有效率的處理網路封包) 以及稱為 `teamd`(負責管理 interface) 的 user-space daemon 來負責實現 network teaming 的功能；其中還有稱為 `runner` 的軟體用來處理網路封包在多條實體網路間配送的問題。
 
 RHEL 7 中以下支援五種 runner，分別是 `broadcast`、`roundrobin`、`activebackup`、`loadbalance`、`lacp`，其中以 **lacp** 的效率最好，但網路卡所連接的 switch 也要做相對應的設定才可以。
+
+> bonding 消耗的資源比 teaming 還多，因此建議使用 teaming
 
 ## 3.1.2 Configuring network teams
 
@@ -144,8 +167,8 @@ runner:
         "sticky": true, /* eno1 掛了會切到 eno2, eno1 回復後會再度主動切回 eno1(以 eno1 為優先使用的 NIC) */
             "link_watch": {
                 "name": "arp_ping", /* 比 ethtool 準確 */
-                "interval": 100,
-                "missed_max": 30,
+                "interval": 100, /* 100ms ping 一次 */
+                "missed_max": 30, /* 掉封包超過 30 個以上 */
                 "source_host": "192.168.23.2",  /* 需要給 ip 做檢測 */
                 "target_host": "192.168.23.1"
             }
@@ -224,7 +247,7 @@ runner:
   active port: eno2
 
 # 以 json 格式匯出 network teaming interface 的設定
-$ sudo teamdctl team0 config dump
+$ sudo teamdctl team0 config dump > /tmp/team0.json
 ```
 
 -------------------------------------------------------
