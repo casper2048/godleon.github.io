@@ -629,3 +629,182 @@ Hint: Some lines were ellipsized, use -l to show in full.
 [root@server ~]# firewall-cmd --permanent --zone=work --add-port=999/tcp
 [root@server ~]# firewall-cmd --reload
 ```
+
+-----------------------------------------------------------------------------
+
+老師補充(iptables)
+=================
+
+- Linux 防火牆叫做 **netfilter**
+
+- Linux 把很多功能獨立出來成一個一個小檔案，可以到 **/lib/modules/<kernel version>/kernel/** 目錄下找 `*.ko` 的檔案
+
+> 在上面的目錄的 `netfilter` / `ipv4` / `ipv6` 等資料夾下，都是跟網路有關的模組，可參考 http://www.netfilter.org 尋找 `extention howto` 文件，查詢 ko 的使用方式
+
+## 1、netfilter tables
+
+主要有五個 table：
+
+1. **filter**：主要防火牆的功能
+
+2. **nat**：IP 分享器的功能進到主機之後，就直接轉出去的封包，歸類為 FORWARD (例如：本機為 router)
+
+3. **mangle**：可對封包的內容小幅度的修改(例如：TTL，可偽裝成不同的作業系統)
+
+4. **raw**：調整連線追蹤的功能，可以指定某些電腦不做連線追蹤
+
+5. **security**
+
+### 1.1 filter chains
+
+- **INPUT**：從外面進來，目的地為本機應用程式的封包，歸類為 INPUT
+
+- **FORWARD**：進到主機之後，就直接轉出去的封包，歸類為 FORWARD (例如：本機為 router)
+
+- **OUTPUT**：本機的應用程式，目的地是外面主機的封包，歸類為 OUTPUT
+
+> Linux netfilter 架構：`table` -> `chain` -> `rule`
+
+> chain default policy：只有 `ACCEPT` & `DROP` 兩種，完全沒動過就會是 ACCEPT
+
+### 1.2 連線追蹤(使用 state 模組)
+
+狀態分為四種：
+
+1. **NEW**：所有連線的第一個封包狀態，皆為 NEW
+
+2. **ESTABLISHED**：當封包穿越了 FW，這條連線的後續封包狀態都會變成 ESTABLISHED
+
+3. **RELATED**：因為主動產生的連線而發生的其他類型封包
+
+4. **INVALID**：狀態不明的封包，建議一律丟棄
+
+### 1.3 iptables 他使用上的注意事項
+
+- 若要阻擋特定其他使用上的注意事項
+
+- 若要阻擋特定網路流量，對內使用 **REJECT**、對外使用 **DROP**
+
+- `--dport 80`：destination port = 80
+
+- `-i eth0`：incoming interface = eth0
+
+- `-o eth1`：outgoing interface = eth1
+
+- 為了避免影響 loopback interface，不建議設定 chain default policy，而是加上 `iptables -t filter -A INPUT -i eth0 -j DROP` 到最後一條規則
+
+- `iptables -L -v -n`：可看出那一條規則比較熱門
+
+## 2、NAT 種類
+
+- 把來源端 ip 換掉的 NAT，稱為 **SNAT** (POSTROUTING chain 的任務)
+
+- 把目的端 ip 換掉的 NAT，稱為 **DNAT** (PREROUTING chain 的任務)
+
+- 本機產生的封包，原本僅能有 SNAT，而 nat OUTPUT chain 是要補足 DNAT 的功能
+
+- 要作 NAT 必須開啟 port forward 功能：`echo 1 > /proc/sys/net/ipv4/ip_forward`
+
+
+## 3、iptables 使用方式
+
+```bash
+[root@server0 /]# systemctl disable firewalld
+[root@server0 /]# systemctl stop firewalld
+
+# List chains of filter table (可以看 chain default rule)
+[root@server0 /]# iptables -t filter -L
+
+# Append rule to chain FORWARD
+# -p：指定 protocol，可參考 /etc/protocols
+# -s：source
+[root@server0 /]# iptables -t filter -A FORWARD -p tcp -s 172.25.254.250 -j ACCEPT
+[root@server0 /]# iptables -t filter -A FORWARD -p udp -s 172.25.254.250 -j ACCEPT
+[root@server0 /]# iptables -t filter -A FORWARD -p icmp -s 172.25.254.250 -j ACCEPT
+
+# -n：以數字方式表示
+# --line-number：顯示第幾條規則
+[root@server0 /]# iptables -t filter -L -n --line-number
+
+# 設定 chain default rule
+[root@server0 /]# iptables -t filter -P INPUT DROP
+
+# 清除 chain rules
+[root@server0 /]# iptables -t filter -F
+```
+
+## 4、基本操作練習
+
+```bash
+[root@server0 ~]# iptables -t filter -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+[root@server0 ~]# iptables -t filter -A INPUT -p tcp -j ACCEPT
+[root@server0 ~]# iptables -t filter -A INPUT -p udp -j ACCEPT
+[root@server0 ~]# iptables -t filter -A INPUT -p icmp -j ACCEPT
+[root@server0 ~]# iptables -t filter -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     tcp  --  anywhere             anywhere            
+ACCEPT     udp  --  anywhere             anywhere            
+ACCEPT     icmp --  anywhere             anywhere            
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+# 設定 chain default policy  
+[root@server0 ~]# iptables -t filter -P INPUT DROP
+[root@server0 ~]# iptables -t filter -L
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     tcp  --  anywhere             anywhere            
+ACCEPT     udp  --  anywhere             anywhere            
+ACCEPT     icmp --  anywhere             anywhere            
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+[root@server0 ~]# iptables -t filter -F
+FORWARD  INPUT    OUTPUT   
+
+# remove all chain rules
+[root@server0 ~]# iptables -t filter -F INPUT
+```
+
+## 5、使用 shell script 建立 FW
+
+```bash
+#!/bin/bash
+
+# 防止 sync flooding 攻擊(開啟 tcp sync cookie)
+echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+
+SRV=172.25.0.11
+
+iptables -t filter -F
+
+# 設定 connection track
+iptables -t filter -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+# 避免 INVALID 封包被其他服務所接收
+iptables -t filter -A INPUT -m state --state INVALID -j DROP
+
+iptables -t filter -A INPUT -d $SRV -p tcp --dport 22 -j ACCEPT
+iptables -t filter -A INPUT -d $SRV -p tcp --dport 25 -j ACCEPT
+iptables -t filter -A INPUT -d $SRV -p tcp --dport 110 -j ACCEPT
+
+
+# 用來取代 chain default policy
+iptables -t filter -A INPUT -i eth0 -j DROP
+```
